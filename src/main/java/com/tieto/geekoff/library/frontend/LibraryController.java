@@ -15,6 +15,7 @@ public class LibraryController {
    @Autowired
    private PersonService personService;
 
+   //
    @RequestMapping(value="person/load", method = RequestMethod.GET)
    public ModelAndView loadPersons() {
       Person model = loadFromDao();
