@@ -16,6 +16,7 @@ public class App{
     private final String url = "jdbc:postgresql://192.168.1.202:5432/postgres";
     private final String user = "postgres";
     private final String password = "postgres";
+    private final String tietoDomain = "tieto.com";
 
     /**
      * Connect to the PostgreSQL database
@@ -27,40 +28,52 @@ public class App{
         return DriverManager.getConnection(url, user, password);
     }
 
+    private boolean checkEmail(Person person) {
+        String email = person.getEmail().substring(person.getEmail().indexOf("@") + 1);
+        System.out.println(email);
+        return email.equals(tietoDomain);
+    }
 
-    public void createUser(Person user) throws SQLException {
+    public void createUser(Person person) throws SQLException {
 
         String sql = "INSERT INTO persondata ("
                 + " firstname,"
                 + " lastname,"
                 + " email) VALUES ("
                 + "?, ?, ?)";
-        try (
-                Connection connection = connect();
-                PreparedStatement statement = connection.prepareStatement(sql,
-                        Statement.RETURN_GENERATED_KEYS)
-        ) {
 
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getSurname());
-            statement.setString(3, user.getEmail());
+        if (checkEmail(person)) {
+            try (
+                    Connection connection = connect();
+                    PreparedStatement statement = connection.prepareStatement(sql,
+                            Statement.RETURN_GENERATED_KEYS)
+            ) {
+
+                statement.setString(1, person.getFirstName());
+                statement.setString(2, person.getSurname());
+                statement.setString(3, person.getEmail());
 
 
-            int affectedRows = statement.executeUpdate();
+                int affectedRows = statement.executeUpdate();
 
-            if (affectedRows == 0) {
-                throw new SQLException("Creating user failed, no rows affected.");
-            }
-
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    user.setId(generatedKeys.getLong(1));
+                if (affectedRows == 0) {
+                    throw new SQLException("Creating user failed, no rows affected.");
                 }
-                else {
-                    throw new SQLException("Creating user failed, no ID obtained.");
+
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        person.setId(generatedKeys.getLong(1));
+                    }
+                    else {
+                        throw new SQLException("Creating user failed, no ID obtained.");
+                    }
                 }
             }
+        } else {
+            System.out.println("Invalid email address!");
         }
+
+
     }
 
 
@@ -75,9 +88,10 @@ public class App{
         Person person = new Person();
         person.setFirstName("Mati");
         person.setSurname("Kati");
-        person.setEmail("mati@kati.ee");
+        person.setEmail("kati@mati.ee");
 
-        app.createUser(person);
+        // app.createUser(person);
+        app.checkEmail(person);
     }
 
      */
