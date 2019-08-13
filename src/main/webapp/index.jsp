@@ -56,7 +56,7 @@
     <button class="button" type="submit">CREATE ACCOUNT</button>
 </form>
 <br>
-<form action="/app/person/load" method="get">
+<form action="/app/person/login" method="get">
     <button class="button2" type="submit">LOGIN</button>
 </form>
 
