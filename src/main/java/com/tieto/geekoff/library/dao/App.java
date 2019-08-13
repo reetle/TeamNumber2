@@ -34,7 +34,28 @@ public class App{
         return email.equals(tietoDomain);
     }
 
-    public void createUser(Person person) throws SQLException {
+    private boolean checkAccountAlreadyExist(Person person) {
+
+        String sql = "SELECT email FROM persondata WHERE email = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, person.getEmail());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                System.out.println("Konto juba olemas");
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return true;
+    }
+
+    public boolean createUser(Person person) throws SQLException {
 
         String sql = "INSERT INTO persondata ("
                 + " firstname,"
@@ -42,7 +63,7 @@ public class App{
                 + " email) VALUES ("
                 + "?, ?, ?)";
 
-        if (checkEmail(person)) {
+        if (checkEmail(person) && checkAccountAlreadyExist(person)) {
             try (
                     Connection connection = connect();
                     PreparedStatement statement = connection.prepareStatement(sql,
@@ -69,10 +90,11 @@ public class App{
                     }
                 }
             }
+            return true;
         } else {
             System.out.println("Invalid email address!");
+            return false;
         }
-
 
     }
 

@@ -26,17 +26,15 @@ public class LibraryController {
    @Autowired
    private PersonService personService;
 
-   /*
-   @RequestMapping(value="person/load", method = RequestMethod.GET)
-   public ModelAndView loadPersons() {
-      Person model = loadFromDao();
-      return new ModelAndView("newPerson", "person", model);
-   }
-   */
-   @RequestMapping(value="person/load", method = RequestMethod.GET)
-   public ModelAndView loadPersons() {
-      Person model = loadFromDao();
 
+   @RequestMapping(value="person/login", method = RequestMethod.GET)
+   public ModelAndView loginPerson(@ModelAttribute("person")Person model) {
+      // Person model = loadFromDao();
+      return new ModelAndView("showLogin");
+   }
+
+   @RequestMapping(value="person/load", method = RequestMethod.POST)
+   public ModelAndView loadPersons(@ModelAttribute("person")Person model) {
 
 
       return new ModelAndView("showProfile", "person", model);
@@ -50,13 +48,15 @@ public class LibraryController {
    }
 
     */
-
+   /*
    private Person loadFromDao() {
       Person person = new Person();
       person.setFirstName(personService.loadPerson(person));
       person.setSurname(personService.loadPerson(person));
       return person;
    }
+
+    */
 
    @RequestMapping(value = "person/new", method = RequestMethod.GET)
    public ModelAndView createNewPerson(@ModelAttribute("person")Person model) {
@@ -70,27 +70,15 @@ public class LibraryController {
       // personService.savePerson(model);
       App app = new App();
       try {
-
-         app.createUser(model);
+         if (app.createUser(model)) {
+            return new ModelAndView("showProfile", "person", model);
+         }
       } catch (SQLException e) {
          e.printStackTrace();
       }
 
 
-      return new ModelAndView("showProfile", "person", model);
+      return new ModelAndView("newPerson", "person", new Person());
    }
-
-
-   public static void takeProfilePicture() {
-      // get default webcam and open it
-      Webcam webcam = Webcam.getDefault();
-      webcam.open();
-      try {
-         ImageIO.write(webcam.getImage(), "PNG", new File("hello-world.png"));
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-   }
-
 
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: raul
@@ -5,25 +6,30 @@
   Time: 14:03
   To change this template use File | Settings | File Templates.
 --%>
-pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Login Page</title>
-</head>
+<head></head>
 <body>
 
-<div style="margin:10px">
 
-    <form action="/app/person/load" method="post">
+<h3>Log in</h3>
 
-        Email : <input type="text" id="email" name="userName"/><br/>
+<form:form method="POST" action="/app/person/load" modelAttribute="person">
+    <table>
+        <tr>
+            <td><form:label path="email">Email</form:label></td>
+            <td><form:input path="email"/></td>
+        </tr>
 
-        <input type="submit" value="Login" />
+        <tr>
+            <td><input type="submit" value="Salvesta"/></td>
+        </tr>
+    </table>
+</form:form>
 
-    </form>
-</div>
+
+
+
 
 </body>
 </html>

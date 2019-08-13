@@ -60,12 +60,6 @@
     <button class="button2" type="submit">LOGIN</button>
 </form>
 
-<br>
 
-<div>
-    <h4>
-        <a href="/app/person/load">Isikud</a>
-    </h4>
-</div>
 </body>
 </html>
