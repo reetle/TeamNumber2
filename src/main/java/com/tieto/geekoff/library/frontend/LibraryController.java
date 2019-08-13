@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 @Controller
 public class LibraryController {
@@ -34,10 +35,14 @@ public class LibraryController {
    }
 
    @RequestMapping(value="person/load", method = RequestMethod.POST)
-   public ModelAndView loadPersons(@ModelAttribute("person")Person model) {
+   public ModelAndView loadPerson(@ModelAttribute("person")Person model) {
+      System.out.println(model);
+      //Siia
+      App app = new App();
+      Person person = app.loadUser(model.getEmail());
 
 
-      return new ModelAndView("showProfile", "person", model);
+      return new ModelAndView("showProfile", "person", person);
    }
 
    /*

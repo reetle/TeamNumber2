@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.Optional;
 
 /**
  *
@@ -98,6 +99,35 @@ public class App{
 
     }
 
+    public Person loadUser(String email) {
+
+        String sql = "SELECT firstname, lastname, email, personid FROM persondata WHERE email = ?";
+        Person person;
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                person = new Person();
+                person.setFirstName(rs.getString("firstname"));
+                person.setSurname(rs.getString("lastname"));
+                person.setEmail(rs.getString("email"));
+                person.setId(rs.getLong("personid"));
+                return person;
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return null;
+
+
+    }
+
 
  
     /**
@@ -107,6 +137,7 @@ public class App{
     public static void main(String[] args) throws SQLException {
 
         App app = new App();
+        /*
         Person person = new Person();
         person.setFirstName("Mati");
         person.setSurname("Kati");
@@ -114,7 +145,13 @@ public class App{
 
         // app.createUser(person);
         app.checkEmail(person);
+
+
+        System.out.println(app.loadUser("Jaana@tieto.com"));
     }
 
      */
+
+
+
 }
