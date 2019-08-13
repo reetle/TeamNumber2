@@ -19,19 +19,13 @@
 <div class="container">
 	<div class="box">
 		<div>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	</div>
-		<div>
-			<a href="app/person/load">
-				<button type="button" class="btn btn-primary">Profiil</button>
+			<!--a href="app/person/load"-->
+			<a href="profile.jsp">
+				<button type="button" class="btn btn-primary btn-lg">Log In</button>
 			</a>
-		<button type="button" class="btn btn-success">Laenutus</button>
-		<button type="button" class="btn btn-warning">Tagastus</button>
+		</div>
+		<div>
+		<button type="button" class="btn btn-warning btn-lg">Create Account</button>
 		</div>
 	</div>
 </div>
