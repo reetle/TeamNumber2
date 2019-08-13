@@ -4,6 +4,8 @@ public class PersonEnt {
 
    private String firstName;
    private String surname;
+   private String email;
+
 
    public void setFirstName(String firstName) {
       this.firstName = firstName;
@@ -20,4 +22,14 @@ public class PersonEnt {
    public String getSurname() {
       return this.surname;
    }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+
 }
