@@ -32,7 +32,7 @@
     <button class="button2" type="submit">AVAILABLE BOOKS</button>
 </form>
 <br>
-<form action="/app/person/books" method="get">
+<form action="/app/person/borrowed_books" method="get">
     <button class="button2" type="submit">BORROWED BOOKS</button>
 </form>
 <br>

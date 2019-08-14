@@ -12,7 +12,7 @@
 </head>
 <body>
 <div align="center">
-    <h1>Books List</h1>
+    <h1>Raamat, mida soovid laenutada.t</h1>
 
     <table border="1">
         <th>Name</th>
@@ -23,6 +23,19 @@
             <td>${book.author}</td>
         </tr>
     </table>
+    <br>
+    Kas oled kindel, et soovid antud raamatut laenutada?
+    <form action="/app/person/profile" method="get">
+        <button class="button2" type="submit">Jah</button>
+    </form>
+    <br>
+    <form action="/app/person/profile" method="get">
+        <button class="button2" type="submit">Ei</button>
+    </form>
+    <br>
+    <form action="/app/person/profile" method="get">
+        <button class="button2" type="submit">BACK TO HOME</button>
+    </form>
 </div>
 </body>
 </html>
