@@ -37,6 +37,12 @@ public class LibraryController {
       return new ModelAndView("showLogin");
    }
 
+   @RequestMapping(value="person/lend", method = RequestMethod.GET)
+   public ModelAndView lendBook(@ModelAttribute("book")Book book) {
+
+      return new ModelAndView("lendBooksFront");
+   }
+
    @RequestMapping(value="person/load", method = RequestMethod.POST)
    public ModelAndView loadPerson(@ModelAttribute("person")Person model) {
       System.out.println(model);
@@ -49,6 +55,14 @@ public class LibraryController {
       return new ModelAndView("showProfile", "person", person);
    }
 
+   @RequestMapping(value="library/book_confirmation", method = RequestMethod.POST)
+   public ModelAndView bookConfirmation(@ModelAttribute("book")Book book) {
+
+
+
+      return new ModelAndView("showProfile", "book", book);
+   }
+
 
    @RequestMapping(value="library/books")
    public ModelAndView availableBooks(ModelAndView model) {
@@ -56,7 +70,7 @@ public class LibraryController {
       List<Book> books = app.getBooks();
       model.addObject("books", books);
       model.setViewName("books");
-       System.out.println("yess");
+      System.out.println("yess");
       System.out.println(books);
 
       return model;

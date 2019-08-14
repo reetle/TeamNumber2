@@ -31,5 +31,17 @@
 <form action="/app/library/books" method="get">
     <button class="button2" type="submit">AVAILABLE BOOKS</button>
 </form>
+<br>
+<form action="/app/person/books" method="get">
+    <button class="button2" type="submit">BORROWED BOOKS</button>
+</form>
+<br>
+<form action="/app/person/lend" method="get">
+    <button class="button2" type="submit">LEND BOOKS</button>
+</form>
+<br>
+<form action="/app/person/books" method="get">
+    <button class="button2" type="submit">RETURN BOOKS</button>
+</form>
 </body>
 </html>

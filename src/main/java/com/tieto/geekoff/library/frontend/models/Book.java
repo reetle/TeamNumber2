@@ -6,6 +6,7 @@ public class Book {
     private String name;
     private String author;
     private String status;
+    private int bookid;
 
     public String getName() {
         return name;
@@ -38,5 +39,13 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    public int getBookid() {
+        return bookid;
+    }
+
+    public void setBookid(int bookid) {
+        this.bookid = bookid;
     }
 }
