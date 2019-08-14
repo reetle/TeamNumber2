@@ -27,8 +27,17 @@ import java.util.Optional;
 @Controller
 public class LibraryController {
 
+   private Book newBook;
+   private static Person person2;
+
    @Autowired
    private PersonService personService;
+
+   @RequestMapping(value="person/profile", method = RequestMethod.GET)
+   public ModelAndView showProfile(@ModelAttribute("person")Person model) {
+      model = person2;
+      return new ModelAndView("showProfile", "person", model);
+   }
 
 
 
@@ -39,16 +48,35 @@ public class LibraryController {
 
    }
 
+   @RequestMapping(value="person/lend", method = RequestMethod.GET)
+   public ModelAndView lendBook(@ModelAttribute("book")Book model) {
+
+      return new ModelAndView("lendBooksFront", "book", model);
+   }
+
    @RequestMapping(value="person/load", method = RequestMethod.POST)
    public ModelAndView loadPerson(@ModelAttribute("person")Person model) {
-      System.out.println(model);
-      //Siia
+
       App app = new App();
       Person person = app.loadUser(model.getEmail());
-      // List<Person> list = app.getPersons();
+      person2 = person;
+      System.out.println(person2);
+
 
 
       return new ModelAndView("showProfile", "person", person);
+   }
+
+   @RequestMapping(value="library/book_confirmation", method = RequestMethod.POST)
+   public ModelAndView bookConfirmation(@ModelAttribute("book")Book book) {
+
+      App app = new App();
+
+      book = app.getBook(book.getBookid());
+      System.out.println(app.getBook(book.getBookid()));
+
+      app.addBookToPerson(person2, book);
+      return new ModelAndView("lendBooksConfirmation", "book", book);
    }
 
 
@@ -58,8 +86,16 @@ public class LibraryController {
       List<Book> books = app.getBooks();
       model.addObject("books", books);
       model.setViewName("books");
-       System.out.println("yess");
-      System.out.println(books);
+
+      return model;
+   }
+
+   @RequestMapping(value="person/borrowed_books")
+   public ModelAndView borrowedBooks(ModelAndView model) {
+      App app = new App();
+      List<Book> books = app.getBorrowedBooks(person2);
+      model.addObject("books", books);
+      model.setViewName("borrowedBooks");
 
       return model;
    }
@@ -93,8 +129,6 @@ public class LibraryController {
       } catch (SQLException e) {
          e.printStackTrace();
       }
-
-
       return new ModelAndView("newPerson", "person", new Person());
    }
 

@@ -157,31 +157,106 @@ public class App{
     }
 
 
+    public Book getBook(int bookid) {
+        String sql = "SELECT bookname, bookautor FROM bookdata WHERE bookid = ?";
+        Book book = new Book();
+        book.setBookid(bookid);
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, bookid);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                book.setName(rs.getString("bookname"));
+                book.setAuthor(rs.getString("bookautor"));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return book;
+    }
+
+    public void addBookToPerson(Person person, Book book) {
+        String sql = "INSERT INTO orderedbooks (personid, bookid) VALUES (?,?)";
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setLong(1, person.getId());
+            pstmt.setInt(2, book.getBookid());
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public List<Book> getBorrowedBooks(Person person) {
+        List<Book> books = new ArrayList<>();
+
+        String sql = "SELECT bookid FROM orderedbooks WHERE personid = ?";
+        String sql2 = "SELECT bookname, bookautor FROM bookdata WHERE bookid = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setLong(1, person.getId());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                PreparedStatement statement = conn.prepareStatement(sql2);
+                statement.setInt(1, rs.getInt("bookid"));
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    Book book = new Book();
+                    book.setName(resultSet.getString("bookname"));
+                    book.setAuthor(resultSet.getString("bookautor"));
+                    books.add(book);
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return books;
+    }
 
     /**
      * @param args the command line arguments
      */
-    /*
+
     public static void main(String[] args) throws SQLException {
 
         App app = new App();
-        /*
+
         Person person = new Person();
         person.setFirstName("Mati");
         person.setSurname("Kati");
         person.setEmail("kati@mati.ee");
+        person.setId(8L);
 
         // app.createUser(person);
-        app.checkEmail(person);
+        // app.checkEmail(person);
 
 
-        System.out.println(app.loadUser("Jaana@tieto.com"));
+        // System.out.println(app.loadUser("Jaana@tieto.com"));
 
 
-        System.out.println(app.getBooks());
+        // System.out.println(app.getBooks());
+
+
+        // System.out.println(app.getBook(1));
+        System.out.println(app.getBorrowedBooks(person));
     }
 
-     */
+
+
+
+
 
 
 
