@@ -26,6 +26,7 @@ import java.util.Optional;
 
 @Controller
 public class LibraryController {
+   Book newBook;
 
    @Autowired
    private PersonService personService;
@@ -39,7 +40,9 @@ public class LibraryController {
 
    @RequestMapping(value="person/lend", method = RequestMethod.GET)
    public ModelAndView lendBook(@ModelAttribute("book")Book book) {
-
+      App app = new App();
+      newBook = app.getBook(book.getBookid());
+      System.out.println(newBook);
       return new ModelAndView("lendBooksFront");
    }
 
@@ -57,10 +60,14 @@ public class LibraryController {
 
    @RequestMapping(value="library/book_confirmation", method = RequestMethod.POST)
    public ModelAndView bookConfirmation(@ModelAttribute("book")Book book) {
+      /*
+      App app = new App();
+      newBook = app.getBook(book.getBookid());
+      System.out.println(newBook);
 
+       */
 
-
-      return new ModelAndView("showProfile", "book", book);
+      return new ModelAndView("lendBooksConfirmation", "book", book);
    }
 
 

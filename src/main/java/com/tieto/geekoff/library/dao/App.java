@@ -157,15 +157,36 @@ public class App{
     }
 
 
+    public Book getBook(int bookid) {
+        String sql = "SELECT bookname, bookautor FROM bookdata WHERE bookid = ?";
+        Book book = new Book();
+        book.setBookid(bookid);
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, bookid);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                book.setName(rs.getString("bookname"));
+                book.setAuthor(rs.getString("bookautor"));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return book;
+    }
 
     /**
      * @param args the command line arguments
      */
-    /*
+
     public static void main(String[] args) throws SQLException {
 
         App app = new App();
-        /*
+
         Person person = new Person();
         person.setFirstName("Mati");
         person.setSurname("Kati");
@@ -179,9 +200,13 @@ public class App{
 
 
         System.out.println(app.getBooks());
+
+
+        System.out.println(app.getBook(1));
     }
 
-     */
+
+
 
 
 
