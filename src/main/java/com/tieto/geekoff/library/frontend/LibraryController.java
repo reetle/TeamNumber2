@@ -40,10 +40,12 @@ public class LibraryController {
    }
 
 
+
    @RequestMapping(value="person/login", method = RequestMethod.GET)
    public ModelAndView loginPerson(@ModelAttribute("person")Person model) {
       // Person model = loadFromDao();
       return new ModelAndView("showLogin");
+
    }
 
    @RequestMapping(value="person/lend", method = RequestMethod.GET)
