@@ -26,5 +26,10 @@
     </tr>
 
 </table>
+<br/>
+
+<form action="/app/library/books" method="get">
+    <button class="button2" type="submit">AVAILABLE BOOKS</button>
+</form>
 </body>
 </html>

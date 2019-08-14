@@ -4,10 +4,12 @@ import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
 import com.tieto.geekoff.library.dao.App;
+import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
 import com.tieto.geekoff.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +21,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -40,19 +43,26 @@ public class LibraryController {
       //Siia
       App app = new App();
       Person person = app.loadUser(model.getEmail());
+      // List<Person> list = app.getPersons();
 
 
       return new ModelAndView("showProfile", "person", person);
    }
 
-   /*
-   @RequestMapping(value="person/save", method = RequestMethod.POST)
-   public ModelAndView savePerson(@ModelAttribute("person")Person model) {
-      personService.savePerson(model.getFirstName());
-      return new ModelAndView("newPerson", "person", loadFromDao());
+
+   @RequestMapping(value="library/books")
+   public ModelAndView availableBooks(ModelAndView model) {
+      App app = new App();
+      List<Book> books = app.getBooks();
+      model.addObject("books", books);
+      model.setViewName("books");
+       System.out.println("yess");
+      System.out.println(books);
+
+      return model;
    }
 
-    */
+
    /*
    private Person loadFromDao() {
       Person person = new Person();

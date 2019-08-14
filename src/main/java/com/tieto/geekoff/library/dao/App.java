@@ -1,10 +1,15 @@
 package com.tieto.geekoff.library.dao;
 
+import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -128,8 +133,31 @@ public class App{
 
     }
 
+    public List<Book> getBooks(){
+        String sql = "SELECT bookname, bookautor, status FROM bookdata";
+        Book book;
+        List<Book> listOfBooks =  new ArrayList<>();
 
- 
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                book = new Book();
+                book.setName(rs.getString("bookname"));
+                book.setAuthor(rs.getString("bookautor"));
+                book.setStatus(rs.getString("status"));
+                listOfBooks.add(book);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listOfBooks;
+    }
+
+
+
     /**
      * @param args the command line arguments
      */
@@ -148,9 +176,15 @@ public class App{
 
 
         System.out.println(app.loadUser("Jaana@tieto.com"));
+
+
+        System.out.println(app.getBooks());
     }
 
      */
+
+
+
 
 
 
