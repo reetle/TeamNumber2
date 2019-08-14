@@ -31,10 +31,12 @@ public class LibraryController {
    private PersonService personService;
 
 
+
    @RequestMapping(value="person/login", method = RequestMethod.GET)
    public ModelAndView loginPerson(@ModelAttribute("person")Person model) {
       // Person model = loadFromDao();
       return new ModelAndView("showLogin");
+
    }
 
    @RequestMapping(value="person/load", method = RequestMethod.POST)
