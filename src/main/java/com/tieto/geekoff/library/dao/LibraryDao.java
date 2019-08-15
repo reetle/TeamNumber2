@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface LibraryDao {
     List<Book> getBooks();
+    void updateBook(int id);
 
 }

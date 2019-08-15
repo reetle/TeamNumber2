@@ -12,7 +12,7 @@ public class BookServiceImpl implements BookService {
     private BookDao bookDao;
 
 
-    public Book getBook(int bookid) {
-        return bookDao.getBook(bookid);
+    public Book getBook(int id) {
+        return bookDao.getBook(id);
     }
 }

@@ -2,11 +2,16 @@ package com.tieto.geekoff.library.frontend.models;
 
 public class Book {
 
-
+    private int bookid;
     private String name;
     private String author;
     private String status;
-    private int bookid;
+    private String review;
+    private int code;
+
+
+
+
 
     public String getName() {
         return name;
@@ -48,4 +53,21 @@ public class Book {
     public void setBookid(int bookid) {
         this.bookid = bookid;
     }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
 }
