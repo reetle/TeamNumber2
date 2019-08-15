@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: raul
@@ -32,10 +33,6 @@
     <button class="button2" type="submit">AVAILABLE BOOKS</button>
 </form>
 <br>
-<form action="/app/person/borrowed_books" method="get">
-    <button class="button2" type="submit">BORROWED BOOKS</button>
-</form>
-<br>
 <form action="/app/person/lend" method="get">
     <button class="button2" type="submit">LEND BOOKS</button>
 </form>
@@ -43,5 +40,24 @@
 <form action="/app/person/books" method="get">
     <button class="button2" type="submit">RETURN BOOKS</button>
 </form>
+
+<div align="center">
+    <h1>Books List</h1>
+
+    <table border="1">
+        <th>No</th>
+        <th>Name</th>
+        <th>Author</th>
+
+
+        <c:forEach var="book" items="${books}" varStatus="status">
+            <tr>
+                <td>${status.index + 1}</td>
+                <td>${book.name}</td>
+                <td>${book.author}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 </body>
 </html>
