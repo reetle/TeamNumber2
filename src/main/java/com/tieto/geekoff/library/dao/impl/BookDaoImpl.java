@@ -15,9 +15,6 @@ public class BookDaoImpl implements BookDao {
 
     App app = new App();
 
-    public Book createBook(int id, String name, String author, String status, String review, int code) {
-        return null;
-    }
 
     public Book getBook(int id) {
         String sql = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
