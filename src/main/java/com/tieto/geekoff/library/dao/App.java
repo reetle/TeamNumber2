@@ -34,6 +34,7 @@ public class App{
         return DriverManager.getConnection(url, user, password);
     }
 
+    /*
     private boolean checkEmail(Person person) {
         String email = person.getEmail().substring(person.getEmail().indexOf("@") + 1);
         System.out.println(email);
@@ -225,10 +226,13 @@ public class App{
         return books;
     }
 
+     */
+
     /**
      * @param args the command line arguments
      */
 
+    /*
     public static void main(String[] args) throws SQLException {
 
         App app = new App();
@@ -250,9 +254,9 @@ public class App{
 
 
         // System.out.println(app.getBook(1));
-        System.out.println(app.getBorrowedBooks(person));
+        // System.out.println(app.getBorrowedBooks(person));
     }
-
+    */
 
 
 

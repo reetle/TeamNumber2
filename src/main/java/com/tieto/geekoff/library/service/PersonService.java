@@ -1,11 +1,18 @@
 package com.tieto.geekoff.library.service;
 
+import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public interface PersonService {
 
-   String loadPerson(Person person);
-
-   void savePerson(Person person);
+   boolean checkAccountAlreadyExist(Person person);
+   boolean createUser(Person person) throws SQLException;
+   Person loadUser(String email);
+   void addBookToPerson(Person person, Book book);
+   List<Book> getBorrowedBooks(Person person);
+   boolean checkEmail(Person person);
 
 }

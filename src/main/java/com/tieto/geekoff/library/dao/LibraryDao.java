@@ -1,7 +1,11 @@
 package com.tieto.geekoff.library.dao;
 
+
 import com.tieto.geekoff.library.frontend.models.Book;
 
-public interface BookDao {
-    Book getBook(int bookid);
+import java.util.List;
+
+public interface LibraryDao {
+    List<Book> getBooks();
+
 }
