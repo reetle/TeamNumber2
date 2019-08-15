@@ -17,4 +17,8 @@ public class LibraryServiceImpl implements LibraryService {
     public List<Book> getBooks() {
         return libraryDao.getBooks();
     }
+
+    public void updateBook(int id) {
+        libraryDao.updateBook(id);
+    }
 }

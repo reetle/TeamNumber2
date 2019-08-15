@@ -15,19 +15,27 @@ public class BookDaoImpl implements BookDao {
 
     App app = new App();
 
-    public Book getBook(int bookid) {
-        String sql = "SELECT bookname, bookautor FROM bookdata WHERE bookid = ?";
+    public Book createBook(int id, String name, String author, String status, String review, int code) {
+        return null;
+    }
+
+    public Book getBook(int id) {
+        String sql = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
         Book book = new Book();
-        book.setBookid(bookid);
+
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, bookid);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
+                book.setBookid(rs.getInt("bookid"));
                 book.setName(rs.getString("bookname"));
                 book.setAuthor(rs.getString("bookautor"));
+                book.setStatus(rs.getString("status"));
+                book.setReview(rs.getString("review"));
+                book.setCode(rs.getInt("code"));
             }
 
         } catch (SQLException ex) {

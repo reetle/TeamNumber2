@@ -31,6 +31,10 @@
             </tr>
         </c:forEach>
     </table>
+    <br>
+    <form action="/app//person/profile" method="get">
+        <button class="button2" type="submit">BACK TO HOME</button>
+    </form>
 </div>
 </body>
 </html>

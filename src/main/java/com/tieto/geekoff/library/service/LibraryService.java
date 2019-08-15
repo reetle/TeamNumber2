@@ -7,5 +7,5 @@ import java.util.List;
 public interface LibraryService {
 
     List<Book> getBooks();
-
+    void updateBook(int id);
 }

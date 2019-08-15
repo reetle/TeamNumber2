@@ -19,7 +19,7 @@ public class LibraryDaoImpl implements LibraryDao {
 
 
     public List<Book> getBooks() {
-        String sql = "SELECT bookname, bookautor, status FROM bookdata";
+        String sql = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata";
         Book book;
         List<Book> listOfBooks =  new ArrayList<>();
 
@@ -29,9 +29,12 @@ public class LibraryDaoImpl implements LibraryDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 book = new Book();
+                book.setBookid(rs.getInt("bookid"));
                 book.setName(rs.getString("bookname"));
                 book.setAuthor(rs.getString("bookautor"));
                 book.setStatus(rs.getString("status"));
+                book.setReview(rs.getString("review"));
+                book.setCode(rs.getInt("code"));
                 listOfBooks.add(book);
             }
 
@@ -39,5 +42,10 @@ public class LibraryDaoImpl implements LibraryDao {
             System.out.println(ex.getMessage());
         }
         return listOfBooks;
+    }
+
+    public void updateBook(int id) {
+        String sql = "UPDATE bookdata SET status=? WHERE bookid = ?";
+        String sqlSearch = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
     }
 }

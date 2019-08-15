@@ -7,6 +7,8 @@ public class Book {
     private String author;
     private String status;
     private int bookid;
+    private int code;
+    private String review;
 
     public String getName() {
         return name;
@@ -47,5 +49,25 @@ public class Book {
 
     public void setBookid(int bookid) {
         this.bookid = bookid;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public Book createBook(int id, String name, String author, String status, String review, int code) {
+        return null;
     }
 }
