@@ -34,6 +34,7 @@ public class App{
         return DriverManager.getConnection(url, user, password);
     }
 
+
     /*
     private boolean checkEmail(Person person) {
         String email = person.getEmail().substring(person.getEmail().indexOf("@") + 1);
