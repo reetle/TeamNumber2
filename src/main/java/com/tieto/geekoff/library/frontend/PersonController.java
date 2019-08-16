@@ -62,12 +62,15 @@ public class PersonController {
         System.out.println(books);
         modelAndView.addObject("books", books);
 
-        if (personService.isAdmin(person2)) {
-            modelAndView.setViewName("adminView");
-        } else {
-            modelAndView.setViewName("showProfile");
+        if (person2.getRole() == null) {
+            modelAndView.setViewName("showLogin");
+            return modelAndView;
         }
 
+        if (personService.isAdmin(person2)) {
+            modelAndView.setViewName("adminView");
+        }
+        modelAndView.setViewName("showProfile");
 
 
 
