@@ -45,7 +45,7 @@
             </table>
             <br>
             <form action="/app/person/profile" method="get">
-                <button class="button" type="submit">BACK TO HOME</button>
+                <button class="button" type="submit">Back to Profile</button>
             </form>
 
     </div>
