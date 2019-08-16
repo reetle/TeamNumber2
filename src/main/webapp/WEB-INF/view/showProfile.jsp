@@ -25,11 +25,11 @@
         <div>
             <table>
                 <tr>
-                    <%--<td>Name</td>--%>
+
                     <td align="center">${person.firstName} ${person.surname}</td>
                 </tr>
                 <tr>
-                 <%--   <td>Email</td>--%>
+
                     <td align="center">${person.email}</td>
                 </tr>
 
@@ -50,10 +50,11 @@
                 <button class="button" type="submit">Book Directory</button>
             </form>
         </div>
-        <div class="d-sm-none">
+
+<%--        <div class="d-sm-none">
             <p>Swipe Down for Your Profile</p>
 
-        </div>
+        </div>--%>
 
 
         <!--/div>
@@ -66,14 +67,18 @@
 
 
         <table class="booksTable">
-            <th>No</th>
+            <tr>
+                <th colspan="2">Your books</th>
+
+            </tr>
+            <%--<th>No</th>--%>
             <th>Name</th>
             <th>Author</th>
 
 
             <c:forEach var="book" items="${books}" varStatus="status">
                 <tr>
-                    <td>${status.index + 1}</td>
+                    <%--<td>${status.index + 1}</td>--%>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                 </tr>

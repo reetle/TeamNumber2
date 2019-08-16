@@ -26,6 +26,7 @@ html,body{
 
 }
 
+/*
 p {
 	background-color: white;
 	padding: 30px;
@@ -35,6 +36,7 @@ p {
 
 
 }
+*/
 
 /*td, th {
 !*	padding: 10px 20px;*!
@@ -48,7 +50,7 @@ table.booksTable {
 }
 table.booksTable td, table.booksTable th {
 	padding: 10px 20px;
-	border-style: dashed;
+	border-style: dotted;
 	border-width: 1px;
 
 
@@ -63,6 +65,10 @@ table.booksTable thead th {
 	/*font-size: 15px;*/
 	font-weight: bold;
 	text-align: center;
+}
+
+.tableHeading {
+	border-style: none;
 }
 
 .row, [class^="col"], .container, .box {
