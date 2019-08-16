@@ -38,10 +38,10 @@ p {
 }
 */
 
-/*td, th {
-!*	padding: 10px 20px;*!
-	align="center";
-}*/
+td, tr {
+
+	text-align: center;
+}
 
 table.booksTable {
 	/*width: 100%;
