@@ -4,6 +4,7 @@ import com.tieto.geekoff.library.dao.App;
 import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
 import com.tieto.geekoff.library.service.BookService;
+import com.tieto.geekoff.library.service.LibraryService;
 import com.tieto.geekoff.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class PersonController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private LibraryService libraryService;
+
     @RequestMapping(value="person/profile", method = RequestMethod.GET)
     public ModelAndView showProfile(@ModelAttribute("person")Person model, ModelAndView modelAndView) {
         model = person2;
@@ -46,20 +50,6 @@ public class PersonController {
         // Person model = loadFromDao();
         return new ModelAndView("showLogin");
     }
-
-
-
-    @RequestMapping(value="library/book_confirmation", method = RequestMethod.POST)
-    public ModelAndView bookConfirmation(@ModelAttribute("book") Book book) {
-
-        App app = new App();
-
-        book = bookService.getBook(book.getBookid());
-        personService.addBookToPerson(person2, book);
-
-        return new ModelAndView("lendBooksConfirmation", "book", book);
-    }
-
 
     @RequestMapping(value="person/load", method = RequestMethod.POST)
     public ModelAndView loadPerson(@ModelAttribute("person")Person model, ModelAndView modelAndView) {
@@ -112,5 +102,26 @@ public class PersonController {
             e.printStackTrace();
         }
         return new ModelAndView("newPerson", "person", new Person());
+    }
+
+    @RequestMapping(value="library/book_confirmation", method = RequestMethod.POST)
+    public ModelAndView bookConfirmation(@ModelAttribute("book") Book book) {
+
+        App app = new App();
+
+        book = bookService.getBook(book.getBookid());
+        personService.addBookToPerson(person2, book);
+        libraryService.bookIsNotAvailable(book.getBookid());
+
+        return new ModelAndView("lendBooksConfirmation", "book", book);
+    }
+
+    @RequestMapping(value="book/return", method = RequestMethod.POST)
+    public ModelAndView returnBook(@ModelAttribute("book") Book book) {
+        book = bookService.getBook(book.getBookid());
+        personService.removeBookFromPerson(person2, book);
+        libraryService.bookIsAvailable(book.getBookid());
+
+        return new ModelAndView("returnBook", "book", book);
     }
 }

@@ -1,14 +1,13 @@
 package com.tieto.geekoff.library.frontend.models;
 
-import java.util.List;
 
 public class Person {
 
+   private int id;
    private String firstName;
    private String surname;
    private String email;
-   private long id;
-   private List<Book> borrowedBooks;
+   private String role;
 
 
    public void setFirstName(String firstName) {
@@ -35,32 +34,30 @@ public class Person {
       this.email = email;
    }
 
-
-   public List<Book> getBorrowedBooks() {
-      return borrowedBooks;
-   }
-
-   public void setBorrowedBooks(List<Book> borrowedBooks) {
-      this.borrowedBooks = borrowedBooks;
-   }
-
-
-   public long getId() {
+   public int getId() {
       return id;
    }
 
-   public void setId(long id) {
+   public void setId(int id) {
       this.id = id;
    }
 
    @Override
    public String toString() {
       return "Person{" +
-              "firstName='" + firstName + '\'' +
+              "id=" + id +
+              ", firstName='" + firstName + '\'' +
               ", surname='" + surname + '\'' +
               ", email='" + email + '\'' +
-              ", id=" + id +
-              ", borrowedBooks=" + borrowedBooks +
+              ", role='" + role + '\'' +
               '}';
+   }
+
+   public String getRole() {
+      return role;
+   }
+
+   public void setRole(String role) {
+      this.role = role;
    }
 }

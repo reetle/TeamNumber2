@@ -33,6 +33,7 @@ public class BookDaoImpl implements BookDao {
                 book.setStatus(rs.getString("status"));
                 book.setReview(rs.getString("review"));
                 book.setCode(rs.getInt("code"));
+
             }
 
         } catch (SQLException ex) {

@@ -6,6 +6,7 @@ import com.github.sarxos.webcam.WebcamResolution;
 import com.tieto.geekoff.library.dao.App;
 import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
+import com.tieto.geekoff.library.service.BookService;
 import com.tieto.geekoff.library.service.LibraryService;
 import com.tieto.geekoff.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,13 @@ public class LibraryController {
    private static Person person2;
 
    @Autowired
+   private BookService bookService;
+
+   @Autowired
    private LibraryService libraryService;
+
+   @Autowired
+   private PersonService personService;
 
    @RequestMapping(value="library/books")
    public ModelAndView availableBooks(ModelAndView model) {
@@ -43,6 +50,13 @@ public class LibraryController {
       return model;
    }
 
+
+
+   @RequestMapping(value="person/return", method = RequestMethod.GET)
+   public ModelAndView lendBook(@ModelAttribute("book") Book model) {
+
+      return new ModelAndView("returnBook", "book", model);
+   }
 
 
    /*

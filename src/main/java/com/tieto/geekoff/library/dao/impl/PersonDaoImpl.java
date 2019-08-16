@@ -17,6 +17,11 @@ public class PersonDaoImpl implements PersonDao {
 
     App app = new App();
 
+    public boolean checkEmail(Person person) {
+        String email = person.getEmail().substring(person.getEmail().indexOf("@") + 1);
+        return email.equals(tietoDomain);
+    }
+
 
     public boolean checkAccountAlreadyExist(Person person) {
         String sql = "SELECT email FROM persondata WHERE email = ?";
@@ -66,7 +71,7 @@ public class PersonDaoImpl implements PersonDao {
 
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        person.setId(generatedKeys.getLong(1));
+                        person.setId(generatedKeys.getInt(1));
                     }
                     else {
                         throw new SQLException("Creating user failed, no ID obtained.");
@@ -82,8 +87,8 @@ public class PersonDaoImpl implements PersonDao {
 
 
     public Person loadUser(String email) {
-        String sql = "SELECT firstname, lastname, email, personid FROM persondata WHERE email = ?";
-        Person person;
+        String sql = "SELECT personid, firstname, lastname, email, role FROM persondata WHERE email = ?";
+        Person person = new Person();
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -91,20 +96,18 @@ public class PersonDaoImpl implements PersonDao {
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                person = new Person();
+                person.setId(rs.getInt("personid"));
                 person.setFirstName(rs.getString("firstname"));
                 person.setSurname(rs.getString("lastname"));
                 person.setEmail(rs.getString("email"));
-                person.setId(rs.getLong("personid"));
-                return person;
-
+                person.setRole(rs.getString("role"));
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
 
-        return new Person();
+        return person;
     }
 
 
@@ -123,12 +126,27 @@ public class PersonDaoImpl implements PersonDao {
         }
     }
 
+    public void removeBookFromPerson(Person person, Book book) {
+        String sql = "DELETE FROM orderedbooks WHERE bookid = ? AND personid = ?";
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, book.getBookid());
+            pstmt.setInt(2, person.getId());
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
 
     public List<Book> getBorrowedBooks(Person person) {
         List<Book> books = new ArrayList<>();
 
         String sql = "SELECT bookid FROM orderedbooks WHERE personid = ?";
-        String sql2 = "SELECT bookname, bookautor FROM bookdata WHERE bookid = ?";
+        String sql2 = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -141,8 +159,12 @@ public class PersonDaoImpl implements PersonDao {
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
                     Book book = new Book();
+                    book.setBookid(resultSet.getInt("bookid"));
                     book.setName(resultSet.getString("bookname"));
                     book.setAuthor(resultSet.getString("bookautor"));
+                    book.setStatus(resultSet.getString("status"));
+                    book.setReview(resultSet.getString("review"));
+                    book.setCode(resultSet.getInt("code"));
                     books.add(book);
                 }
 
@@ -156,8 +178,5 @@ public class PersonDaoImpl implements PersonDao {
     }
 
 
-    public boolean checkEmail(Person person) {
-        String email = person.getEmail().substring(person.getEmail().indexOf("@") + 1);
-        return email.equals(tietoDomain);
-    }
+
 }

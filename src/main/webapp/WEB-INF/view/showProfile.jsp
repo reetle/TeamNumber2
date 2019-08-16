@@ -37,7 +37,7 @@
     <button class="button2" type="submit">LEND BOOKS</button>
 </form>
 <br>
-<form action="/app/person/books" method="get">
+<form action="/app//person/return" method="get">
     <button class="button2" type="submit">RETURN BOOKS</button>
 </form>
 
