@@ -42,6 +42,10 @@ public class PersonServiceImpl implements PersonService {
       return personDao.checkEmail(person);
    }
 
+   public void removeBookFromPerson(Person person, Book book) {
+      personDao.removeBookFromPerson(person, book);
+   }
+
    /*
    public String loadPerson(Person person) {
       String ret;

@@ -20,6 +20,7 @@ import java.util.Optional;
 public class App{
  
     private final String url = "jdbc:postgresql://192.168.1.202:5432/postgres";
+    // private final String url = "jdbc:postgresql://localhost/postgres";
     private final String user = "postgres";
     private final String password = "postgres";
     private final String tietoDomain = "tieto.com";

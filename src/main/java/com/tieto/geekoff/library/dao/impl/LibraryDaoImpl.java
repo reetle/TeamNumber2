@@ -44,8 +44,37 @@ public class LibraryDaoImpl implements LibraryDao {
         return listOfBooks;
     }
 
-    public void updateBook(int id) {
+
+    public void bookIsNotAvailable(int id) {
         String sql = "UPDATE bookdata SET status=? WHERE bookid = ?";
-        String sqlSearch = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "booked");
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+
+    public void bookIsAvailable(int id) {
+        String sql = "UPDATE bookdata SET status=? WHERE bookid = ?";
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "available");
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
