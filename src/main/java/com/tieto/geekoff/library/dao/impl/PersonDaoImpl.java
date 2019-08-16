@@ -110,6 +110,10 @@ public class PersonDaoImpl implements PersonDao {
         return person;
     }
 
+    public boolean isAdmin(Person person) {
+        return person.getRole().equals("admin");
+    }
+
 
     public void addBookToPerson(Person person, Book book) {
         String sql = "INSERT INTO orderedbooks (personid, bookid) VALUES (?,?)";
