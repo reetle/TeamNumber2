@@ -17,4 +17,5 @@ public interface PersonDao {
    void addBookToPerson(Person person, Book book);
    List<Book> getBorrowedBooks(Person person);
    boolean checkEmail(Person person);
+   void removeBookFromPerson(Person person, Book book);
 }
