@@ -51,6 +51,11 @@
                 <button class="button" type="submit">Book Directory</button>
             </form>
         </div>
+        <div>
+            <form action="/" method="get">
+                <button class="button" type="submit">Log Out</button>
+            </form>
+        </div>
 
 <%--        <div class="d-sm-none">
             <p>Swipe Down for Your Profile</p>
