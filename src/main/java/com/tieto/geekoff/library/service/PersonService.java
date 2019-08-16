@@ -15,5 +15,5 @@ public interface PersonService {
    List<Book> getBorrowedBooks(Person person);
    boolean checkEmail(Person person);
    void removeBookFromPerson(Person person, Book book);
-
+   boolean isAdmin(Person person);
 }

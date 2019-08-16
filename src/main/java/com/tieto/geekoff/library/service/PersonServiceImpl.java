@@ -46,6 +46,11 @@ public class PersonServiceImpl implements PersonService {
       personDao.removeBookFromPerson(person, book);
    }
 
+   public boolean isAdmin(Person person) {
+      return personDao.isAdmin(person);
+   }
+
+
    /*
    public String loadPerson(Person person) {
       String ret;

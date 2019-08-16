@@ -54,7 +54,6 @@ public class PersonController {
     @RequestMapping(value="person/load", method = RequestMethod.POST)
     public ModelAndView loadPerson(@ModelAttribute("person")Person model, ModelAndView modelAndView) {
 
-        App app = new App();
         Person person = personService.loadUser(model.getEmail());
         person2 = person;
         System.out.println(person2);
@@ -63,7 +62,12 @@ public class PersonController {
         System.out.println(books);
         modelAndView.addObject("books", books);
 
-        modelAndView.setViewName("showProfile");
+        if (personService.isAdmin(person2)) {
+            modelAndView.setViewName("adminView");
+        } else {
+            modelAndView.setViewName("showProfile");
+        }
+
 
 
 
@@ -91,11 +95,14 @@ public class PersonController {
 
     @RequestMapping(value="person/save", method = RequestMethod.POST)
     public ModelAndView savePerson(@ModelAttribute("person")Person model) {
-        // personService.savePerson(model);
-        App app = new App();
+
         try {
             if (personService.createUser(model)) {
                 person2 = personService.loadUser(model.getEmail());
+                if (personService.isAdmin(person2)) {
+                    System.out.println("ADMIN");
+                    return new ModelAndView("adminView", "person", model);
+                }
                 return new ModelAndView("showProfile", "person", model);
             }
         } catch (SQLException e) {
