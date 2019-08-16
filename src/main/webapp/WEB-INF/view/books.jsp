@@ -26,7 +26,7 @@
             <table class="booksTable">
 
                 <tr>
-                    <th colspan="3">All books</th>
+                    <th colspan="3">Book Directory</th>
                 </tr>
 
                 <th>Name</th>
