@@ -26,6 +26,7 @@ html,body{
 
 }
 
+/*
 p {
 	background-color: white;
 	padding: 30px;
@@ -34,6 +35,40 @@ p {
 	border-radius:  50px;
 
 
+}
+*/
+
+/*td, th {
+!*	padding: 10px 20px;*!
+	align="center";
+}*/
+
+table.booksTable {
+	/*width: 100%;
+	height: 200%;*/
+	text-align: center;
+}
+table.booksTable td, table.booksTable th {
+	padding: 10px 20px;
+	border-style: dotted;
+	border-width: 1px;
+
+
+}
+table.booksTable tr:nth-child(even) {
+	background: #DDDDDD;
+}
+table.booksTable thead {
+	background: #DDDDDD;
+}
+table.booksTable thead th {
+	/*font-size: 15px;*/
+	font-weight: bold;
+	text-align: center;
+}
+
+.tableHeading {
+	border-style: none;
 }
 
 .row, [class^="col"], .container, .box {
