@@ -1,8 +1,8 @@
 package com.tieto.geekoff.library.frontend;
 
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-import com.github.sarxos.webcam.WebcamResolution;
+//import com.github.sarxos.webcam.Webcam;
+//import com.github.sarxos.webcam.WebcamPanel;
+//import com.github.sarxos.webcam.WebcamResolution;
 import com.tieto.geekoff.library.dao.App;
 import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
@@ -45,6 +45,13 @@ public class LibraryController {
       App app = new App();
       List<Book> books = libraryService.getBooks();
       model.addObject("books", books);
+
+      //THIS IS A HACK, Person should come from DB after login
+      Person admin = new Person();
+      admin.setRole("admin");
+
+
+      model.addObject("person", admin);
       model.setViewName("books");
 
       return model;
