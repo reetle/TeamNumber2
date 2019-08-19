@@ -45,7 +45,7 @@
             </form>
         </div>
         <div>
-            <form action="/app/library/books" method="get">
+            <form action="/app/person/profile" method="get">
                 <button class="button-active" type="submit">Books</button>
             </form>
         </div>

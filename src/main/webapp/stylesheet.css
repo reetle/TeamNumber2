@@ -142,6 +142,7 @@ table.booksTable thead th {
     color: #222629;
     width: 200px;
     font-weight: bolder;
+    outline:0;
 }
 
 
