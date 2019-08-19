@@ -17,7 +17,7 @@
 
 </head>
 
-<body id="bodyGradient">
+<body id="bodySolid">
 
 <div class="row">
     <div class="col-sm-4" id="left">
