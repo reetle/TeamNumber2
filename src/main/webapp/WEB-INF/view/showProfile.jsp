@@ -12,7 +12,7 @@
     <!-- stylesheet-->
     <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
     <!-- google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
 
 </head>
@@ -21,8 +21,6 @@
 
 <div class="row">
     <div class="col-sm-4" id="left">
-        <!--div class="container"-->
-        <!--div class="box"-->
         <div>
             <table>
                 <tr>
@@ -47,8 +45,8 @@
             </form>
         </div>
         <div>
-            <form action="/app/library/books" method="get">
-                <button class="button" type="submit">Book Directory</button>
+            <form action="/app/person/profile" method="get">
+                <button class="button-active" type="submit">Books</button>
             </form>
         </div>
         <div>
@@ -56,44 +54,45 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
-
-<%--        <div class="d-sm-none">
-            <p>Swipe Down for Your Profile</p>
-
-        </div>--%>
-
-
-        <!--/div>
     </div-->
     </div>
+
     <div class="col-sm-8" id="right">
-        <%--    <div class="container">--%>
-        <%--        <div class="box">--%>
-        <%--           <div>--%>
+        <div>
+            <table>
+            <tr>
+            <td>
+                <form action="/app/person/profile" method="get">
+                <button class="button-active" type="submit">Your Books</button>
+            </form>
+            </td>
+                <td>
+            <form action="/app/library/books" method="get">
+                <button class="button" type="submit">All Books</button>
+            </form>
+                </td>
+            </tr>
+        </table>
+        </div>
 
 
-        <table class="booksTable">
+            <table class="booksTable">
             <tr>
                 <th colspan="2">Your books</th>
-
             </tr>
-            <%--<th>No</th>--%>
             <th>Name</th>
             <th>Author</th>
 
 
             <c:forEach var="book" items="${books}" varStatus="status">
                 <tr>
-                    <%--<td>${status.index + 1}</td>--%>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                 </tr>
             </c:forEach>
         </table>
-        <%--       </div>--%>
-        <%--        </div>--%>
-        <%--    </div>--%>
-    </div>
+
+
 </div>
 </body>
 </html>
