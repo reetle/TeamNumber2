@@ -16,7 +16,7 @@
 
 
 </head>
-<body id="bodyGradient">
+<body id="bodySolid">
 
 <div class="container">
     <div class="box">

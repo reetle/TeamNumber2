@@ -12,7 +12,7 @@
     background-attachment: fixed;
 }
 
-#bodyGradient {
+#bodySolid {
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#1f2833+0,1f2833+65,0b0c10+100 */
     background: rgb(31,40,51); /* Old browsers */
     background: -moz-linear-gradient(top,  rgba(31,40,51,1) 0%, rgba(31,40,51,1) 65%, rgba(11,12,16,1) 100%); /* FF3.6-15 */
