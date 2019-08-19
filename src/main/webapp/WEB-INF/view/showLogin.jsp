@@ -12,7 +12,7 @@
     <!-- stylesheet-->
     <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
     <!-- google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
 
 </head>

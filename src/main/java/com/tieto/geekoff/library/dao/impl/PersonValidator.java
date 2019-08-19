@@ -5,12 +5,13 @@ import com.tieto.geekoff.library.frontend.models.Person;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import org.springframework.web.servlet.ModelAndView;
 
 
 public class PersonValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
-        return Person.class.equals(aClass) || Book.class.equals(aClass);
+        return Person.class.equals(aClass) || Book.class.equals(aClass) || ModelAndView.class.equals(aClass);
     }
 
     @Override

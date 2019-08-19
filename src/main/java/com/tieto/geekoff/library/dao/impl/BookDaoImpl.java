@@ -42,4 +42,21 @@ public class BookDaoImpl implements BookDao {
 
         return book;
     }
+
+    @Override
+    public void saveBook(Book book) {
+    String sql= "UPDATE bookdata SET bookautor=?, bookname=? WHERE bookid=?";
+
+        try (Connection conn = app.connect();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setString(1, book.getAuthor());
+            statement.setString(2, book.getName());
+            statement.setInt(3, book.getBookid());
+            statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }

@@ -50,21 +50,6 @@ public class PersonController {
         return new Person();
     }
 
-    @RequestMapping(value="person/profile", method = RequestMethod.GET)
-    public ModelAndView showProfile(@ModelAttribute("person")Person model, ModelAndView modelAndView) {
-        model = person2;
-
-        modelAndView.addObject("person", model);
-        List<Book> books = personService.getBorrowedBooks(person2);
-        System.out.println(books);
-        modelAndView.addObject("books", books);
-
-        modelAndView.setViewName("showProfile");
-        return modelAndView;
-        // return new ModelAndView("showProfile", "person", model);
-    }
-
-
     @RequestMapping(value="person/login", method = RequestMethod.GET)
     public ModelAndView loginPerson(@ModelAttribute("person")Person model) {
 
@@ -84,7 +69,11 @@ public class PersonController {
             return "showLogin";
         }
 
-
+        try {
+            personService.createUser(person);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         person2 = personService.loadUser(person.getEmail());
         System.out.println(person2);
         person2.setBorrowedBooks(personService.getBorrowedBooks(person2));
@@ -100,18 +89,6 @@ public class PersonController {
 
         return "showProfile";
     }
-
-    @RequestMapping(value="person/borrowed_books")
-    public ModelAndView borrowedBooks(ModelAndView model) {
-        App app = new App();
-        List<Book> books = personService.getBorrowedBooks(person2);
-        model.addObject("books", books);
-
-        model.setViewName("borrowedBooks");
-
-        return model;
-    }
-
 
 
     @RequestMapping(value = "/addPerson", method = RequestMethod.GET)
@@ -139,30 +116,6 @@ public class PersonController {
         return "showProfile";
     }
 
-    @RequestMapping(value="person/save", method = RequestMethod.POST)
-    public ModelAndView savePerson(@ModelAttribute("person") @Validated Person person, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            System.out.println("YEEE");
-            return new ModelAndView("newPerson", "person", new Person());
-        }
-        System.out.println("NOOO");
-
-        try {
-            if (personService.createUser(person)) {
-                person2 = personService.loadUser(person.getEmail());
-                if (personService.isAdmin(person2)) {
-                    System.out.println("ADMIN");
-                    return new ModelAndView("adminView", "person", person);
-                }
-                return new ModelAndView("showProfile", "person", person);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return new ModelAndView("newPerson", "person", new Person());
-    }
-
     @RequestMapping(value = "/library/book_confirmation", method = RequestMethod.POST)
     public String bookConfirmation(@ModelAttribute("book")Book book, Model model) {
         book = bookService.getBook(book.getBookid());
@@ -174,12 +127,38 @@ public class PersonController {
 
     }
 
+
     @RequestMapping(value="book/return", method = RequestMethod.POST)
-    public ModelAndView returnBook(@ModelAttribute("book") Book book) {
+    public String returnBook(@ModelAttribute("book") Book book, Model model) {
         book = bookService.getBook(book.getBookid());
         personService.removeBookFromPerson(person2, book);
         libraryService.bookIsAvailable(book.getBookid());
-
-        return new ModelAndView("returnBook", "book", book);
+        model.addAttribute("person", person2);
+        return "returnBook";
     }
+
+    @RequestMapping(value = "book/return", method = RequestMethod.GET)
+    public String returnBooks(@ModelAttribute("book") Book book, Model model) {
+
+        model.addAttribute("person", person2);
+        return "returnBook";
+    }
+
+    @RequestMapping(value = "library/books")
+    public String allBooks(@ModelAttribute("book")Book book, Model model) {
+        List<Book> books = libraryService.getBooks();
+        model.addAttribute("books", books);
+        model.addAttribute("person", person2);
+        return "books";
+    }
+
+    @RequestMapping(value = "person/lend")
+    public String lendBook(@ModelAttribute("book") Book book, Model model) {
+
+        model.addAttribute("person", person2);
+        return "lendBooksFront";
+    }
+
+
+
 }
