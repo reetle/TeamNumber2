@@ -11,15 +11,16 @@
     <!-- stylesheet-->
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <!-- google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+  <%--  <link href="https://fonts.googleapis.com/css?family=Montserrat:300&display=swap" rel="stylesheet">--%>
+    <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
 
 
 </head>
-<body id="bodyBackground">
+<body id="bodyGradient">
 
-<div class="container">
-    <div class="box">
+<div class="row">
+    <div class="col-sm-4">
         <div>
             <form action="/app/person/login" method="get">
                 <button class="button" type="submit">Login</button>
@@ -30,6 +31,15 @@
                 <button class="button" type="submit">Create Account</button>
             </form>
         </div>
+    </div>
+    <div class="col-sm-8">
+        <div>
+            <h1>
+                <span>BOOK</span>
+                <span>SELF</span>
+            </h1>
+        </div>
+
     </div>
 </div>
 </body>
