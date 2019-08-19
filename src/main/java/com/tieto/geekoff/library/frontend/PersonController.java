@@ -84,6 +84,7 @@ public class PersonController {
             return "showLogin";
         }
 
+
         person2 = personService.loadUser(person.getEmail());
         System.out.println(person2);
         person2.setBorrowedBooks(personService.getBorrowedBooks(person2));
