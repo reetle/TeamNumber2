@@ -27,7 +27,7 @@
             </form>
         </div>
         <div>
-            <form action="/app/person/new" method="GET">
+            <form action="/app/addPerson" method="GET">
                 <button class="button" type="submit">Create Account</button>
             </form>
         </div>

@@ -40,11 +40,15 @@ public class LibraryController {
    @Autowired
    private PersonService personService;
 
+
+
+   /*
    @RequestMapping(value="library/books")
    public ModelAndView availableBooks(ModelAndView model) {
-      App app = new App();
+
       List<Book> books = libraryService.getBooks();
       model.addObject("books", books);
+
 
       //THIS IS A HACK, Person should come from DB after login
       Person admin = new Person();
@@ -57,13 +61,11 @@ public class LibraryController {
       return model;
    }
 
+    */
 
 
-   @RequestMapping(value="person/return", method = RequestMethod.GET)
-   public ModelAndView lendBook(@ModelAttribute("book") Book model) {
 
-      return new ModelAndView("returnBook", "book", model);
-   }
+
 
 
    /*
