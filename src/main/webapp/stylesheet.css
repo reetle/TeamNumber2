@@ -146,6 +146,10 @@ table.booksTable thead th {
     outline:0;
 }
 
+.button-active:focus{
+    outline: 0;
+}
+
 
 
 
