@@ -16,8 +16,55 @@
     <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
 
 
+
+<div id="resultado"></div>
+
+<div id="camera"></div>
+
+<!--<script src="quagga.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 </head>
-<body id="bodyGradient">
+
+<body>
+<script>
+Quagga.init({
+inputStream: {
+name: "Live",
+type: "LiveStream",
+target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+},
+decoder: {
+readers: ["code_128_reader", "ean_reader",
+"ean_8_reader",
+"code_39_reader",
+"code_39_vin_reader"
+]
+
+},
+
+}, function (err) {
+if (err) {
+console.log(err);
+return
+}
+console.log("Initialization finished. Ready to start");
+Quagga.start();
+});
+
+
+Quagga.onDetected(function (data) {
+
+
+<!--console.log(data.codeResult.code);-->
+var x =document.getElementById("triip");
+x.value=data.codeResult.code;
+
+
+});
+
+
+</script>
+
 
 <div class="container">
     <div class="box">
@@ -25,9 +72,12 @@
             <table>
                 <tr>
                     <td>
+
                         <form:form method="POST" action="/app/library/book_confirmation" modelAttribute="book">
-                            <form:label path="bookid">Enter barcode </form:label>
-                            <form:input path="bookid"/>
+                        <form:label path="bookid">Enter barcode </form:label>
+                        <form:input id="triip" path="bookid"/>
+
+
 
                     </td>
                 </tr>
@@ -41,11 +91,12 @@
             </table>
         </div>
 
-        <form action="/app/person/profile" method="get">
+        <form action="${pageContext.request.contextPath}/app/person/profile" method="get">
             <button class="button" type="submit">Back to Profile</button>
         </form>
 
     </div>
+
 </div>
 </body>
 </html>
