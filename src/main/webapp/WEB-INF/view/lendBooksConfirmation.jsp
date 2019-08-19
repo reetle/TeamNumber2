@@ -78,12 +78,12 @@
             <table>
                 <tr>
                     <td>
-                        <form action="" method="get">
+                        <form action="/app/library/book_confirm_yes" method="get">
                             <button class="button" type="submit">Yes</button>
                         </form>
                     </td>
                     <td>
-                        <form action="" method="get">
+                        <form action="/app/library/book_confirm_no" method="get">
                             <button class="button" type="submit">No</button>
                         </form>
                     </td>
