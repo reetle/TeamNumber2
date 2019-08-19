@@ -61,6 +61,7 @@
         <div>
             <table>
                 <tr>
+
                     <td>
                         <form action="/app/person/profile" method="get">
                             <button class="button" type="submit">Your Books</button>
@@ -71,9 +72,11 @@
                             <button class="button-active" type="submit">All Books</button>
                         </form>
                     </td>
+
                 </tr>
             </table>
         </div>
+
 
 
         <table class="booksTable">
@@ -96,6 +99,8 @@
                 </tr>
             </c:forEach>
         </table>
+
+
 
 
 
