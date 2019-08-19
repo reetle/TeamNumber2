@@ -36,7 +36,7 @@
         </div>
         <div>
             <form action="/app/person/lend" method="get">
-                <button class="button-active" type="submit">Lending</button>
+                <button class="button" type="submit">Lending</button>
             </form>
         </div>
         <div>
@@ -45,8 +45,8 @@
             </form>
         </div>
         <div>
-            <form action="/app/person/profile" method="get">
-                <button class="button" type="submit">Books</button>
+            <form action="/app/library/books" method="get">
+                <button class="button-active" type="submit">Books</button>
             </form>
         </div>
         <div>
@@ -58,38 +58,51 @@
     </div>
 
     <div class="col-sm-8" id="right">
-    <div>
-        <table class=>
-            <tr>
-                <td>Do You want to borrow</td>
-            </tr>
-            <tr>
-                <th>${book.name}</th>
-            </tr>
-            <tr>
-                <td>${book.author}</td>
-            </tr>
-        </table>
-    </div>
-
-
-
         <div>
             <table>
                 <tr>
+
                     <td>
-                        <form action="" method="get">
-                            <button class="button" type="submit">Yes</button>
+                        <form action="/app/person/profile" method="get">
+                            <button class="button" type="submit">Your Books</button>
                         </form>
                     </td>
                     <td>
-                        <form action="" method="get">
-                            <button class="button" type="submit">No</button>
+                        <form action="/app/library/books" method="get">
+                            <button class="button-active" type="submit">All Books</button>
                         </form>
                     </td>
+
                 </tr>
             </table>
         </div>
+
+
+
+        <table class="booksTable">
+
+            <tr>
+                <th colspan="3">Book Directory</th>
+            </tr>
+
+            <th>Name</th>
+            <th>Author</th>
+            <th>Status</th>
+
+
+            <c:forEach var="book" items="${books}" varStatus="status">
+                <tr>
+
+                    <td>${book.name}</td>
+                    <td>${book.author}</td>
+                    <td>${book.status}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
+
+
+
 
     </div>
 </body>
