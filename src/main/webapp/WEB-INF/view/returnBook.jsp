@@ -14,10 +14,55 @@
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
+    <div id="resultado"></div>
+
+    <div id="camera"></div>
+
+    <!--<script src="quagga.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 
 </head>
 
 <body id="bodySolid">
+
+<script>
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+        },
+        decoder: {
+            readers: ["code_128_reader", "ean_reader",
+                "ean_8_reader",
+                "code_39_reader",
+                "code_39_vin_reader"
+            ]
+
+        },
+
+    }, function (err) {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log("Initialization finished. Ready to start");
+        Quagga.start();
+    });
+
+
+    Quagga.onDetected(function (data) {
+
+
+        <!--console.log(data.codeResult.code);-->
+        var x =document.getElementById("triip");
+        x.value=data.codeResult.code;
+
+
+    });
+
+
+</script>
 
 <div class="row">
     <div class="col-sm-4" id="left">
@@ -40,12 +85,12 @@
             </form>
         </div>
         <div>
-            <form action="/app/person/return" method="get">
+            <form action="/app/book/return" method="get">
                 <button class="button-active" type="submit">Returning</button>
             </form>
         </div>
         <div>
-            <form action="/app/person/profile" method="get">
+            <form action="/app/profile" method="get">
                 <button class="button" type="submit">Books</button>
             </form>
         </div>
@@ -63,7 +108,7 @@
                 <td>
                     <form:form method="POST" action="/app/book/return" modelAttribute="book">
                     <form:label path="bookid">Enter barcode </form:label>
-                    <form:input path="bookid"/>
+                        <form:input id="triip" path="bookid"/>
                 </td>
             </tr>
             <tr>

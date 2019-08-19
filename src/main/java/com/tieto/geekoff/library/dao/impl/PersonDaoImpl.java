@@ -51,6 +51,10 @@ public class PersonDaoImpl implements PersonDao {
                 + " email) VALUES ("
                 + "?, ?, ?)";
 
+        String email = person.getEmail();
+        String firstName = email.substring(0, email.indexOf("."));
+        String surname = email.substring(email.indexOf(".") + 1, email.indexOf("@"));
+
         if (checkEmail(person) && checkAccountAlreadyExist(person)) {
             try (
                     Connection connection = app.connect();
@@ -58,8 +62,8 @@ public class PersonDaoImpl implements PersonDao {
                             Statement.RETURN_GENERATED_KEYS)
             ) {
 
-                statement.setString(1, person.getFirstName());
-                statement.setString(2, person.getSurname());
+                statement.setString(1, firstName);
+                statement.setString(2, surname);
                 statement.setString(3, person.getEmail());
 
 
@@ -101,6 +105,7 @@ public class PersonDaoImpl implements PersonDao {
                 person.setSurname(rs.getString("lastname"));
                 person.setEmail(rs.getString("email"));
                 person.setRole(rs.getString("role"));
+                person.setBorrowedBooks(getBorrowedBooks(person));
             }
 
         } catch (SQLException ex) {

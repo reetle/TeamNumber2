@@ -40,12 +40,12 @@
             </form>
         </div>
         <div>
-            <form action="/app/person/return" method="get">
+            <form action="/app/book/return" method="get">
                 <button class="button" type="submit">Returning</button>
             </form>
         </div>
         <div>
-            <form action="/app/person/profile" method="get">
+            <form action="/app/profile" method="get">
                 <button class="button-active" type="submit">Books</button>
             </form>
         </div>
@@ -84,7 +84,7 @@
             <th>Author</th>
 
 
-            <c:forEach var="book" items="${books}" varStatus="status">
+            <c:forEach var="book" items="${person.borrowedBooks}" varStatus="status">
                 <tr>
                     <td>${book.name}</td>
                     <td>${book.author}</td>

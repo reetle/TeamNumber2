@@ -92,7 +92,9 @@
         </div>
 
 
-
+        <form action="/app/profile" method="get">
+            <button class="button" type="submit">Back to Profile</button>
+        </form>
 
 
     </div>
