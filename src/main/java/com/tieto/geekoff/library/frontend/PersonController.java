@@ -1,6 +1,5 @@
 package com.tieto.geekoff.library.frontend;
 
-import com.tieto.geekoff.library.dao.App;
 import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
 import com.tieto.geekoff.library.service.BookService;
@@ -35,6 +34,7 @@ public class PersonController {
     }
 
     private static Person person2;
+    private static Book book2;
 
     @Autowired
     private PersonService personService;
@@ -83,10 +83,6 @@ public class PersonController {
             return "showLogin";
         }
 
-        if (personService.isAdmin(person2)) {
-            return "adminView";
-        }
-
         return "showProfile";
     }
 
@@ -119,13 +115,32 @@ public class PersonController {
     @RequestMapping(value = "/library/book_confirmation", method = RequestMethod.POST)
     public String bookConfirmation(@ModelAttribute("book")Book book, Model model) {
         book = bookService.getBook(book.getBookid());
+        book2 = book;
         System.out.println(book);
-        personService.addBookToPerson(person2, book);
-        libraryService.bookIsNotAvailable(book.getBookid());
+        // personService.addBookToPerson(person2, book);
+        // libraryService.bookIsNotAvailable(book.getBookid());
         model.addAttribute("book", book);
+        model.addAttribute("person", person2);
         return "lendBooksConfirmation";
 
     }
+
+    @RequestMapping(value = "/library/book_confirm_yes", method = RequestMethod.GET)
+    public String bookYes(@ModelAttribute("book")Book book, Model model) {
+        personService.addBookToPerson(person2, book2);
+        System.out.println(book2);
+        libraryService.bookIsNotAvailable(book2.getBookid());
+        model.addAttribute("book", book2);
+        model.addAttribute("person", person2);
+        return "redirect:/app/profile";
+    }
+
+    @RequestMapping(value = "/library/book_confirm_no", method = RequestMethod.GET)
+    public String bookNo(@ModelAttribute("book")Book book, Model model) {
+
+        return "lendBooksFront";
+    }
+
 
 
     @RequestMapping(value="book/return", method = RequestMethod.POST)
