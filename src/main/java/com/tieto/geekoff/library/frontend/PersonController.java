@@ -83,10 +83,6 @@ public class PersonController {
             return "showLogin";
         }
 
-        if (personService.isAdmin(person2)) {
-            return "adminView";
-        }
-
         return "showProfile";
     }
 
