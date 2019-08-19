@@ -23,7 +23,7 @@
 
 </head>
 
-<body id="bodyGradient">
+<body id="bodySolid">
 
 <script>
     Quagga.init({
