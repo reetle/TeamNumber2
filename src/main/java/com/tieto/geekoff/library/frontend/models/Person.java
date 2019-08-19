@@ -1,6 +1,8 @@
 package com.tieto.geekoff.library.frontend.models;
 
 
+import java.util.List;
+
 public class Person {
 
    private int id;
@@ -8,6 +10,7 @@ public class Person {
    private String surname;
    private String email;
    private String role;
+   private List<Book> borrowedBooks;
 
 
    public void setFirstName(String firstName) {
@@ -59,5 +62,13 @@ public class Person {
 
    public void setRole(String role) {
       this.role = role;
+   }
+
+   public List<Book> getBorrowedBooks() {
+      return borrowedBooks;
+   }
+
+   public void setBorrowedBooks(List<Book> borrowedBooks) {
+      this.borrowedBooks = borrowedBooks;
    }
 }

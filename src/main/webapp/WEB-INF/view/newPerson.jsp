@@ -23,19 +23,12 @@
 <div class="container">
     <div class="box">
         <div>
-            <form:form method="POST" action="/app/person/save" modelAttribute="person">
+            <form:form method="POST" action="/app/profile" modelAttribute="person">
             <table>
-                <tr>
-                    <td><form:label path="firstName">Firstname</form:label></td>
-                    <td><form:input path="firstName"/></td>
-                </tr>
-                <tr>
-                    <td><form:label path="surname">Lastname</form:label></td>
-                    <td><form:input path="surname"/></td>
-                </tr>
                 <tr>
                     <td><form:label path="email">Email</form:label></td>
                     <td><form:input path="email"/></td>
+                    <td><form:errors path="email" cssStyle="color: #ff0000;"/></td>
                 </tr>
             </table>
 

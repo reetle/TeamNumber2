@@ -82,7 +82,7 @@
             <th>Author</th>
 
 
-            <c:forEach var="book" items="${books}" varStatus="status">
+            <c:forEach var="book" items="${person.borrowedBooks}" varStatus="status">
                 <tr>
                     <%--<td>${status.index + 1}</td>--%>
                     <td>${book.name}</td>

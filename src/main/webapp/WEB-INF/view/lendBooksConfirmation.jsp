@@ -36,7 +36,7 @@
             </table>
         </div>
 
-        <form action="/app/person/profile" method="get">
+        <form action="/app/profile" method="get">
             <button class="button" type="submit">Back to Profile</button>
         </form>
 

@@ -29,6 +29,7 @@
           <element id="library" level="project" name="Maven: com.github.sarxos:webcam-capture:0.3.10" />
           <element id="library" level="project" name="Maven: com.nativelibs4java:bridj:0.6.2" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.2" />
+          <element id="library" level="project" name="Maven: javax.validation:validation-api:2.0.1.Final" />
         </element>
       </element>
       <element id="directory" name="META-INF">
