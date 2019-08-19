@@ -38,6 +38,8 @@ p {
 }
 */
 
+
+
 td, tr {
 
 	text-align: center;
@@ -100,6 +102,36 @@ table.booksTable thead th {
 
 }
 
-.btn-primary:hover {
+.button:hover {
+    background-color: #35a1e3;
+}
 
+.button-active {
+    background-color: #c9b51c;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.button-active:hover {
+    background-color: #e3cf35;
+}
+
+.button-logout {
+	background-color: #c91c31;
+	border: none;
+	color: white;
+	padding: 12px 20px;
+	text-align: center;
+	font-size: 20px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.button-logout:hover {
+	background-color: #e3354a;
 }
