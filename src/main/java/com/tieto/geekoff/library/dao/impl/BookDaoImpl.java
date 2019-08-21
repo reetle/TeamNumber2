@@ -61,4 +61,22 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
+    public Book getBookById (int bookid){
+        String sql="SELECT * FROM bookdata WHERE bookid=?";
+        Book book = new Book();
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, bookid);
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return book;
+    }
+
+
+
 }

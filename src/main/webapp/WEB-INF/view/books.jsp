@@ -81,25 +81,21 @@
 
         <table class="booksTable">
 
-            <tr>
-                <th colspan="4">Book Directory</th>
-            </tr>
-
             <th>Name</th>
             <th>Author</th>
             <th>Status</th>
             <c:if test="${person.role=='admin'}">
-                <th>Commands</th>
+               <th>Edit</th>
             </c:if>
             <c:forEach var="book" items="${books}" varStatus="status">
                 <tr>
-
+                    <td>${book.bookid}</td>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                     <td>${book.status}</td>
                     <c:if test="${person.role=='admin'}">
                         <td>
-                            <form action="/app/book/${book.bookid}/edit" method="get">
+                            <form action="/app/book/edit/${book.bookid}" method="get">
                                 <button class="button" type="submit">Edit</button>
                             </form>
                         </td>

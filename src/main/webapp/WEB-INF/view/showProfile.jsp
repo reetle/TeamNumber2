@@ -77,9 +77,9 @@
 
 
             <table class="booksTable">
-            <tr>
+            <%--<tr>
                 <th colspan="2">Your books</th>
-            </tr>
+            </tr>--%>
             <th>Name</th>
             <th>Author</th>
 
