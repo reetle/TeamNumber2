@@ -23,7 +23,7 @@
 <div class="container">
     <div class="box">
         <div>
-            <form:form method="POST" action="/app/profile" modelAttribute="person">
+            <form:form method="POST" action="/app/addPerson" modelAttribute="person">
             <table>
                 <tr>
                     <td><form:label path="email">Email</form:label></td>
