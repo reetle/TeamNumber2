@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -56,14 +58,38 @@ public class PersonController {
         return new ModelAndView("showLogin");
     }
 
+    @RequestMapping(value = "person/login", method = RequestMethod.POST)
+    public String userLoginF(@ModelAttribute("person")@Validated Person person, BindingResult bindingResult, Model model) {
+
+
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            for (ObjectError error : errors) {
+                System.out.println(error.getCode());
+                if (error.getCode().equals("email.exists")) {
+                    person2 = personService.loadUser(person.getEmail());
+                    return "redirect:/app/profile";
+                }
+            }
+            return "showLogin";
+        }
+        return "showLogin";
+
+
+    }
+
+
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView profile() {
+        System.out.println(person2);
         person2 = personService.loadUser(person2.getEmail());
+        System.out.println(person2);
         return new ModelAndView("showProfile", "person", person2);
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String userProfile(@ModelAttribute("person")@Validated Person person, BindingResult bindingResult, Model model) {
+
 
         if (bindingResult.hasErrors()) {
             return "showLogin";
@@ -75,7 +101,6 @@ public class PersonController {
             e.printStackTrace();
         }
         person2 = personService.loadUser(person.getEmail());
-        System.out.println(person2);
         person2.setBorrowedBooks(personService.getBorrowedBooks(person2));
         model.addAttribute("person", person2);
 
@@ -89,6 +114,7 @@ public class PersonController {
 
     @RequestMapping(value = "/addPerson", method = RequestMethod.GET)
     public ModelAndView person() {
+
         return new ModelAndView("newPerson", "person", new Person());
     }
 
@@ -100,6 +126,7 @@ public class PersonController {
             return "newPerson";
         }
 
+
         try {
             if (personService.createUser(person)) {
                 person2 = personService.loadUser(person.getEmail());
@@ -109,7 +136,7 @@ public class PersonController {
             e.printStackTrace();
         }
 
-        return "showProfile";
+        return "redirect:/app/profile";
     }
 
     @RequestMapping(value = "/library/book_confirmation", method = RequestMethod.POST)
@@ -117,8 +144,6 @@ public class PersonController {
         book = bookService.getBook(book.getBookid());
         book2 = book;
         System.out.println(book);
-        // personService.addBookToPerson(person2, book);
-        // libraryService.bookIsNotAvailable(book.getBookid());
         model.addAttribute("book", book);
         model.addAttribute("person", person2);
         return "lendBooksConfirmation";
@@ -138,7 +163,7 @@ public class PersonController {
     @RequestMapping(value = "/library/book_confirm_no", method = RequestMethod.GET)
     public String bookNo(@ModelAttribute("book")Book book, Model model) {
 
-        return "lendBooksFront";
+        return "redirect:/app/person/lend";
     }
 
 

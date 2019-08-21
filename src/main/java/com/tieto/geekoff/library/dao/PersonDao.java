@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface PersonDao {
 
-   boolean checkAccountAlreadyExist(Person person);
+   boolean checkAccountAlreadyExist(String email);
    boolean createUser(Person person) throws SQLException;
    Person loadUser(String email);
    void addBookToPerson(Person person, Book book);

@@ -40,7 +40,7 @@
             </form>
         </div>
         <div>
-            <form action="/app/person/return" method="get">
+            <form action="/app/book/return" method="get">
                 <button class="button" type="submit">Returning</button>
             </form>
         </div>

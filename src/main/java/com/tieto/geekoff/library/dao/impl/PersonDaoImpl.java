@@ -23,24 +23,24 @@ public class PersonDaoImpl implements PersonDao {
     }
 
 
-    public boolean checkAccountAlreadyExist(Person person) {
+    public boolean checkAccountAlreadyExist(String email) {
         String sql = "SELECT email FROM persondata WHERE email = ?";
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, person.getEmail());
+            pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 System.out.println("Konto juba olemas");
-                return false;
+                return true;
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
 
-        return true;
+        return false;
     }
 
 
@@ -51,19 +51,19 @@ public class PersonDaoImpl implements PersonDao {
                 + " email) VALUES ("
                 + "?, ?, ?)";
 
-        String email = person.getEmail();
+        String email = person.getEmail().toLowerCase();
         String firstName = email.substring(0, email.indexOf("."));
         String surname = email.substring(email.indexOf(".") + 1, email.indexOf("@"));
 
-        if (checkEmail(person) && checkAccountAlreadyExist(person)) {
+        if (checkEmail(person) && !checkAccountAlreadyExist(person.getEmail())) {
             try (
                     Connection connection = app.connect();
                     PreparedStatement statement = connection.prepareStatement(sql,
                             Statement.RETURN_GENERATED_KEYS)
             ) {
 
-                statement.setString(1, firstName);
-                statement.setString(2, surname);
+                statement.setString(1, firstName.substring(0, 1).toUpperCase() + firstName.substring(1));
+                statement.setString(2, surname.substring(0, 1).toUpperCase() + surname.substring(1));
                 statement.setString(3, person.getEmail());
 
 
