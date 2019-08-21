@@ -21,7 +21,7 @@
 <div class="container">
     <div class="box">
         <div>
-            <form:form method="POST" action="/app/profile" modelAttribute="person">
+            <form:form method="POST" action="/app/person/login" modelAttribute="person">
             <form:label path="email">Enter Email: </form:label>
                 <form:input path="email"/>
                 <td><form:errors path="email" cssStyle="color: #ff0000;"/></td>

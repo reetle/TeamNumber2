@@ -18,8 +18,8 @@ public class PersonServiceImpl implements PersonService {
    @Autowired
    private PersonDao personDao;
 
-   public boolean checkAccountAlreadyExist(Person person) {
-      return personDao.checkAccountAlreadyExist(person);
+   public boolean checkAccountAlreadyExist(String email) {
+      return personDao.checkAccountAlreadyExist(email);
    }
 
    public boolean createUser(Person person) throws SQLException {
