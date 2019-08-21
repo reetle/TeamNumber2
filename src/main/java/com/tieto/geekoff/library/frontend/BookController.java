@@ -3,6 +3,7 @@ package com.tieto.geekoff.library.frontend;
 import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
 import com.tieto.geekoff.library.service.BookService;
+import com.tieto.geekoff.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class BookController {
 
 
 
+/*
     @RequestMapping(value = "book/{id}/edit", method = RequestMethod.GET)
     public ModelAndView editBook(@PathVariable("id") String bookId, ModelAndView model) {
 
@@ -38,4 +40,22 @@ public class BookController {
         bookService.saveBook(book);
         return new RedirectView("/app/library/books");
     }
+*/
+
+
+    @RequestMapping(value = "/book/new", method = RequestMethod.GET)
+    public String newBook(Model model) {
+        model.addAttribute("book", new Book());
+        return "addNewBook";
+    }
+
+    @RequestMapping(value= "/save", method = RequestMethod.POST)
+    public String save(@ModelAttribute("book") Book book){
+
+        bookService.saveBook(book);
+        return "redirect:/app/library/books";
+    }
+
+
+
 }
