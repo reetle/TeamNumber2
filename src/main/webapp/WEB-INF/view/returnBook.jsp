@@ -103,6 +103,9 @@
     </div>
 
     <div class="col-sm-8" id="right">
+        <div>
+            <!-- Siin vahel v6iks kaamera pilt olla-->
+        </div>
         <table>
             <tr>
                 <td>
