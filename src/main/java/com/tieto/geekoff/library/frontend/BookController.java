@@ -56,25 +56,29 @@ public class BookController {
         return "redirect:/app/library/books";
     }
 
-    @RequestMapping(value = "/book/edit/{bookid}", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/book/edit/{bookid}", method = RequestMethod.GET)
     public String editBook(@PathVariable int bookid, Model model){
         Book book=bookService.getBook(bookid);
 
         model.addAttribute("book", book);
         return "bookEdit";
     }
-
+*/
     @RequestMapping(value = "/saveBookEdit", method = RequestMethod.POST)
     public String saveEdit(@ModelAttribute("book") Book book){
         bookService.updateBook(book);
         return "redirect:/app/library/books";
     }
+/*
 
     @RequestMapping(value = "/book/edit/{bookid}", method = RequestMethod.GET)
     public String deleteBook (@PathVariable int bookid, Model model){
         bookService.deleteBook(bookid);
-        /*model.addAttribute("book");*/
+        */
+/*model.addAttribute("book");*//*
+
         return "redirect:/app/library/books";
     }
-
+*/
 }
+

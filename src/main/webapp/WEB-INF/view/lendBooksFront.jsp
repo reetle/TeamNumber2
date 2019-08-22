@@ -14,9 +14,7 @@
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
-    <div id="resultado"></div>
 
-    <div id="camera"></div>
 
     <!--<script src="quagga.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
@@ -24,45 +22,6 @@
 </head>
 
 <body id="bodySolid">
-
-<script>
-    Quagga.init({
-        inputStream: {
-            name: "Live",
-            type: "LiveStream",
-            target: document.querySelector('#camera')    // Or '#yourElement' (optional)
-        },
-        decoder: {
-            readers: ["code_128_reader", "ean_reader",
-                "ean_8_reader",
-                "code_39_reader",
-                "code_39_vin_reader"
-            ]
-
-        },
-
-    }, function (err) {
-        if (err) {
-            console.log(err);
-            return
-        }
-        console.log("Initialization finished. Ready to start");
-        Quagga.start();
-    });
-
-
-    Quagga.onDetected(function (data) {
-
-
-        <!--console.log(data.codeResult.code);-->
-        var x =document.getElementById("triip");
-        x.value=data.codeResult.code;
-
-
-    });
-
-
-</script>
 
 <div class="row">
     <div class="col-sm-4" id="left">
@@ -104,7 +63,11 @@
 
     <div class="col-sm-8" id="right">
         <div>
-            <!-- Siin vahel v6iks kaamera pilt olla-->
+            <div id="resultado"></div>
+
+            <div id="camera"></div>
+
+
         </div>
         <div>
             <table>
@@ -132,5 +95,43 @@
     </div>
 
     </div>
+
+<script>
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+        },
+        decoder: {
+            readers: ["code_128_reader", "ean_reader",
+                "ean_8_reader",
+                "code_39_reader",
+                "code_39_vin_reader"
+            ]
+
+        },
+
+    }, function (err) {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log("Initialization finished. Ready to start");
+        Quagga.start();
+    });
+
+
+    Quagga.onDetected(function (data) {
+
+
+        <!--console.log(data.codeResult.code);-->
+        var x =document.getElementById("triip");
+        x.value=data.codeResult.code;
+
+
+    });
+
+</script>
 </body>
 </html>
