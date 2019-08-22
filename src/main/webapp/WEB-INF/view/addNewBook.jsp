@@ -13,6 +13,10 @@
             <td><form:input path="author" /></td>
         </tr>
         <tr>
+            <td>Barcode :</td>
+            <td><form:input path="code"</td>
+        </tr>
+        <tr>
             <td> </td>
             <td><input type="submit" value="Save"/></td>
         </tr>

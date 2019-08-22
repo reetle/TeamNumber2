@@ -21,5 +21,9 @@ public class BookServiceImpl implements BookService {
         bookDao.saveBook(book);
     }
 
+    public void updateBook(Book book) {
+        bookDao.updateBook(book);
+    }
+
 
 }

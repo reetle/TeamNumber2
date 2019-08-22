@@ -64,4 +64,10 @@ public class BookController {
         return "bookEdit";
     }
 
+    @RequestMapping(value = "saveBookEdit", method = RequestMethod.POST)
+    public String saveEdit(@ModelAttribute("book") Book book){
+        bookService.updateBook(book);
+        return "redirect:/app/library/books";
+    }
+
 }

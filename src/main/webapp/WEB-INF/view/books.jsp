@@ -89,7 +89,6 @@
             </c:if>
             <c:forEach var="book" items="${books}" varStatus="status">
                 <tr>
-                    <td>${book.bookid}</td>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                     <td>${book.status}</td>

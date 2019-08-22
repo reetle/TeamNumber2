@@ -45,7 +45,7 @@ public class BookDaoImpl implements BookDao {
 
 
     public void saveBook(Book book) {
-        String sql = "INSERT INTO bookdata(bookname,bookautor,status) values(?,?,?)";
+        String sql = "INSERT INTO bookdata(bookname,bookautor,status,code) values(?,?,?,?)";
 
 
         try (Connection conn = app.connect();
@@ -53,6 +53,7 @@ public class BookDaoImpl implements BookDao {
             pstmt.setString(1, book.getName());
             pstmt.setString(2, book.getAuthor());
             pstmt.setString(3,"available");
+            pstmt.setString(3,book.getCode());
 
             pstmt.executeUpdate();
 
@@ -61,20 +62,19 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
-    public Book getBookById (int bookid){
-        String sql="SELECT * FROM bookdata WHERE bookid=?";
-        Book book = new Book();
+    public void updateBook (Book book){
+        String sql = "UPDATE bookdata SET bookname = ?, bookautor = ?";
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, bookid);
+            pstmt.setString(1, book.getName());
+            pstmt.setString(2, book.getAuthor());
+
             pstmt.executeUpdate();
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
-        return book;
     }
 
 

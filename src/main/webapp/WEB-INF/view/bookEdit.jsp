@@ -13,7 +13,7 @@
 <div class="container">
     <div class="box">
         <div>
-            <form:form method="POST" action="/app/book/save" modelAttribute="book">
+            <form:form method="POST" action="/app/saveBookEdit" modelAttribute="book">
             <table>
                 <tr>
                     <td><form:label path="author">Author</form:label></td>

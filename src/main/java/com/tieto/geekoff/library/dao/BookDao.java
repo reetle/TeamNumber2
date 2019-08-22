@@ -7,5 +7,5 @@ public interface BookDao {
 
     void saveBook(Book book);
 
-
+    void updateBook(Book book);
 }
