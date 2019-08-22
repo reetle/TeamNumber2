@@ -173,7 +173,7 @@ public class PersonDaoImpl implements PersonDao {
                     book.setAuthor(resultSet.getString("bookautor"));
                     book.setStatus(resultSet.getString("status"));
                     book.setReview(resultSet.getString("review"));
-                    book.setCode(resultSet.getInt("code"));
+                    book.setCode(resultSet.getString("code"));
                     books.add(book);
                 }
 

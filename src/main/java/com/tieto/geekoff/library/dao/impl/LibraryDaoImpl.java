@@ -34,7 +34,7 @@ public class LibraryDaoImpl implements LibraryDao {
                 book.setAuthor(rs.getString("bookautor"));
                 book.setStatus(rs.getString("status"));
                 book.setReview(rs.getString("review"));
-                book.setCode(rs.getInt("code"));
+                book.setCode(rs.getString("code"));
                 listOfBooks.add(book);
             }
 

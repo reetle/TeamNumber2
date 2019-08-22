@@ -20,4 +20,13 @@ public class BookServiceImpl implements BookService {
     public void saveBook(Book book) {
         bookDao.saveBook(book);
     }
+
+
+    public boolean isBookAvailable(int code) {
+        return bookDao.isBookAvailable(code);
+    }
+
+    public boolean isBookInDatabase(int code) {
+        return bookDao.isBookInDatabase(code);
+    }
 }
