@@ -6,6 +6,8 @@ public interface BookService {
     Book getBook(int id);
 
     void saveBook(Book book);
+
     boolean isBookAvailable(int code);
     boolean isBookInDatabase(int code);
+
 }

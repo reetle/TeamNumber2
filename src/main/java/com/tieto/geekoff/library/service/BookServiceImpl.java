@@ -22,6 +22,7 @@ public class BookServiceImpl implements BookService {
     }
 
 
+
     public boolean isBookAvailable(int code) {
         return bookDao.isBookAvailable(code);
     }
@@ -29,4 +30,5 @@ public class BookServiceImpl implements BookService {
     public boolean isBookInDatabase(int code) {
         return bookDao.isBookInDatabase(code);
     }
+
 }

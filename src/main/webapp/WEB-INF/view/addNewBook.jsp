@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <h1>Add New Book</h1>
-<form:form method="post" action="/app/save" modelAttribute="book">
+<form:form method="post" action="/app/saveNewBook" modelAttribute="book">
     <table >
         <tr>
             <td>Name : </td>
@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td> </td>
-            <td><input type="submit" value="save" /></td>
+            <td><input type="submit" value="Save"/></td>
         </tr>
     </table>
 </form:form>
