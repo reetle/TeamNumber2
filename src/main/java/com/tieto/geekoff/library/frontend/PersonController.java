@@ -55,6 +55,10 @@ public class PersonController {
         return new Book();
     }
 
+    public Person getPerson2() {
+        return person2;
+    }
+
     @RequestMapping(value="person/login", method = RequestMethod.GET)
     public ModelAndView loginPerson(@ModelAttribute("person")Person model) {
         return new ModelAndView("showLogin");
@@ -197,6 +201,14 @@ public class PersonController {
         return "books";
     }
 
+    @RequestMapping(value = "history")
+    public String lendedBooksHistory(@ModelAttribute("book")Book book, Model model) {
+        List<Book> books = personService.getLendingHistory(person2);
+        model.addAttribute("books", books);
+        model.addAttribute("person", person2);
+        return "personLendingHistory";
+    }
+
     @RequestMapping(value = "person/lend")
     public String lendBook(@ModelAttribute("book") Book book, Model model) {
 
@@ -212,18 +224,21 @@ public class PersonController {
         bookValidator.validate(book, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "lendBooksFront";
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            for (ObjectError error : errors) {
+                if (error.getCode().equals("book.notYours")) {
+                    book = bookService.getBook(book.getCode());
+                    book2 = book;
+                    System.out.println(book);
+                    model.addAttribute("book", book);
+                    model.addAttribute("person", person2);
+                    status.setComplete();
+                    return "lendBooksConfirmation";
+                }
+            }
+
         }
-
-
-        book = bookService.getBook(book.getCode());
-        book2 = book;
-        System.out.println(book);
-        model.addAttribute("book", book);
-        model.addAttribute("person", person2);
-        status.setComplete();
-        return "lendBooksConfirmation";
-
+        return "lendBooksFront";
     }
 
 

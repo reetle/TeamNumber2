@@ -50,6 +50,10 @@ public class PersonServiceImpl implements PersonService {
       return personDao.isAdmin(person);
    }
 
+   public List<Book> getLendingHistory(Person person) {
+      return personDao.getLendingHistory(person);
+   }
+
 
    /*
    public String loadPerson(Person person) {

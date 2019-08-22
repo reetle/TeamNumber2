@@ -1,4 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -14,10 +14,6 @@
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
-
-
-    <!--<script src="quagga.min.js"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 
 </head>
 
@@ -40,7 +36,7 @@
         </div>
         <div>
             <form action="/app/person/lend" method="get">
-                <button class="button-active" type="submit">Lending</button>
+                <button class="button" type="submit">Lending</button>
             </form>
         </div>
         <div>
@@ -50,7 +46,7 @@
         </div>
         <div>
             <form action="/app/profile" method="get">
-                <button class="button" type="submit">Books</button>
+                <button class="button-active" type="submit">Books</button>
             </form>
         </div>
         <div>
@@ -63,75 +59,40 @@
 
     <div class="col-sm-8" id="right">
         <div>
-            <div id="resultado"></div>
-
-            <div id="camera"></div>
-
-
-        </div>
-        <div>
             <table>
                 <tr>
                     <td>
-                        <form:form method="POST" action="/app/person/lend" modelAttribute="book">
-                        <form:label path="code">Enter barcode </form:label>
-                            <form:input id="triip" path="code"/>
-                    <td><form:errors path="code" cssStyle="color: #ff0000;"/></td>
-
+                        <form action="/app/person/profile" method="get">
+                            <button class="button-active" type="submit">Your Books</button>
+                        </form>
                     </td>
-                </tr>
-                <tr>
                     <td>
-                        <input class="button" type="submit" value="Lend"/>
-                        </form:form>
-
+                        <form action="/app/library/books" method="get">
+                            <button class="button" type="submit">All Books</button>
+                        </form>
                     </td>
                 </tr>
             </table>
         </div>
 
 
+        <table class="booksTable">
+            <%--<tr>
+                <th colspan="2">Your books</th>
+            </tr>--%>
+            <th>Name</th>
+            <th>Author</th>
+
+
+            <c:forEach var="book" items="${books}" varStatus="status">
+                <tr>
+                    <td>${book.name}</td>
+                    <td>${book.author}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
 
     </div>
-
-    </div>
-
-<script>
-    Quagga.init({
-        inputStream: {
-            name: "Live",
-            type: "LiveStream",
-            target: document.querySelector('#camera')    // Or '#yourElement' (optional)
-        },
-        decoder: {
-            readers: ["code_128_reader", "ean_reader",
-                "ean_8_reader",
-                "code_39_reader",
-                "code_39_vin_reader"
-            ]
-
-        },
-
-    }, function (err) {
-        if (err) {
-            console.log(err);
-            return
-        }
-        console.log("Initialization finished. Ready to start");
-        Quagga.start();
-    });
-
-
-    Quagga.onDetected(function (data) {
-
-
-        <!--console.log(data.codeResult.code);-->
-        var x =document.getElementById("triip");
-        x.value=data.codeResult.code;
-
-
-    });
-
-</script>
 </body>
 </html>

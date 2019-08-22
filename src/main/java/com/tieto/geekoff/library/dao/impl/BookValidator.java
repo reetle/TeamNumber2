@@ -1,6 +1,7 @@
 package com.tieto.geekoff.library.dao.impl;
 
 import com.tieto.geekoff.library.frontend.models.Book;
+import com.tieto.geekoff.library.frontend.models.Person;
 import com.tieto.geekoff.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,12 +27,16 @@ public class BookValidator implements Validator {
 
         Book book = (Book) target;
 
+        Person person = new Person();
+
         if (!(book.getCode().equals(""))) {
             if (!bookService.isBookInDatabase(book.getCode())) {
                 errors.rejectValue("code", "error.NotInDatabase", "There is not such a book in library.");
 
             } else if (!bookService.isBookAvailable(book.getCode())) {
                 errors.rejectValue("code", "code.exists", "Book is already booked!");
+            } else if (!bookService.doIHaveThisBook(book.getBookid(), person)) {
+                errors.rejectValue("code", "book.notYours", "You haven't lended that book!");
             }
         }
 

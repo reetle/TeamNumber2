@@ -19,4 +19,5 @@ public interface PersonDao {
    boolean checkEmail(Person person);
    void removeBookFromPerson(Person person, Book book);
    boolean isAdmin(Person person);
+   List<Book> getLendingHistory(Person person);
 }
