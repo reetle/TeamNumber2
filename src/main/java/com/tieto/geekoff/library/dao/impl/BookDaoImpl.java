@@ -32,7 +32,7 @@ public class BookDaoImpl implements BookDao {
                 book.setAuthor(rs.getString("bookautor"));
                 book.setStatus(rs.getString("status"));
                 book.setReview(rs.getString("review"));
-                book.setCode(rs.getInt("code"));
+                book.setCode(rs.getString("code"));
 
             }
 
@@ -62,15 +62,16 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
-}
+
 
     public void updateBook (Book book){
-        String sql = "UPDATE bookdata SET bookname = ?, bookautor = ?";
+        String sql = "UPDATE bookdata SET bookname = ?, bookautor = ? WHERE bookid=?";
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, book.getName());
             pstmt.setString(2, book.getAuthor());
+            pstmt.setInt(3, book.getBookid());
 
             pstmt.executeUpdate();
 
