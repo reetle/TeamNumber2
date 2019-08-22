@@ -7,4 +7,7 @@ public interface BookService {
 
     void saveBook(Book book);
 
+    boolean isBookAvailable(int code);
+    boolean isBookInDatabase(int code);
+
 }

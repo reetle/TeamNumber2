@@ -110,9 +110,10 @@
             <table>
                 <tr>
                     <td>
-                        <form:form method="POST" action="/app/library/book_confirmation" modelAttribute="book">
+                        <form:form method="POST" action="/app/person/lend" modelAttribute="book">
                         <form:label path="bookid">Enter barcode </form:label>
                             <form:input id="triip" path="bookid"/>
+
 
                     </td>
                 </tr>
