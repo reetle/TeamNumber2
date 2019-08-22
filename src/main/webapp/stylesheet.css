@@ -52,6 +52,7 @@ h1 {
     font-size: 100px;
 
 
+
 }
 
 h1 span {
@@ -89,22 +90,50 @@ table.booksTable thead th {
     border-style: none;
 }
 
-.row, [class^="col"], .container, .box {
+.row, [class^="col"], .container, .box { /*[class^="col"]*/
     width:100%;
+    height:100%;
     display:flex;
 }
 
-.container, .row{
-    height:100%;
-    justify-content:center;
-}
 
 .box, [class^="col"] {
-    height: 100%;
+
     flex-direction: column;
-    justify-content:space-evenly;
-    align-items:center;
+    align-items: center;
+    justify-content: space-around;
+
 }
+
+.box {
+    justify-content: center;
+}
+
+#addMargin div {
+    margin: 10px auto;
+}
+
+.errors{
+    color: aqua;
+}
+
+#test {
+    justify-content: center;
+    margin: 100px auto;
+}
+
+
+#right {
+
+}
+
+
+.drawingBuffer {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 
 .button {
     background-color: transparent;
@@ -191,3 +220,4 @@ select:-webkit-autofill:focus {
     -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
     -webkit-transition-delay: 9999s;
 }
+
