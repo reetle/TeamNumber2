@@ -21,6 +21,14 @@ public class BookServiceImpl implements BookService {
         bookDao.saveBook(book);
     }
 
+    public void updateBook(Book book) {
+        bookDao.updateBook(book);
+    }
+
+    public void deleteBook (int bookid) {
+        bookDao.deleteBook(bookid);
+    }
+
 
     public boolean isBookAvailable(String code) {
         return bookDao.isBookAvailable(code);
