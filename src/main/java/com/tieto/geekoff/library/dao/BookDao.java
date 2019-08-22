@@ -8,4 +8,6 @@ public interface BookDao {
     void saveBook(Book book);
 
     void updateBook(Book book);
+    boolean isBookAvailable(int code);
+    boolean isBookInDatabase(int code);
 }

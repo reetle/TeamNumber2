@@ -36,9 +36,6 @@
 
   <bean id = "personValidator" class = "com.tieto.geekoff.library.dao.impl.PersonValidator" />
 
-  <bean id="messageSource"
-        class="org.springframework.context.support.ResourceBundleMessageSource">
-    <property name="basename" value="validation" />
-  </bean>
+
 
 </beans>
