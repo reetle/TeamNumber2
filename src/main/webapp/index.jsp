@@ -19,8 +19,15 @@
 </head>
 <body id="bodySolid">
 
-<div class="row">
-    <div class="col-sm-4">
+<div class="container">
+
+    <div class="box" id="addMargin">
+        <div>
+            <h1>
+                <span>BOOK</span>
+                <span>SELF</span>
+            </h1>
+        </div>
         <div>
             <form action="/app/person/login" method="get">
                 <button class="button" type="submit">Login</button>
@@ -31,16 +38,11 @@
                 <button class="button" type="submit">Create Account</button>
             </form>
         </div>
-    </div>
-    <div class="col-sm-8">
-        <div>
-            <h1>
-                <span>BOOK</span>
-                <span>SELF</span>
-            </h1>
-        </div>
+
 
     </div>
+
+
 </div>
 </body>
 </html>

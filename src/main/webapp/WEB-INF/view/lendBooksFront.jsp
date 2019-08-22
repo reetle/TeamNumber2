@@ -61,14 +61,16 @@
         </div-->
     </div>
 
-    <div class="col-sm-8" id="right">
-        <div>
-            <div id="resultado"></div>
+    <div class="col-sm-4" id="center">
+          <div id="interactive" class="viewport">
+              <video class="videoCamera" autoplay="true" preload="auto" src="" muted="true"
+                     playsinline="true"></video>
+              <canvas class="drawingBuffer"></canvas>
+          </div>
+    </div>
 
-            <div id="camera"></div>
+    <div class="col-sm-4" id="right">
 
-
-        </div>
         <div>
             <table>
                 <tr>

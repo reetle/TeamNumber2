@@ -21,10 +21,11 @@
 <div class="container">
     <div class="box">
         <div>
-            <form:form method="POST" action="/app/person/login" modelAttribute="person">
+            <table></table>
+                <form:form method="POST" action="/app/person/login" modelAttribute="person">
             <form:label path="email">Enter Email: </form:label>
                 <form:input path="email"/>
-                <td><form:errors path="email" cssStyle="color: #ff0000;"/></td>
+                <td><form:errors path="email" class="errors"/></td>
 
         </div>
         <div>
