@@ -57,7 +57,6 @@ public class PersonController {
 
     @RequestMapping(value="person/login", method = RequestMethod.GET)
     public ModelAndView loginPerson(@ModelAttribute("person")Person model) {
-
         return new ModelAndView("showLogin");
     }
 
