@@ -49,13 +49,19 @@ public class BookController {
         return "addNewBook";
     }
 
-    @RequestMapping(value= "/save", method = RequestMethod.POST)
+    @RequestMapping(value= "/saveNewBook", method = RequestMethod.POST)
     public String save(@ModelAttribute("book") Book book){
 
         bookService.saveBook(book);
         return "redirect:/app/library/books";
     }
 
-
+    @RequestMapping(value = "/book/edit/{bookid}", method = RequestMethod.GET)
+    public String editBook(@PathVariable int bookid, Model model){
+        Book book=bookService.getBook(bookid);
+        System.out.println(book);
+        model.addAttribute("book", book);
+        return "bookEdit";
+    }
 
 }
