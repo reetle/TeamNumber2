@@ -89,7 +89,6 @@
             </c:if>
             <c:forEach var="book" items="${books}" varStatus="status">
                 <tr>
-                    <td>${book.bookid}</td>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                     <td>${book.status}</td>
@@ -97,6 +96,11 @@
                         <td>
                             <form action="/app/book/edit/${book.bookid}" method="get">
                                 <button class="button" type="submit">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/app/book/remove/${book.bookid}" method="get">
+                                <button class="button" type="submit">Remove</button>
                             </form>
                         </td>
                     </c:if>
