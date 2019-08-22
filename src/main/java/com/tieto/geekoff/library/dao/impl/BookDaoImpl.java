@@ -16,15 +16,15 @@ public class BookDaoImpl implements BookDao {
     App app = new App();
 
 
-    public Book getBook(int id) {
-        String sql = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
+    public Book getBook(String code) {
+        String sql = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE code = ?";
         Book book = new Book();
 
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, id);
+            pstmt.setString(1, code);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 book.setBookid(rs.getInt("bookid"));
@@ -45,7 +45,7 @@ public class BookDaoImpl implements BookDao {
 
 
     public void saveBook(Book book) {
-        String sql = "INSERT INTO bookdata(bookname,bookautor,status) values(?,?,?)";
+        String sql = "INSERT INTO bookdata(bookname,bookautor,status, code) values(?,?,?,?)";
 
 
         try (Connection conn = app.connect();
@@ -53,6 +53,7 @@ public class BookDaoImpl implements BookDao {
             pstmt.setString(1, book.getName());
             pstmt.setString(2, book.getAuthor());
             pstmt.setString(3,"available");
+            pstmt.setString(4, book.getCode());
 
             pstmt.executeUpdate();
 
@@ -62,11 +63,11 @@ public class BookDaoImpl implements BookDao {
     }
 
 
-    public boolean isBookAvailable(int code) {
-        String sql = "SELECT bookname FROM bookdata WHERE bookid = ? AND status = ?";
+    public boolean isBookAvailable(String code) {
+        String sql = "SELECT bookname FROM bookdata WHERE code = ? AND status = ?";
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, code);
+            pstmt.setString(1, code);
             pstmt.setString(2, "available");
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -78,11 +79,11 @@ public class BookDaoImpl implements BookDao {
         return false;
     }
 
-    public boolean isBookInDatabase(int code) {
-        String sql = "SELECT bookname FROM bookdata WHERE bookid = ?";
+    public boolean isBookInDatabase(String code) {
+        String sql = "SELECT bookname FROM bookdata WHERE code = ?";
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, code);
+            pstmt.setString(1, code);
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {

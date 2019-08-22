@@ -110,8 +110,9 @@
             <tr>
                 <td>
                     <form:form method="POST" action="/app/book/return" modelAttribute="book">
-                    <form:label path="bookid">Enter barcode </form:label>
-                        <form:input id="triip" path="bookid"/>
+                    <form:label path="code">Enter barcode </form:label>
+                        <form:input id="triip" path="code"/>
+                <td><form:errors path="code" cssStyle="color: #ff0000;"/></td>
                 </td>
             </tr>
             <tr>

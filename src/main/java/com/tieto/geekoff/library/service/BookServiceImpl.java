@@ -12,8 +12,8 @@ public class BookServiceImpl implements BookService {
     private BookDao bookDao;
 
 
-    public Book getBook(int id) {
-        return bookDao.getBook(id);
+    public Book getBook(String code) {
+        return bookDao.getBook(code);
     }
 
 
@@ -22,11 +22,11 @@ public class BookServiceImpl implements BookService {
     }
 
 
-    public boolean isBookAvailable(int code) {
+    public boolean isBookAvailable(String code) {
         return bookDao.isBookAvailable(code);
     }
 
-    public boolean isBookInDatabase(int code) {
+    public boolean isBookInDatabase(String code) {
         return bookDao.isBookInDatabase(code);
     }
 }

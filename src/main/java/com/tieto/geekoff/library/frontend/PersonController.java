@@ -1,5 +1,7 @@
 package com.tieto.geekoff.library.frontend;
 
+import com.tieto.geekoff.library.dao.impl.BookValidator;
+import com.tieto.geekoff.library.dao.impl.PersonValidator;
 import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
 import com.tieto.geekoff.library.service.BookService;
@@ -11,29 +13,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@SessionAttributes({"person", "book"})
 public class PersonController {
 
     @Autowired
-    @Qualifier("personValidator")
-    private Validator validator;
+    private PersonValidator personValidator;
 
-    @InitBinder
-    private void initBinder(WebDataBinder binder) {
-        binder.setValidator(validator);
-    }
+    @Autowired
+    private BookValidator bookValidator;
 
     private static Person person2;
     private static Book book2;
@@ -52,6 +50,11 @@ public class PersonController {
         return new Person();
     }
 
+    @ModelAttribute("book")
+    public Book createBookModel() {
+        return new Book();
+    }
+
     @RequestMapping(value="person/login", method = RequestMethod.GET)
     public ModelAndView loginPerson(@ModelAttribute("person")Person model) {
 
@@ -59,8 +62,9 @@ public class PersonController {
     }
 
     @RequestMapping(value = "person/login", method = RequestMethod.POST)
-    public String userLoginF(@ModelAttribute("person")@Validated Person person, BindingResult bindingResult, Model model) {
+    public String userLoginF(@ModelAttribute("person")Person person, BindingResult bindingResult, Model model, SessionStatus status) {
 
+        personValidator.validate(person, bindingResult);
 
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
@@ -68,11 +72,13 @@ public class PersonController {
                 System.out.println(error.getCode());
                 if (error.getCode().equals("email.exists")) {
                     person2 = personService.loadUser(person.getEmail());
+                    status.setComplete();
                     return "redirect:/app/profile";
                 }
             }
-            return "showLogin";
+
         }
+
         return "showLogin";
 
 
@@ -81,19 +87,14 @@ public class PersonController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView profile() {
-        System.out.println(person2);
         person2 = personService.loadUser(person2.getEmail());
-        System.out.println(person2);
         return new ModelAndView("showProfile", "person", person2);
     }
 
+    /*
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String userProfile(@ModelAttribute("person")@Validated Person person, BindingResult bindingResult, Model model) {
 
-
-        if (bindingResult.hasErrors()) {
-            return "showLogin";
-        }
 
         try {
             personService.createUser(person);
@@ -104,12 +105,11 @@ public class PersonController {
         person2.setBorrowedBooks(personService.getBorrowedBooks(person2));
         model.addAttribute("person", person2);
 
-        if (person2.getRole() == null) {
-            return "showLogin";
-        }
 
         return "showProfile";
     }
+
+     */
 
 
     @RequestMapping(value = "/addPerson", method = RequestMethod.GET)
@@ -119,8 +119,10 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/addPerson", method = RequestMethod.POST)
-    public String addPerson(@ModelAttribute("person") @Validated Person person,
-                             BindingResult bindingResult, Model model) {
+    public String addPerson(@ModelAttribute("person") Person person,
+                             BindingResult bindingResult, Model model, SessionStatus status) {
+
+        personValidator.validate(person, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "newPerson";
@@ -135,20 +137,11 @@ public class PersonController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        status.setComplete();
         return "redirect:/app/profile";
     }
 
-    @RequestMapping(value = "/library/book_confirmation", method = RequestMethod.POST)
-    public String bookConfirmation(@ModelAttribute("book")Book book, Model model) {
-        book = bookService.getBook(book.getBookid());
-        book2 = book;
-        System.out.println(book);
-        model.addAttribute("book", book);
-        model.addAttribute("person", person2);
-        return "lendBooksConfirmation";
 
-    }
 
     @RequestMapping(value = "/library/book_confirm_yes", method = RequestMethod.GET)
     public String bookYes(@ModelAttribute("book")Book book, Model model) {
@@ -169,11 +162,24 @@ public class PersonController {
 
 
     @RequestMapping(value="book/return", method = RequestMethod.POST)
-    public String returnBook(@ModelAttribute("book") Book book, Model model) {
-        book = bookService.getBook(book.getBookid());
-        personService.removeBookFromPerson(person2, book);
-        libraryService.bookIsAvailable(book.getBookid());
-        model.addAttribute("person", person2);
+    public String returnBook(@ModelAttribute("book") Book book, Model model, BindingResult bindingResult, SessionStatus status) {
+
+        bookValidator.validate(book, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            for (ObjectError error : errors) {
+                System.out.println(error);
+                if (error.getCode().equals("code.exists")) {
+                    book = bookService.getBook(book.getCode());
+                    personService.removeBookFromPerson(person2, book);
+                    libraryService.bookIsAvailable(book.getBookid());
+                    model.addAttribute("person", person2);
+                    status.setComplete();
+                    return "redirect:/app/profile";
+                }
+            }
+        }
         return "returnBook";
     }
 
@@ -195,8 +201,30 @@ public class PersonController {
     @RequestMapping(value = "person/lend")
     public String lendBook(@ModelAttribute("book") Book book, Model model) {
 
+
         model.addAttribute("person", person2);
+
         return "lendBooksFront";
+    }
+
+    @RequestMapping(value = "person/lend", method = RequestMethod.POST)
+    public String bookConfirmation(@ModelAttribute("book") Book book, Model model, BindingResult bindingResult, SessionStatus status) {
+
+        bookValidator.validate(book, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "lendBooksFront";
+        }
+
+
+        book = bookService.getBook(book.getCode());
+        book2 = book;
+        System.out.println(book);
+        model.addAttribute("book", book);
+        model.addAttribute("person", person2);
+        status.setComplete();
+        return "lendBooksConfirmation";
+
     }
 
 
