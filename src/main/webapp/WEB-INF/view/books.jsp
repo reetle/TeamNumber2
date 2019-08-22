@@ -99,7 +99,7 @@
                             </form>
                         </td>
                         <td>
-                            <form action="/app/book/remove/${book.bookid}" method="get">
+                            <form action="/app/book/delete/${book.bookid}" method="get">
                                 <button class="button" type="submit">Remove</button>
                             </form>
                         </td>
