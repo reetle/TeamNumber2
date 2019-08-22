@@ -53,7 +53,7 @@ public class BookDaoImpl implements BookDao {
             pstmt.setString(1, book.getName());
             pstmt.setString(2, book.getAuthor());
             pstmt.setString(3,"available");
-            pstmt.setString(3,book.getCode());
+            pstmt.setString(4,book.getCode());
 
             pstmt.executeUpdate();
 
@@ -72,6 +72,20 @@ public class BookDaoImpl implements BookDao {
             pstmt.setString(1, book.getName());
             pstmt.setString(2, book.getAuthor());
             pstmt.setInt(3, book.getBookid());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void deleteBook (int bookid){
+        String sql ="DELETE FROM bookdata WHERE bookid=?";
+
+        try (Connection conn = app.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, bookid);
 
             pstmt.executeUpdate();
 

@@ -98,6 +98,11 @@
                                 <button class="button" type="submit">Edit</button>
                             </form>
                         </td>
+                        <td>
+                            <form action="/app/book/remove/${book.bookid}" method="get">
+                                <button class="button" type="submit">Remove</button>
+                            </form>
+                        </td>
                     </c:if>
                 </tr>
             </c:forEach>

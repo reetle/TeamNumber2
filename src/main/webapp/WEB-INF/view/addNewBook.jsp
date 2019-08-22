@@ -3,7 +3,7 @@
 
 <h1>Add New Book</h1>
 <form:form method="post" action="/app/saveNewBook" modelAttribute="book">
-    <table >
+    <table>
         <tr>
             <td>Name : </td>
             <td><form:input path="name"  /></td>
@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>Barcode :</td>
-            <td><form:input path="code"</td>
+            <td><form:input path="code"/></td>
         </tr>
         <tr>
             <td> </td>
