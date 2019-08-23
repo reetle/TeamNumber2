@@ -8,15 +8,10 @@ import com.tieto.geekoff.library.service.BookService;
 import com.tieto.geekoff.library.service.LibraryService;
 import com.tieto.geekoff.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,6 +48,10 @@ public class PersonController {
     @ModelAttribute("book")
     public Book createBookModel() {
         return new Book();
+    }
+
+    public Person getPerson2() {
+        return person2;
     }
 
     @RequestMapping(value="person/login", method = RequestMethod.GET)
@@ -165,6 +164,27 @@ public class PersonController {
 
         bookValidator.validate(book, bindingResult);
 
+
+        if (bindingResult.hasErrors()) {
+            
+            return "returnBook";
+        }
+
+        if (!bookService.doIHaveThisBook(book.getCode(), person2)) {
+            bindingResult.rejectValue("code", "book.notYours", "You haven't lended that book!");
+            return "returnBook";
+        }
+
+        book = bookService.getBook(book.getCode());
+        personService.removeBookFromPerson(person2, book);
+        libraryService.bookIsAvailable(book.getBookid());
+        model.addAttribute("person", person2);
+        status.setComplete();
+        return "redirect:/app/profile";
+
+
+
+        /*
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
             for (ObjectError error : errors) {
@@ -180,6 +200,10 @@ public class PersonController {
             }
         }
         return "returnBook";
+
+         */
+
+
     }
 
     @RequestMapping(value = "book/return", method = RequestMethod.GET)
@@ -197,6 +221,14 @@ public class PersonController {
         return "books";
     }
 
+    @RequestMapping(value = "history")
+    public String personLendedBooksHistory(@ModelAttribute("book")Book book, Model model) {
+        List<Book> books = personService.getLendingHistory(person2);
+        model.addAttribute("books", books);
+        model.addAttribute("person", person2);
+        return "personLendingHistory";
+    }
+
     @RequestMapping(value = "person/lend")
     public String lendBook(@ModelAttribute("book") Book book, Model model) {
 
@@ -211,10 +243,15 @@ public class PersonController {
 
         bookValidator.validate(book, bindingResult);
 
+
         if (bindingResult.hasErrors()) {
             return "lendBooksFront";
         }
 
+        if (!bookService.isBookAvailable(book.getCode())) {
+            bindingResult.rejectValue("code", "code.exists", "Book is already booked!");
+            return "lendBooksFront";
+        }
 
         book = bookService.getBook(book.getCode());
         book2 = book;
@@ -223,6 +260,29 @@ public class PersonController {
         model.addAttribute("person", person2);
         status.setComplete();
         return "lendBooksConfirmation";
+
+
+
+        /*
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            for (ObjectError error : errors) {
+                if (error.getCode().equals("book.notYours")) {
+                    book = bookService.getBook(book.getCode());
+                    book2 = book;
+                    System.out.println(book);
+                    model.addAttribute("book", book);
+                    model.addAttribute("person", person2);
+                    status.setComplete();
+                    return "lendBooksConfirmation";
+                }
+            }
+
+        }
+        return "lendBooksFront";
+
+         */
+
 
     }
 

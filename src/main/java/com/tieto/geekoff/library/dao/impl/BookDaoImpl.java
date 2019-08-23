@@ -3,12 +3,14 @@ package com.tieto.geekoff.library.dao.impl;
 import com.tieto.geekoff.library.dao.App;
 import com.tieto.geekoff.library.dao.BookDao;
 import com.tieto.geekoff.library.frontend.models.Book;
+import com.tieto.geekoff.library.frontend.models.Person;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -158,6 +160,34 @@ public class BookDaoImpl implements BookDao {
 
         return false;
     }
+
+
+    public boolean doIHaveThisBook(String code, Person person) {
+        String sqlBookInfo = "SELECT bookid FROM bookdata WHERE code = ?";
+        String sql = "SELECT personid FROM orderedbooks WHERE bookid = ? AND personid = ?";
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement statement = conn.prepareStatement(sqlBookInfo);
+            statement.setString(1, code);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                pstmt.setInt(1, resultSet.getInt("bookid"));
+                pstmt.setInt(2, person.getId());
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return false;
+    }
+
 
 }
 

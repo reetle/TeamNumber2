@@ -24,14 +24,16 @@
         <div>
             <table>
                 <tr>
+
                     <td align="center">${person.firstName} ${person.surname}</td>
                 </tr>
                 <tr>
+
                     <td align="center">${person.email}</td>
                 </tr>
+
             </table>
         </div>
-
         <div>
             <form action="/app/person/lend" method="get">
                 <button class="button" type="submit">Lending</button>
@@ -43,7 +45,7 @@
             </form>
         </div>
         <div>
-            <form action="/app/library/books" method="get">
+            <form action="/app/profile" method="get">
                 <button class="button-active" type="submit">Books</button>
             </form>
         </div>
@@ -52,68 +54,45 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
+        </div-->
     </div>
 
-    <div class="col-sm-8" id="profileRight">
+    <div class="col-sm-8" id="right">
         <div>
-            <table id="topButtons">
+            <table>
                 <tr>
                     <td>
-                        <form action="/app/profile" method="get">
-                            <button class="button" type="submit">Your Books</button>
+                        <form action="/app/person/profile" method="get">
+                            <button class="button-active" type="submit">Your Books</button>
                         </form>
                     </td>
                     <td>
                         <form action="/app/library/books" method="get">
-                            <button class="button-active" type="submit">All Books</button>
+                            <button class="button" type="submit">All Books</button>
                         </form>
                     </td>
                 </tr>
             </table>
         </div>
 
-        <div>
-            <c:if test="${person.role=='admin'}">
-                <td>
-                    <form action="/app/book/new" method="get">
-                        <button class="button" type="submit">Add New</button>
-                    </form>
-                </td>
-            </c:if>
-        </div>
 
-        <div>
-            <table class="booksTable">
-                <tr>
-                    <th>Name</th>
-                    <th>Author</th>
-                    <th>Status</th>
-                        <c:if test="${person.role=='admin'}">
-                    <th>Edit</th>
-                    <th>Remove</th>
-                    </c:if>
-                    <c:forEach var="book" items="${books}" varStatus="status">
-                </tr>
+        <table class="booksTable">
+            <%--<tr>
+                <th colspan="2">Your books</th>
+            </tr>--%>
+            <th>Name</th>
+            <th>Author</th>
+
+
+            <c:forEach var="book" items="${books}" varStatus="status">
                 <tr>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
-                    <td>${book.status}</td>
-                    <c:if test="${person.role=='admin'}">
-                    <td>
-                            <form action="/app/book/edit/${book.bookid}" method="get">
-                                <button class="button" type="submit">Edit</button>
-                            </form>
-
-                        </td>
-                        <td>
-                            <form action="/app/book/delete/${book.bookid}" method="get">
-                                <button class="button" type="submit">Remove</button>
-                            </form>
-                    </td>
-                    </c:if>
                 </tr>
             </c:forEach>
         </table>
+
+
     </div>
 </body>
 </html>

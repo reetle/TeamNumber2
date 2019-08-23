@@ -9,5 +9,6 @@ public interface LibraryDao {
     List<Book> getBooks();
     void bookIsNotAvailable(int id);
     void bookIsAvailable(int id);
+    List<Book> getAllLendedBooks();
 
 }

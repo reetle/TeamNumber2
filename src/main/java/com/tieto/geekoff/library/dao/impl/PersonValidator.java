@@ -42,6 +42,10 @@ public class PersonValidator implements Validator {
             errors.rejectValue("email", "email.exists", "The username already exists. Please use a different username");
         }
 
+        if (pattern.matcher(person.getEmail()).matches() && !(personService.checkAccountAlreadyExist(person.getEmail()))) {
+            errors.rejectValue("email", "account.notRegistered", "No registered account with this email!");
+        }
+
 
         System.out.println(errors);
     }

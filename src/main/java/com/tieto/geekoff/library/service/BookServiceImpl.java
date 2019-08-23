@@ -2,6 +2,7 @@ package com.tieto.geekoff.library.service;
 
 import com.tieto.geekoff.library.dao.BookDao;
 import com.tieto.geekoff.library.frontend.models.Book;
+import com.tieto.geekoff.library.frontend.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,4 +43,9 @@ public class BookServiceImpl implements BookService {
     public boolean isBookInDatabase(String code) {
         return bookDao.isBookInDatabase(code);
     }
+
+    public boolean doIHaveThisBook(String code, Person person) {
+        return bookDao.doIHaveThisBook(code, person);
+    }
+
 }

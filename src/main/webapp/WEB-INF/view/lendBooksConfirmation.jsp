@@ -40,12 +40,12 @@
             </form>
         </div>
         <div>
-            <form action="/app/person/return" method="get">
+            <form action="/app/book/return" method="get">
                 <button class="button" type="submit">Returning</button>
             </form>
         </div>
         <div>
-            <form action="/app/person/profile" method="get">
+            <form action="/app/profile" method="get">
                 <button class="button" type="submit">Books</button>
             </form>
         </div>

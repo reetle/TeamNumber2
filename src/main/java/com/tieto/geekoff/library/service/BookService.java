@@ -1,6 +1,7 @@
 package com.tieto.geekoff.library.service;
 
 import com.tieto.geekoff.library.frontend.models.Book;
+import com.tieto.geekoff.library.frontend.models.Person;
 
 public interface BookService {
     Book getBook(String code);
@@ -10,6 +11,7 @@ public interface BookService {
 
     boolean isBookAvailable(String code);
     boolean isBookInDatabase(String code);
+    boolean doIHaveThisBook(String code, Person person);
 
 
     void updateBook(Book book);

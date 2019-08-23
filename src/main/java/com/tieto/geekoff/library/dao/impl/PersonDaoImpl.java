@@ -120,13 +120,52 @@ public class PersonDaoImpl implements PersonDao {
     }
 
 
-    public void addBookToPerson(Person person, Book book) {
-        String sql = "INSERT INTO orderedbooks (personid, bookid) VALUES (?,?)";
-
+    public List<Book> getLendingHistory(Person person) {
+        List<Book> books = new ArrayList<>();
+        String sql = "SELECT bookid FROM orderedbookshistory WHERE personid = ?";
+        String sql2 = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setLong(1, person.getId());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                PreparedStatement statement = conn.prepareStatement(sql2);
+                statement.setInt(1, rs.getInt("bookid"));
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    Book book = new Book();
+                    book.setBookid(resultSet.getInt("bookid"));
+                    book.setName(resultSet.getString("bookname"));
+                    book.setAuthor(resultSet.getString("bookautor"));
+                    book.setStatus(resultSet.getString("status"));
+                    book.setReview(resultSet.getString("review"));
+                    book.setCode(resultSet.getString("code"));
+                    books.add(book);
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return books;
+    }
+
+
+    public void addBookToPerson(Person person, Book book) {
+        String sql = "INSERT INTO orderedbooks (personid, bookid) VALUES (?,?)";
+        String sqlHistory = "INSERT INTO orderedbookshistory (personid, bookid) VALUES (?,?)";
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement statement = conn.prepareStatement(sqlHistory);
+            statement.setInt(1, person.getId());
+            statement.setInt(2, book.getBookid());
+            statement.executeUpdate();
+
+            pstmt.setInt(1, person.getId());
             pstmt.setInt(2, book.getBookid());
             pstmt.executeUpdate();
 

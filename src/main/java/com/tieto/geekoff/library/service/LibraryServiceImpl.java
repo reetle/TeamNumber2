@@ -18,6 +18,11 @@ public class LibraryServiceImpl implements LibraryService {
         return libraryDao.getBooks();
     }
 
+
+    public List<Book> getAllLendedBooks() {
+        return libraryDao.getAllLendedBooks();
+    }
+
     public void bookIsNotAvailable(int id) {
         libraryDao.bookIsNotAvailable(id);
     }
