@@ -18,16 +18,15 @@
 
 
 </head>
-<body id="bodySolid">
+<body>
 
-<div class="container">
-    <div class="box" id="addMargin">
+<div class="center margin">
         <div>
             <form:form method="POST" action="/app/addPerson" modelAttribute="person">
                 <form:errors path="email" class="errors"/>
         </div>
         <div>
-                <form:label path="email">Email</form:label>
+                <form:label path="email">Enter email</form:label>
         </div>
         <div>
                     <form:input path="email"/>
@@ -37,6 +36,5 @@
             </form:form>
         </div>
     </div>
-</div>
 </body>
 </html>

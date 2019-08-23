@@ -1,58 +1,14 @@
-
-
-
-#bodyBackground {
-    background-image: url(blur-book-stack-books.jpg);
-    background-position: center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-#bodySolid {
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2b2b28+0,2b2b28+62,1c1c1c+100 */
-    background-color: #222629;
-
-
-
-}
-
 html,body{
     height:100%;
     font-family: 'Montserrat', sans-serif;
-    /*color: #C5C6C7;*/
     color: #C5C6C7;
-
-
-
+    background-color: #222629;
 }
 
-/*
-p {
-	background-color: white;
-	padding: 30px;
-	border-color: white;
-	border:50px;
-	border-radius:  50px;
-
-
-}
-*/
-
-td, tr {
-
-    text-align: center;
-}
-
+/*BOOKSELF*/
 h1 {
     color: #86C232;
     font-size: 100px;
-
-
-
 }
 
 h1 span {
@@ -62,86 +18,78 @@ h1 span {
     text-align: center;
 }
 
+/*TABELID*/
 table.booksTable {
-    /*width: 100%;
-    height: 200%;*/
     text-align: center;
 }
 table.booksTable td, table.booksTable th {
     padding: 10px 20px;
     border-style: dotted;
     border-width: 1px;
-
-
 }
 table.booksTable tr:nth-child(even) {
     background: #0b0c0d;
 }
 table.booksTable thead {
-    /*background: #DDDDDD;*/
     background: #0b0c0d;
 }
 table.booksTable thead th {
-    /*font-size: 15px;*/
     font-weight: bold;
     text-align: center;
 }
-
 .tableHeading {
     border-style: none;
 }
 
-.row, [class^="col"], .container, .box { /*[class^="col"]*/
-    width:100%;
-    height:100%;
-    display:flex;
+td, tr {
+    text-align: center;
 }
 
+/*JOONDUS*/
 
-.box, [class^="col"] {
+.row {
+    height: 100%;
+    width: 100%;
+}
 
+.center {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.spaceAround {
+    width: 100%;
+    height: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-
 }
 
-.box {
-
-}
-
-#addMargin, #addMargin div {
-    margin: 10px auto;
-    justify-content: center;
-}
-
-
-
-.errors{
-    color: #86C232;
-}
-
-#test {
-    justify-content: center;
-    margin: 100px auto;
-}
-
-
-#profileRight {
+.top {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: flex-start;
 }
 
-#profileRight div {
+.margin div {
     margin: 10px auto;
 }
 
-#topButtons td{
-    padding: 10px;
-    padding-top: 30px;
+.margin-top {
+    margin-top: 30px;
 }
 
-
-
+.padding td{
+    padding: 10px;
+}
 
 .drawingBuffer {
     position: absolute;
@@ -150,6 +98,7 @@ table.booksTable thead th {
 }
 
 
+/*NUPPUD*/
 .button {
     background-color: transparent;
     border-color: #86C232;
@@ -161,8 +110,6 @@ table.booksTable thead th {
     cursor: pointer;
     color: #C5C6C7;
     width: 200px;
-
-
 }
 
 .button:hover, .button:active, .button:focus {
@@ -172,8 +119,6 @@ table.booksTable thead th {
     padding: 12px 20px;
     font-weight: bolder;
     outline:0;
-
-
 }
 
 .button-active {
@@ -194,9 +139,11 @@ table.booksTable thead th {
     outline: 0;
 }
 
+#autoButton {
+    width: auto;
+}
 
-
-
+/*TEKSTILAHTRID*/
 input, select, textarea {
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
@@ -211,15 +158,12 @@ input, select, textarea {
 
 }
 
-
-
 textarea:focus, input:focus {
     box-shadow: 0 0 5px #86C232;
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
     border: 1px solid #86C232;
     color: #C5C6C7;
-
 }
 
 
@@ -237,3 +181,5 @@ select:-webkit-autofill:focus {
     -webkit-transition-delay: 9999s;
 }
 
+.errors{
+    color: #86C232;

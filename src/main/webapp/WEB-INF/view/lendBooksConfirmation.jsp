@@ -17,10 +17,10 @@
 
 </head>
 
-<body id="bodySolid">
+<body>
 
 <div class="row">
-    <div class="col-sm-4" id="left">
+    <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
@@ -57,7 +57,7 @@
         </div-->
     </div>
 
-    <div class="col-sm-8" id="right">
+    <div class="col-sm-8 center">
     <div>
         <table class=>
             <tr>
@@ -75,7 +75,7 @@
 
 
         <div>
-            <table id="topButtons">
+            <table class="padding">
                 <tr>
                     <td>
                         <form action="/app/library/book_confirm_yes" method="get">
