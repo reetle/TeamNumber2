@@ -17,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Controller
 @SessionAttributes({"person", "book"})
@@ -63,6 +64,8 @@ public class PersonController {
     public String userLoginF(@ModelAttribute("person")Person person, BindingResult bindingResult, Model model, SessionStatus status) {
 
         personValidator.validate(person, bindingResult);
+        Pattern pattern = Pattern.compile("[a-zA-Z]+[.][a-zA-Z]+@\\btieto\\b[.]\\bcom\\b",
+                Pattern.CASE_INSENSITIVE);
 
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
@@ -75,6 +78,10 @@ public class PersonController {
                 }
             }
 
+        }
+        if (pattern.matcher(person.getEmail()).matches() && !(personService.checkAccountAlreadyExist(person.getEmail()))) {
+            bindingResult.rejectValue("email", "account.notRegistered", "No registered account with this email!");
+            return "showLogin";
         }
 
         return "showLogin";
@@ -125,6 +132,7 @@ public class PersonController {
         if (bindingResult.hasErrors()) {
             return "newPerson";
         }
+
 
 
         try {
