@@ -44,8 +44,8 @@ public class BookServiceImpl implements BookService {
         return bookDao.isBookInDatabase(code);
     }
 
-    public boolean doIHaveThisBook(int id, Person person) {
-        return bookDao.doIHaveThisBook(id, person);
+    public boolean doIHaveThisBook(String code, Person person) {
+        return bookDao.doIHaveThisBook(code, person);
     }
 
 }

@@ -77,4 +77,8 @@ public class LibraryDaoImpl implements LibraryDao {
             System.out.println(ex.getMessage());
         }
     }
+
+    public List<Book> getAllLendedBooks() {
+        return null;
+    }
 }

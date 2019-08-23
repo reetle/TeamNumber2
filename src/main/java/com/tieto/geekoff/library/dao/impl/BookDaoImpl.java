@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -161,23 +162,32 @@ public class BookDaoImpl implements BookDao {
     }
 
 
-    public boolean doIHaveThisBook(int id, Person person) {
+    public boolean doIHaveThisBook(String code, Person person) {
+        String sqlBookInfo = "SELECT bookid FROM bookdata WHERE code = ?";
         String sql = "SELECT personid FROM orderedbooks WHERE bookid = ? AND personid = ?";
+
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
-            pstmt.setInt(2, person.getId());
-
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return true;
+            PreparedStatement statement = conn.prepareStatement(sqlBookInfo);
+            statement.setString(1, code);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                pstmt.setInt(1, resultSet.getInt("bookid"));
+                pstmt.setInt(2, person.getId());
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
             }
+
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
 
         return false;
     }
+
 
 }
 

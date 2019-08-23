@@ -169,6 +169,27 @@ public class PersonController {
 
         bookValidator.validate(book, bindingResult);
 
+
+        if (bindingResult.hasErrors()) {
+            
+            return "returnBook";
+        }
+
+        if (!bookService.doIHaveThisBook(book.getCode(), person2)) {
+            bindingResult.rejectValue("code", "book.notYours", "You haven't lended that book!");
+            return "returnBook";
+        }
+
+        book = bookService.getBook(book.getCode());
+        personService.removeBookFromPerson(person2, book);
+        libraryService.bookIsAvailable(book.getBookid());
+        model.addAttribute("person", person2);
+        status.setComplete();
+        return "redirect:/app/profile";
+
+
+
+        /*
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
             for (ObjectError error : errors) {
@@ -184,6 +205,10 @@ public class PersonController {
             }
         }
         return "returnBook";
+
+         */
+
+
     }
 
     @RequestMapping(value = "book/return", method = RequestMethod.GET)
@@ -202,7 +227,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "history")
-    public String lendedBooksHistory(@ModelAttribute("book")Book book, Model model) {
+    public String personLendedBooksHistory(@ModelAttribute("book")Book book, Model model) {
         List<Book> books = personService.getLendingHistory(person2);
         model.addAttribute("books", books);
         model.addAttribute("person", person2);
@@ -223,6 +248,27 @@ public class PersonController {
 
         bookValidator.validate(book, bindingResult);
 
+
+        if (bindingResult.hasErrors()) {
+            return "lendBooksFront";
+        }
+
+        if (!bookService.isBookAvailable(book.getCode())) {
+            bindingResult.rejectValue("code", "code.exists", "Book is already booked!");
+            return "lendBooksFront";
+        }
+
+        book = bookService.getBook(book.getCode());
+        book2 = book;
+        System.out.println(book);
+        model.addAttribute("book", book);
+        model.addAttribute("person", person2);
+        status.setComplete();
+        return "lendBooksConfirmation";
+
+
+
+        /*
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
             for (ObjectError error : errors) {
@@ -239,6 +285,10 @@ public class PersonController {
 
         }
         return "lendBooksFront";
+
+         */
+
+
     }
 
 
