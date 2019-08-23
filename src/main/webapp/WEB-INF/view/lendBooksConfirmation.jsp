@@ -64,7 +64,7 @@
                 <td>Do You want to borrow</td>
             </tr>
             <tr>
-                <th>${book.name}</th>
+                <th><h3>${book.name}</h3></th>
             </tr>
             <tr>
                 <td>${book.author}</td>
@@ -75,7 +75,7 @@
 
 
         <div>
-            <table>
+            <table id="topButtons">
                 <tr>
                     <td>
                         <form action="/app/library/book_confirm_yes" method="get">

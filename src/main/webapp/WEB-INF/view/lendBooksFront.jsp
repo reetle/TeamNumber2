@@ -58,7 +58,6 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
-        </div-->
     </div>
 
     <div class="col-sm-4" id="center">
@@ -69,33 +68,21 @@
           </div>
     </div>
 
-    <div class="col-sm-4" id="right">
-
+    <div class="col-sm-4" id="addMargin">
         <div>
-            <table>
-                <tr>
-                    <td>
-                        <form:form method="POST" action="/app/person/lend" modelAttribute="book">
-                        <form:label path="code">Enter barcode </form:label>
-                            <form:input id="triip" path="code"/>
-                    <td><form:errors path="code" cssStyle="color: #ff0000;"/></td>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input class="button" type="submit" value="Lend"/>
-                        </form:form>
-
-                    </td>
-                </tr>
-            </table>
+            <form:form method="POST" action="/app/person/lend" modelAttribute="book">
+                <form:errors path="code" class="errors"/>
         </div>
-
-
-
-    </div>
-
+        <div>
+                <form:label path="code">Enter barcode</form:label>
+        </div>
+        <div>
+            <form:input id="triip" path="code"/>
+        </div>
+        <div>
+            <input class="button" type="submit" value="Lend"/>
+            </form:form>
+        </div>
     </div>
 
 <script>

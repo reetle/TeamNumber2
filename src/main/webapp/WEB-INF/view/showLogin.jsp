@@ -16,22 +16,26 @@
 
 
 </head>
+
+
 <body id="bodySolid">
 
 <div class="container">
-    <div class="box">
+    <div class="box" id="addMargin">
         <div>
-            <table></table>
-                <form:form method="POST" action="/app/person/login" modelAttribute="person">
-            <form:label path="email">Enter Email: </form:label>
-                <form:input path="email"/>
-                <td><form:errors path="email" class="errors"/></td>
-
+        <form:form method="POST" action="/app/person/login" modelAttribute="person">
+            <form:errors path="email" class="errors"/>
+        </div>
+        <div>
+            <form:label path="email">Enter Email</form:label>
+        </div>
+        <div>
+            <form:input path="email" value=""/>
         </div>
         <div>
             <input class="button" type="submit" value="Login"/>
+                </form:form>
         </div>
-        </form:form>
     </div>
 </div>
 </body>

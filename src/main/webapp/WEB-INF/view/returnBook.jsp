@@ -70,30 +70,21 @@
         </div>
     </div>
 
-    <div class="col-sm-4" id="right">
-        <table>
-            <tr>
-                <td>
-                    <form:form method="POST" action="/app/book/return" modelAttribute="book">
-                    <form:label path="code">Enter barcode </form:label>
-                </td>
-            </tr>
-            <tr>
-                <td><form:input id="triip" path="code"/></td>
-            </tr>
-            <tr>
-                <td><form:errors path="code" class="errors" /></td>
-            </tr>
-            <tr>
-                <td>
-                    <input class="button" type="submit" value="Return"/>
-                    </form:form>
-                </td>
-            </tr>
-        </table>
-
-
-
+    <div class="col-sm-4" id="addMargin">
+        <div>
+            <form:form method="POST" action="/app/book/return" modelAttribute="book">
+                <form:errors path="code" class="errors" />
+        </div>
+        <div>
+            <form:label path="code">Enter barcode</form:label>
+        </div>
+        <div>
+                <form:input id="triip" path="code"/>
+        </div>
+        <div>
+            <input class="button" type="submit" value="Return"/>
+            </form:form>
+        <div>
     </div>
 
     <script>

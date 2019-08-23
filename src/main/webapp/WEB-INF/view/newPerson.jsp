@@ -21,22 +21,21 @@
 <body id="bodySolid">
 
 <div class="container">
-    <div class="box">
+    <div class="box" id="addMargin">
         <div>
             <form:form method="POST" action="/app/addPerson" modelAttribute="person">
-            <table>
-                <tr>
-                    <td><form:label path="email">Email</form:label></td>
-                    <td><form:input path="email"/></td>
-                    <td><form:errors path="email" cssStyle="color: #ff0000;"/></td>
-                </tr>
-            </table>
-
+                <form:errors path="email" class="errors"/>
+        </div>
+        <div>
+                <form:label path="email">Email</form:label>
+        </div>
+        <div>
+                    <form:input path="email"/>
         </div>
         <div>
             <input class="button" type="submit" value="Create Account"/>
+            </form:form>
         </div>
-        </form:form>
     </div>
 </div>
 </body>
