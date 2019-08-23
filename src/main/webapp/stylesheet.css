@@ -59,6 +59,7 @@ h1 span {
     display: block;
     font-family: 'Exo 2', sans-serif;
     font-weight: 900;
+    text-align: center;
 }
 
 table.booksTable {
@@ -106,15 +107,18 @@ table.booksTable thead th {
 }
 
 .box {
+
+}
+
+#addMargin, #addMargin div {
+    margin: 10px auto;
     justify-content: center;
 }
 
-#addMargin div {
-    margin: 10px auto;
-}
+
 
 .errors{
-    color: aqua;
+    color: #86C232;
 }
 
 #test {
@@ -123,9 +127,20 @@ table.booksTable thead th {
 }
 
 
-#right {
-
+#profileRight {
+    justify-content: flex-start;
 }
+
+#profileRight div {
+    margin: 10px auto;
+}
+
+#topButtons td{
+    padding: 10px;
+    padding-top: 30px;
+}
+
+
 
 
 .drawingBuffer {
@@ -204,6 +219,7 @@ textarea:focus, input:focus {
     margin: 5px 1px 3px 0px;
     border: 1px solid #86C232;
     color: #C5C6C7;
+
 }
 
 

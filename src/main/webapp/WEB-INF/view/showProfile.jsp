@@ -54,45 +54,41 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
-    </div-->
+
     </div>
 
-    <div class="col-sm-8" id="right">
+    <div class="col-sm-8" id="profileRight">
         <div>
-            <table>
-            <tr>
-            <td>
-                <form action="/app/person/profile" method="get">
-                <button class="button-active" type="submit">Your Books</button>
-            </form>
-            </td>
-                <td>
-            <form action="/app/library/books" method="get">
-                <button class="button" type="submit">All Books</button>
-            </form>
-                </td>
-            </tr>
-        </table>
+            <table id="topButtons">
+                <tr>
+                    <td>
+                        <form action="/app/person/profile" method="get">
+                            <button class="button-active" type="submit">Your Books</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/library/books" method="get">
+                            <button class="button" type="submit">All Books</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
         </div>
 
-
+        <div>
             <table class="booksTable">
-            <%--<tr>
-                <th colspan="2">Your books</th>
-            </tr>--%>
-            <th>Name</th>
-            <th>Author</th>
-
-
-            <c:forEach var="book" items="${person.borrowedBooks}" varStatus="status">
                 <tr>
+                    <th>Name</th>
+                    <th>Author</th>
+                </tr>
+                <tr>
+                    <c:forEach var="book" items="${person.borrowedBooks}" varStatus="status">
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                 </tr>
             </c:forEach>
-        </table>
-
-
+            </table>
+        </div>
 </div>
 </body>
 </html>
