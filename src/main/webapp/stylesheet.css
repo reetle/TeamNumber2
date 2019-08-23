@@ -194,6 +194,10 @@ table.booksTable thead th {
     outline: 0;
 }
 
+#autoButton {
+    width: auto;
+}
+
 
 
 

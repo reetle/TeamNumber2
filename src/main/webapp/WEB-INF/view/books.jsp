@@ -101,13 +101,13 @@
                     <c:if test="${person.role=='admin'}">
                     <td>
                             <form action="/app/book/edit/${book.bookid}" method="get">
-                                <button class="button" type="submit">Edit</button>
+                                <button class="button" type="submit" id="autoButton">Edit</button>
                             </form>
 
                         </td>
                         <td>
                             <form action="/app/book/delete/${book.bookid}" method="get">
-                                <button class="button" type="submit">Remove</button>
+                                <button class="button" type="submit" id="autoButton">Remove</button>
                             </form>
                     </td>
                     </c:if>
