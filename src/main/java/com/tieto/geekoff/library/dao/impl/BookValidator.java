@@ -1,5 +1,6 @@
 package com.tieto.geekoff.library.dao.impl;
 
+import com.tieto.geekoff.library.frontend.PersonController;
 import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
 import com.tieto.geekoff.library.service.BookService;
@@ -26,25 +27,13 @@ public class BookValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code","code.required", "Barcode field is missing");
 
         Book book = (Book) target;
-
-        Person person = new Person();
+        System.out.println(book.getCode());
 
         if (!(book.getCode().equals(""))) {
             if (!bookService.isBookInDatabase(book.getCode())) {
                 errors.rejectValue("code", "error.NotInDatabase", "There is not such a book in library.");
-
-            } else if (!bookService.isBookAvailable(book.getCode())) {
-                errors.rejectValue("code", "code.exists", "Book is already booked!");
-            } else if (!bookService.doIHaveThisBook(book.getBookid(), person)) {
-                errors.rejectValue("code", "book.notYours", "You haven't lended that book!");
             }
         }
-
-
-
-
-
-
     }
 
 

@@ -11,7 +11,7 @@ public interface BookService {
 
     boolean isBookAvailable(String code);
     boolean isBookInDatabase(String code);
-    boolean doIHaveThisBook(int id, Person person);
+    boolean doIHaveThisBook(String code, Person person);
 
 
     void updateBook(Book book);
