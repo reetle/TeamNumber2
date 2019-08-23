@@ -17,10 +17,10 @@
 
 </head>
 
-<body id="bodySolid">
+<body>
 
 <div class="row">
-    <div class="col-sm-4" id="left">
+    <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
@@ -54,9 +54,9 @@
         </div>
     </div>
 
-    <div class="col-sm-8" id="profileRight">
+    <div class="col-sm-8 top margin-top margin">
         <div>
-            <table id="topButtons">
+            <table class="padding">
                 <tr>
                     <td>
                         <form action="/app/profile" method="get">

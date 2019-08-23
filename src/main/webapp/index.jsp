@@ -17,11 +17,10 @@
 
 
 </head>
-<body id="bodySolid">
+<body>
 
-<div class="container">
 
-    <div class="box" id="addMargin">
+    <div class="center margin">
         <div>
             <h1>
                 <span>BOOK</span>
@@ -43,6 +42,5 @@
     </div>
 
 
-</div>
 </body>
 </html>

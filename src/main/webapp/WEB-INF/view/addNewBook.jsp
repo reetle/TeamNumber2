@@ -17,10 +17,10 @@
 
 </head>
 
-<body id="bodySolid">
+<body>
 
 <div class="row">
-    <div class="col-sm-4" id="left">
+    <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
@@ -57,7 +57,7 @@
 
     </div>
 
-    <div class="col-sm-8" >
+    <div class="col-sm-8 center margin" >
         <div>
             <table>
                 <form:form method="post" action="/app/saveNewBook" modelAttribute="book">

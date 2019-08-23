@@ -21,10 +21,10 @@
 
 </head>
 
-<body id="bodySolid">
+<body>
 
 <div class="row">
-    <div class="col-sm-4" id="left">
+    <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <div class="col-sm-4" id="center">
+    <div class="col-sm-4 center">
           <div id="interactive" class="viewport">
               <video class="videoCamera" autoplay="true" preload="auto" src="" muted="true"
                      playsinline="true"></video>
@@ -68,7 +68,7 @@
           </div>
     </div>
 
-    <div class="col-sm-4" id="addMargin">
+    <div class="col-sm-4 center margin">
         <div>
             <form:form method="POST" action="/app/person/lend" modelAttribute="book">
                 <form:errors path="code" class="errors"/>
@@ -77,7 +77,7 @@
                 <form:label path="code">Enter barcode</form:label>
         </div>
         <div>
-            <form:input id="triip" path="code"/>
+            <form:input id="triip" path="code" autofocus="true"/>
         </div>
         <div>
             <input class="button" type="submit" value="Lend"/>
