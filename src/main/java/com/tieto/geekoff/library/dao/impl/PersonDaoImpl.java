@@ -4,17 +4,23 @@ import com.tieto.geekoff.library.dao.App;
 import com.tieto.geekoff.library.dao.PersonDao;
 import com.tieto.geekoff.library.frontend.models.Book;
 import com.tieto.geekoff.library.frontend.models.Person;
+import com.tieto.geekoff.library.service.LibraryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PersonDaoImpl implements PersonDao {
 
 
+    @Autowired
+    private LibraryService libraryService;
 
     private final String TIETO_DOMAIN = "tieto.com";
     private final int LENDING_DURATION = 20;
@@ -126,7 +132,7 @@ public class PersonDaoImpl implements PersonDao {
 
     public List<Book> getLendingHistory(Person person) {
         List<Book> books = new ArrayList<>();
-        String sql = "SELECT bookid, startdate FROM orderedbookshistory WHERE personid = ?";
+        String sql = "SELECT bookid, startdate, status FROM orderedbookshistory WHERE personid = ?";
         String sql2 = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -146,6 +152,7 @@ public class PersonDaoImpl implements PersonDao {
                     book.setReview(resultSet.getString("review"));
                     book.setCode(resultSet.getString("code"));
                     book.setStartdate(rs.getDate("startdate"));
+                    book.setHistoryStatus(rs.getString("status"));
                     books.add(book);
                 }
 
@@ -156,6 +163,20 @@ public class PersonDaoImpl implements PersonDao {
         }
 
         return books;
+    }
+
+    public Map<Person, List<Book>> getAllHistory() {
+        List<Person> personList = libraryService.getAllPersons();
+        Map<Person, List<Book>> personBookMap = new HashMap<>();
+
+        for (Person person : personList) {
+            if (getLendingHistory(person).size() > 0) {
+                personBookMap.put(person, getLendingHistory(person));
+            }
+
+        }
+
+        return personBookMap;
     }
 
 
@@ -247,6 +268,88 @@ public class PersonDaoImpl implements PersonDao {
         return books;
     }
 
+//==========Maris ==========================
+    public List<Person> getPersons() {
+        String sql = "SELECT personid, firstname, lastname, email, role FROM persondata";
+        Person person;
+        List<Person> listOfPersons =  new ArrayList<>();
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                person = new Person();
+                person.setId(rs.getInt("personid"));
+                person.setFirstName(rs.getString("firstname"));
+                person.setSurname(rs.getString("lastname"));
+                person.setEmail(rs.getString("email"));
+                person.setRole(rs.getString("role"));
+                listOfPersons.add(person);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listOfPersons;
+    }
+
+    public void updatePerson (Person person){
+        String sql = "UPDATE persondata SET firstname=?, lastname=?, email=?, role=? WHERE personid=?";
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, person.getFirstName());
+            pstmt.setString(2, person.getSurname());
+            pstmt.setString(3, person.getEmail());
+            pstmt.setString(4, person.getRole());
+            pstmt.setInt(5, person.getId());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+
+    public Person getPerson(int id) {
+        String sql = "SELECT personid, firstname, lastname, email, role FROM persondata WHERE personid = ?";
+        Person person = new Person();
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                person.setId(rs.getInt("personid"));
+                person.setFirstName(rs.getString("firstname"));
+                person.setSurname(rs.getString("lastname"));
+                person.setEmail(rs.getString("email"));
+                person.setRole(rs.getString("role"));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return person;
+    }
+
+    public void deletePerson (int personid){
+        String sql ="DELETE FROM persondata WHERE personid=?";
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, personid);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
 
 }

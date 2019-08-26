@@ -90,7 +90,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="..." method="get">
+                    <form action="/app/allHistory" method="get">
                         <button class="button" type="submit">All History</button>
                     </form>
                 </td>

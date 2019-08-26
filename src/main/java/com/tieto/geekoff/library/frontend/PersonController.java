@@ -20,6 +20,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 @Controller
@@ -205,6 +206,14 @@ public class PersonController {
         return "personLendingHistory";
     }
 
+    @RequestMapping(value = "allHistory")
+    public String allLendingHistory(@ModelAttribute("book")Book book, Model model) {
+        Map<Person, List<Book>> personListMap = personService.getAllHistory();
+        model.addAttribute("map", personListMap);
+        model.addAttribute("person", person2);
+        return "adminAllHistory";
+    }
+
     @RequestMapping(value = "person/lend")
     public String lendBook(@ModelAttribute("book") Book book, Model model) {
 
@@ -256,6 +265,47 @@ public class PersonController {
         return "redirect:/app/person/lend";
     }
 
+//========Maris ======================================
 
+    @RequestMapping(value = "/allPersons")
+    public String allPersons(@ModelAttribute("person")Person person, Model model) {//Kas @ModelAttribute on vajalik??
+        List<Person> persons = personService.getPersons(); //Ok
+        model.addAttribute("persons", persons );//1. "persons" on jsp jaoks, 2. on lok muutuja
+        model.addAttribute("person", person2); //person2 on aktiivne kasutaja?
+        return "persons"; //failinimi
+    }
+
+    @RequestMapping(value = "/person/edit/{id}", method = RequestMethod.GET)
+    public String editPerson(@PathVariable int id, Model model){
+        Person person = personService.getPerson(id);
+        model.addAttribute("person", person);
+        return "personEdit";
+    }
+
+    @RequestMapping(value = "/savePersonEdit", method = RequestMethod.POST)
+    public String saveEdit(@ModelAttribute("person") Person person, Model model){
+        model.addAttribute("person", person);
+        personService.updatePerson(person);
+        return "redirect:/app/allPersons";
+    }
+
+    @RequestMapping(value = "/person/delete_ask_confirmation/{id}", method = RequestMethod.GET)
+    public String deletePersonAskConfirmation(@PathVariable int id, Model model){
+        Person person = personService.getPerson(id);
+        model.addAttribute("personToDelete", person);
+        model.addAttribute("person", person2);
+        return "deletePersonConfirmation";
+    }
+
+    @RequestMapping(value = "/person/delete_confirm_yes/{id}", method = RequestMethod.GET)
+    public String deletePersonFinally(@PathVariable int id){
+        personService.deletePerson(id);
+        return "redirect:/app/allPersons";
+    }
+
+    @RequestMapping(value = "/person/delete_confirm_no", method = RequestMethod.GET)
+    public String deletePersonInterrupt(){
+        return "redirect:/app/allPersons";
+    }
 
 }

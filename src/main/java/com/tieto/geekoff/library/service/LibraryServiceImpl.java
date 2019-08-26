@@ -33,5 +33,9 @@ public class LibraryServiceImpl implements LibraryService {
         libraryDao.bookIsAvailable(id);
     }
 
+    public List<Person> getAllPersons() {
+        return libraryDao.getAllPersons();
+    }
+
 
 }
