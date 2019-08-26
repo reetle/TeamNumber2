@@ -16,7 +16,16 @@
 
 
 
+
+<div id="resultado"></div>
+
+<div id="camera"></div>
+
+<!--<script src="quagga.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 </head>
+
+
 
 <body>
 
@@ -25,6 +34,8 @@
         <div>
             <table>
                 <tr>
+
+
 
                     <td align="center">${person.firstName} ${person.surname}</td>
                 </tr>
@@ -56,6 +67,7 @@
             </form>
         </div>
     </div>
+
 
 
     <div class="col-sm-4 center margin">
