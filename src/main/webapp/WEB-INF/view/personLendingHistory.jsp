@@ -17,10 +17,10 @@
 
 </head>
 
-<body id="bodySolid">
+<body>
 
 <div class="row">
-    <div class="col-sm-4" id="left">
+    <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
@@ -57,18 +57,23 @@
         </div-->
     </div>
 
-    <div class="col-sm-8" id="right">
+    <div class="col-sm-8 top margin-top padding">
         <div>
             <table>
                 <tr>
                     <td>
                         <form action="/app/person/profile" method="get">
-                            <button class="button-active" type="submit">Your Books</button>
+                            <button class="button" type="submit">Your Books</button>
                         </form>
                     </td>
                     <td>
                         <form action="/app/library/books" method="get">
                             <button class="button" type="submit">All Books</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/history" method="get">
+                            <button class="button-active" type="submit">History</button>
                         </form>
                     </td>
                 </tr>
