@@ -57,7 +57,7 @@
 
     </div>
 
-    <div class="col-sm-8 top margin-top">
+    <div class="col-sm-8 top margin-top margin">
         <div>
             <table class="padding">
                 <tr>
@@ -69,6 +69,11 @@
                     <td>
                         <form action="/app/library/books" method="get">
                             <button class="button" type="submit">All Books</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/history" method="get">
+                            <button class="button" type="submit">History</button>
                         </form>
                     </td>
                 </tr>
