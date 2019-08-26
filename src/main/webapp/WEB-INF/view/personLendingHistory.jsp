@@ -89,12 +89,14 @@
             </tr>--%>
             <th>Name</th>
             <th>Author</th>
+                <th>Date</th>
 
 
             <c:forEach var="book" items="${books}" varStatus="status">
                 <tr>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
+                    <td>${book.startdate}</td>
                 </tr>
             </c:forEach>
         </table>

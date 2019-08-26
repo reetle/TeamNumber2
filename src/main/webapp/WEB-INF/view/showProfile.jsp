@@ -62,7 +62,7 @@
             <table class="padding">
                 <tr>
                     <td>
-                        <form action="/app/person/profile" method="get">
+                        <form action="/app/profile" method="get">
                             <button class="button-active" type="submit">Your Books</button>
                         </form>
                     </td>
@@ -85,11 +85,13 @@
                 <tr>
                     <th>Name</th>
                     <th>Author</th>
+                    <th>Returning date</th>
                 </tr>
                 <tr>
                     <c:forEach var="book" items="${person.borrowedBooks}" varStatus="status">
                     <td>${book.name}</td>
                     <td>${book.author}</td>
+                        <td>${book.enddate}</td>
                 </tr>
             </c:forEach>
             </table>

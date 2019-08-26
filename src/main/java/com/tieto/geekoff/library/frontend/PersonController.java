@@ -15,13 +15,18 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Pattern;
 
 @Controller
 @SessionAttributes({"person", "book"})
 public class PersonController {
+
+    private final int LENDING_DURATION = 20;
 
     @Autowired
     private PersonValidator personValidator;
@@ -149,21 +154,7 @@ public class PersonController {
 
 
 
-    @RequestMapping(value = "/library/book_confirm_yes", method = RequestMethod.GET)
-    public String bookYes(@ModelAttribute("book")Book book, Model model) {
-        personService.addBookToPerson(person2, book2);
-        System.out.println(book2);
-        libraryService.bookIsNotAvailable(book2.getBookid());
-        model.addAttribute("book", book2);
-        model.addAttribute("person", person2);
-        return "redirect:/app/profile";
-    }
 
-    @RequestMapping(value = "/library/book_confirm_no", method = RequestMethod.GET)
-    public String bookNo(@ModelAttribute("book")Book book, Model model) {
-
-        return "redirect:/app/person/lend";
-    }
 
 
 
@@ -189,29 +180,6 @@ public class PersonController {
         model.addAttribute("person", person2);
         status.setComplete();
         return "redirect:/app/profile";
-
-
-
-        /*
-        if (bindingResult.hasErrors()) {
-            List<ObjectError> errors = bindingResult.getAllErrors();
-            for (ObjectError error : errors) {
-                System.out.println(error);
-                if (error.getCode().equals("code.exists")) {
-                    book = bookService.getBook(book.getCode());
-                    personService.removeBookFromPerson(person2, book);
-                    libraryService.bookIsAvailable(book.getBookid());
-                    model.addAttribute("person", person2);
-                    status.setComplete();
-                    return "redirect:/app/profile";
-                }
-            }
-        }
-        return "returnBook";
-
-         */
-
-
     }
 
     @RequestMapping(value = "book/return", method = RequestMethod.GET)
@@ -268,30 +236,24 @@ public class PersonController {
         model.addAttribute("person", person2);
         status.setComplete();
         return "lendBooksConfirmation";
+    }
 
+    @RequestMapping(value = "/library/book_confirm_yes", method = RequestMethod.GET)
+    public String bookYes(@ModelAttribute("book")Book book, Model model) {
+        personService.addBookToPerson(person2, book2);
+        book2.setStartdate(Date.valueOf(LocalDate.now()));
+        book2.setEnddate(Date.valueOf(LocalDate.now().plusDays(LENDING_DURATION)));
+        System.out.println(book2);
+        libraryService.bookIsNotAvailable(person2, book2);
+        model.addAttribute("book", book2);
+        model.addAttribute("person", person2);
+        return "redirect:/app/profile";
+    }
 
+    @RequestMapping(value = "/library/book_confirm_no", method = RequestMethod.GET)
+    public String bookNo(@ModelAttribute("book")Book book, Model model) {
 
-        /*
-        if (bindingResult.hasErrors()) {
-            List<ObjectError> errors = bindingResult.getAllErrors();
-            for (ObjectError error : errors) {
-                if (error.getCode().equals("book.notYours")) {
-                    book = bookService.getBook(book.getCode());
-                    book2 = book;
-                    System.out.println(book);
-                    model.addAttribute("book", book);
-                    model.addAttribute("person", person2);
-                    status.setComplete();
-                    return "lendBooksConfirmation";
-                }
-            }
-
-        }
-        return "lendBooksFront";
-
-         */
-
-
+        return "redirect:/app/person/lend";
     }
 
 
