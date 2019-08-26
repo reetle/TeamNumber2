@@ -55,9 +55,19 @@ public class PersonServiceImpl implements PersonService {
       return personDao.getLendingHistory(person);
    }
 
+
+   public List<Person> getPersons() { return personDao.getPersons(); }
+
+   public void updatePerson(Person person) { personDao.updatePerson(person); }
+
+   public Person getPerson(int id) { return personDao.getPerson(id); };
+
+   public void deletePerson(int id) { personDao.deletePerson(id); }
+
    public Map<Person, List<Book>> getAllHistory() {
       return personDao.getAllHistory();
    }
+
 
 
    /*
