@@ -12,7 +12,9 @@ public class Book {
     private String code;
     private Date startdate;
     private Date enddate;
+    private String historyStatus;
     private String genre;
+
 
 
     public String getName() {
@@ -94,7 +96,17 @@ public class Book {
         this.enddate = enddate;
     }
 
+
+    public String getHistoryStatus() {
+        return historyStatus;
+    }
+
+    public void setHistoryStatus(String historyStatus) {
+        this.historyStatus = historyStatus;
+    }
+
     public void setGenre(String genre) {this.genre = genre;}
 
     public String getGenre() {return genre; }
+
 }

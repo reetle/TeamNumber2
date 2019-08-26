@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -52,6 +53,10 @@ public class PersonServiceImpl implements PersonService {
 
    public List<Book> getLendingHistory(Person person) {
       return personDao.getLendingHistory(person);
+   }
+
+   public Map<Person, List<Book>> getAllHistory() {
+      return personDao.getAllHistory();
    }
 
 

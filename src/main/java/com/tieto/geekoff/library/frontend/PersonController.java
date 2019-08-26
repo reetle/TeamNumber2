@@ -20,6 +20,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 @Controller
@@ -203,6 +204,14 @@ public class PersonController {
         model.addAttribute("books", books);
         model.addAttribute("person", person2);
         return "personLendingHistory";
+    }
+
+    @RequestMapping(value = "allHistory")
+    public String allLendingHistory(@ModelAttribute("book")Book book, Model model) {
+        Map<Person, List<Book>> personListMap = personService.getAllHistory();
+        model.addAttribute("map", personListMap);
+        model.addAttribute("person", person2);
+        return "adminAllHistory";
     }
 
     @RequestMapping(value = "person/lend")
