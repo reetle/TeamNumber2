@@ -92,6 +92,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Author</th>
+                    <th>Genre</th>
                     <th>Status</th>
                         <c:if test="${person.role=='admin'}">
                     <th>Edit</th>
@@ -102,6 +103,7 @@
                 <tr>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
+                    <td>${book.genre}</td>
                     <td>${book.status}</td>
                     <c:if test="${person.role=='admin'}">
                     <td>

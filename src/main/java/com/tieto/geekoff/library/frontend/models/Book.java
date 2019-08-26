@@ -12,6 +12,7 @@ public class Book {
     private String code;
     private Date startdate;
     private Date enddate;
+    private String genre;
 
 
     public String getName() {
@@ -49,6 +50,7 @@ public class Book {
                 ", code='" + code + '\'' +
                 ", startdate=" + startdate +
                 ", enddate=" + enddate +
+                ", genre='" + genre + '\'' +
                 '}';
     }
 
@@ -91,4 +93,8 @@ public class Book {
     public void setEnddate(Date enddate) {
         this.enddate = enddate;
     }
+
+    public void setGenre(String genre) {this.genre = genre;}
+
+    public String getGenre() {return genre; }
 }
