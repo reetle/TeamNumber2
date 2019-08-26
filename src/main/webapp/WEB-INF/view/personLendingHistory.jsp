@@ -57,12 +57,12 @@
         </div-->
     </div>
 
-    <div class="col-sm-8 top margin-top padding">
+    <div class="col-sm-8 top margin-top margin">
         <div>
-            <table>
+            <table class="padding">
                 <tr>
                     <td>
-                        <form action="/app/person/profile" method="get">
+                        <form action="/app/profile" method="get">
                             <button class="button" type="submit">Your Books</button>
                         </form>
                     </td>
