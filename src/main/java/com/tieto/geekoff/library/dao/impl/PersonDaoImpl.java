@@ -225,6 +225,88 @@ public class PersonDaoImpl implements PersonDao {
         return books;
     }
 
+//==========Maris ==========================
+    public List<Person> getPersons() {
+        String sql = "SELECT personid, firstname, lastname, email, role FROM persondata";
+        Person person;
+        List<Person> listOfPersons =  new ArrayList<>();
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                person = new Person();
+                person.setId(rs.getInt("personid"));
+                person.setFirstName(rs.getString("firstname"));
+                person.setSurname(rs.getString("lastname"));
+                person.setEmail(rs.getString("email"));
+                person.setRole(rs.getString("role"));
+                listOfPersons.add(person);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listOfPersons;
+    }
+
+    public void updatePerson (Person person){
+        String sql = "UPDATE persondata SET firstname=?, lastname=?, email=?, role=? WHERE personid=?";
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, person.getFirstName());
+            pstmt.setString(2, person.getSurname());
+            pstmt.setString(3, person.getEmail());
+            pstmt.setString(4, person.getRole());
+            pstmt.setInt(5, person.getId());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+
+    public Person getPerson(int id) {
+        String sql = "SELECT personid, firstname, lastname, email, role FROM persondata WHERE personid = ?";
+        Person person = new Person();
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                person.setId(rs.getInt("personid"));
+                person.setFirstName(rs.getString("firstname"));
+                person.setSurname(rs.getString("lastname"));
+                person.setEmail(rs.getString("email"));
+                person.setRole(rs.getString("role"));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return person;
+    }
+
+    public void deletePerson (int personid){
+        String sql ="DELETE FROM persondata WHERE personid=?";
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, personid);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
 
 }

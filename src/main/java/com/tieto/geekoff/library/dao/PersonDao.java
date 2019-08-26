@@ -20,4 +20,8 @@ public interface PersonDao {
    void removeBookFromPerson(Person person, Book book);
    boolean isAdmin(Person person);
    List<Book> getLendingHistory(Person person);
+   List<Person> getPersons(); //Maris
+   void updatePerson(Person person);
+   Person getPerson(int id);
+   void deletePerson(int id);
 }

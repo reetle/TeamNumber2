@@ -17,4 +17,8 @@ public interface PersonService {
    void removeBookFromPerson(Person person, Book book);
    boolean isAdmin(Person person);
    List<Book> getLendingHistory(Person person);
+   List<Person> getPersons();
+   Person getPerson(int id);
+   void updatePerson(Person person);
+   void deletePerson(int id);
 }

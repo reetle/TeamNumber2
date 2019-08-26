@@ -17,23 +17,21 @@
 
 </head>
 
-<body>
+<body id="bodySolid">
 
 <div class="row">
-    <div class="col-sm-4 spaceAround">
+    <div class="col-sm-4" id="left">
         <div>
             <table>
                 <tr>
-
                     <td align="center">${person.firstName} ${person.surname}</td>
                 </tr>
                 <tr>
-
                     <td align="center">${person.email}</td>
                 </tr>
-
             </table>
         </div>
+
         <div>
             <form action="/app/person/lend" method="get">
                 <button class="button" type="submit">Lending</button>
@@ -45,64 +43,76 @@
             </form>
         </div>
         <div>
-            <form action="/app/profile" method="get">
+            <form action="/app/library/books" method="get">
                 <button class="button-active" type="submit">Books</button>
             </form>
         </div>
-        <c:if test="${person.role=='admin'}">
-            <div>
-                <td>
-                    <form action="/app/allPersons" method="get">
-                        <button class="button" type="submit">All persons</button>
-                    </form>
-                </td>
-            </div>
-        </c:if>
         <div>
             <form action="/" method="get">
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
-
     </div>
 
-    <div class="col-sm-8 top margin-top margin">
+    <div class="col-sm-8" id="profileRight">
         <div>
-            <table class="padding">
+            <table id="topButtons">
                 <tr>
                     <td>
-                        <form action="/app/person/profile" method="get">
-                            <button class="button-active" type="submit">Your Books</button>
+                        <form action="/app/profile" method="get">
+                            <button class="button" type="submit">Your Books</button>
                         </form>
                     </td>
                     <td>
                         <form action="/app/library/books" method="get">
-                            <button class="button" type="submit">All Books</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/app/history" method="get">
-                            <button class="button" type="submit">History</button>
+                            <button class="button-active" type="submit">All Books</button>
                         </form>
                     </td>
                 </tr>
             </table>
+        </div>
+
+        <div>
+                <td>
+                    <form action="/app/book/new" method="get">
+                        <button class="button" type="submit">Add New</button>
+                    </form>
+                </td>
         </div>
 
         <div>
             <table class="booksTable">
                 <tr>
-                    <th>Name</th>
-                    <th>Author</th>
+                    <th>Person Id</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Edit</th>
+                    <th>Remove</th>
+                    <c:forEach var="person" items="${persons}" varStatus="status">
                 </tr>
                 <tr>
-                    <c:forEach var="book" items="${person.borrowedBooks}" varStatus="status">
-                    <td>${book.name}</td>
-                    <td>${book.author}</td>
+                    <td>${person.id}</td>
+                    <td>${person.firstName}</td>
+                    <td>${person.surname}</td>
+                    <td>${person.email}</td>
+                    <td>${person.role}</td>
+                    <td>
+                            <form action="/app/person/edit/${person.id}" method="get">
+                                <button class="button" type="submit">Edit</button>
+                            </form>
+
+                        </td>
+                        <td>
+                            <form action="/app/person/delete_ask_confirmation/${person.id}" method="get">
+                                <button class="button" type="submit">Remove</button>
+                            </form>
+                    </td>
                 </tr>
             </c:forEach>
-            </table>
-        </div>
-</div>
+        </table>
+    </div>
+    </div>
 </body>
 </html>
