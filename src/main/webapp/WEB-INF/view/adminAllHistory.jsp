@@ -24,14 +24,16 @@
         <div>
             <table>
                 <tr>
+
                     <td align="center">${person.firstName} ${person.surname}</td>
                 </tr>
                 <tr>
+
                     <td align="center">${person.email}</td>
                 </tr>
+
             </table>
         </div>
-
         <div>
             <form action="/app/person/lend" method="get">
                 <button class="button" type="submit">Lending</button>
@@ -43,7 +45,7 @@
             </form>
         </div>
         <div>
-            <form action="/app/library/books" method="get">
+            <form action="/app/profile" method="get">
                 <button class="button-active" type="submit">Books</button>
             </form>
         </div>
@@ -52,6 +54,7 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
+
     </div>
 
     <div class="col-sm-8 top padding-top">
@@ -60,69 +63,73 @@
                 <tr>
                     <td>
                         <form action="/app/profile" method="get">
+
                             <button class="button" type="submit">Your Books</button>
+
                         </form>
                     </td>
                     <td>
                         <form action="/app/library/books" method="get">
-                            <button class="button-active" type="submit">All Books</button>
+                            <button class="button" type="submit">All Books</button>
                         </form>
                     </td>
                     <td>
                         <form action="/app/history" method="get">
-                            <button class="button" type="submit">History</button>
+                            <button class="button-active" type="submit">History</button>
                         </form>
                     </td>
                 </tr>
             </table>
         </div>
-
         <div>
             <c:if test="${person.role=='admin'}">
                 <table class="padding">
                     <td>
-                    <form action="/app/book/new" method="get">
-                        <button class="button" type="submit">Add New</button>
-                    </form>
+                        <form action="/app/history" method="get">
+                            <button class="button-active" type="submit">Your History</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/allHistory" method="get">
+                            <button class="button" type="submit">All History</button>
+                        </form>
                     </td>
                 </table>
             </c:if>
         </div>
-
         <div>
-            <table class="booksTable">
-                <tr>
-                    <th>Name</th>
-                    <th>Author</th>
-                    <th>Genre</th>
-                    <th>Status</th>
-                        <c:if test="${person.role=='admin'}">
-                    <th>Edit</th>
-                    <th>Remove</th>
-                    </c:if>
-                    <c:forEach var="book" items="${books}" varStatus="status">
-                </tr>
-                <tr>
-                    <td>${book.name}</td>
-                    <td>${book.author}</td>
-                    <td>${book.genre}</td>
-                    <td>${book.status}</td>
-                    <c:if test="${person.role=='admin'}">
-                    <td>
-                            <form action="/app/book/edit/${book.bookid}" method="get">
-                                <button class="button" type="submit" id="autoButton">Edit</button>
-                            </form>
 
-                        </td>
-                        <td>
-                            <form action="/app/book/delete/${book.bookid}" method="get">
-                                <button class="button" type="submit" id="autoButton">Remove</button>
-                            </form>
-                    </td>
-                    </c:if>
-                </tr>
-            </c:forEach>
-        </table>
+
+            <table class="booksTable">
+                <%--<tr>
+                    <th colspan="2">Your books</th>
+                </tr>--%>
+
+
+
+                    <c:forEach items="${map}" var="mapElement">
+                        <tr>
+                            <th colspan="4">${mapElement.key.firstName} ${mapElement.key.surname}</th>
+                            </tr>
+                        <tr>
+                            <th>Book name</th>
+                            <th>Date</th>
+                            <th>Returned?</th>
+                        </tr>
+                            <c:forEach items="${mapElement.value}" var="listElement" >
+
+                                <tr>
+                                <td>${listElement.name}</td>
+                                <td>${listElement.startdate}</td>
+                                <td>${listElement.historyStatus}</td>
+                                </tr>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
+            </table>
+        </div>
+
+
     </div>
 </body>
 </html>

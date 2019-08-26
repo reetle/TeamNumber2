@@ -1,5 +1,7 @@
 package com.tieto.geekoff.library.frontend.models;
 
+import java.sql.Date;
+
 public class Book {
 
     private int bookid;
@@ -8,6 +10,11 @@ public class Book {
     private String status;
     private String review;
     private String code;
+    private Date startdate;
+    private Date enddate;
+    private String historyStatus;
+    private String genre;
+
 
 
     public String getName() {
@@ -37,9 +44,15 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "name='" + name + '\'' +
+                "bookid=" + bookid +
+                ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", status='" + status + '\'' +
+                ", review='" + review + '\'' +
+                ", code='" + code + '\'' +
+                ", startdate=" + startdate +
+                ", enddate=" + enddate +
+                ", genre='" + genre + '\'' +
                 '}';
     }
 
@@ -66,5 +79,34 @@ public class Book {
     public void setReview(String review) {
         this.review = review;
     }
+
+    public Date getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
+    }
+
+    public Date getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
+    }
+
+
+    public String getHistoryStatus() {
+        return historyStatus;
+    }
+
+    public void setHistoryStatus(String historyStatus) {
+        this.historyStatus = historyStatus;
+    }
+
+    public void setGenre(String genre) {this.genre = genre;}
+
+    public String getGenre() {return genre; }
 
 }

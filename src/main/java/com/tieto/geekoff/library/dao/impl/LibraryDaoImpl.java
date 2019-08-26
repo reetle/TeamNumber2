@@ -3,6 +3,7 @@ package com.tieto.geekoff.library.dao.impl;
 import com.tieto.geekoff.library.dao.App;
 import com.tieto.geekoff.library.dao.LibraryDao;
 import com.tieto.geekoff.library.frontend.models.Book;
+import com.tieto.geekoff.library.frontend.models.Person;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -19,7 +20,7 @@ public class LibraryDaoImpl implements LibraryDao {
 
 
     public List<Book> getBooks() {
-        String sql = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata";
+        String sql = "SELECT bookid, bookname, bookautor, status, review, code, genre FROM bookdata";
         Book book;
         List<Book> listOfBooks =  new ArrayList<>();
 
@@ -35,6 +36,7 @@ public class LibraryDaoImpl implements LibraryDao {
                 book.setStatus(rs.getString("status"));
                 book.setReview(rs.getString("review"));
                 book.setCode(rs.getString("code"));
+                book.setGenre(rs.getString("genre"));
                 listOfBooks.add(book);
             }
 
@@ -45,14 +47,15 @@ public class LibraryDaoImpl implements LibraryDao {
     }
 
 
-    public void bookIsNotAvailable(int id) {
+    public void bookIsNotAvailable(Person person, Book book) {
         String sql = "UPDATE bookdata SET status=? WHERE bookid = ?";
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, "booked");
-            pstmt.setInt(2, id);
+            String statusUpdated = "Booked by " + person.getFirstName() + " " + person.getSurname() + " until " + book.getEnddate() + ".";
+            pstmt.setString(1, statusUpdated);
+            pstmt.setInt(2, book.getBookid());
             pstmt.executeUpdate();
 
 
@@ -80,5 +83,31 @@ public class LibraryDaoImpl implements LibraryDao {
 
     public List<Book> getAllLendedBooks() {
         return null;
+    }
+
+
+    public List<Person> getAllPersons() {
+        String personsSql = "SELECT personid, firstname, lastname, email, role FROM persondata";
+        List<Person> personList = new ArrayList<>();
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(personsSql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Person person = new Person();
+                person.setId(rs.getInt("personid"));
+                person.setFirstName(rs.getString("firstname"));
+                person.setSurname(rs.getString("lastname"));
+                person.setEmail(rs.getString("email"));
+                person.setRole(rs.getString("role"));
+                personList.add(person);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return personList;
     }
 }

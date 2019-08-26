@@ -5,6 +5,7 @@ import com.tieto.geekoff.library.frontend.models.Person;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface PersonService {
 
@@ -21,4 +22,5 @@ public interface PersonService {
    Person getPerson(int id);
    void updatePerson(Person person);
    void deletePerson(int id);
+   Map<Person, List<Book>> getAllHistory();
 }

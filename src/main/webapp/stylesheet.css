@@ -21,6 +21,9 @@ h1 span {
 /*TABELID*/
 table.booksTable {
     text-align: center;
+    display: block;
+    max-height: 80vh;
+    overflow: auto;
 }
 table.booksTable td, table.booksTable th {
     padding: 10px 20px;
@@ -83,8 +86,9 @@ td, tr {
     margin: 10px auto;
 }
 
-.margin-top {
-    margin-top: 30px;
+.padding-top {
+
+    padding-top: 30px;
 }
 
 .padding td{
