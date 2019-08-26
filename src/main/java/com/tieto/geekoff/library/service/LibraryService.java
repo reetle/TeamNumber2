@@ -11,4 +11,5 @@ public interface LibraryService {
     List<Book> getAllLendedBooks();
     void bookIsNotAvailable(Person person, Book book);
     void bookIsAvailable(int id);
+    List<Person> getAllPersons();
 }

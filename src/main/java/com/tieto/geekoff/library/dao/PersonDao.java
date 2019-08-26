@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface PersonDao {
 
@@ -20,4 +21,5 @@ public interface PersonDao {
    void removeBookFromPerson(Person person, Book book);
    boolean isAdmin(Person person);
    List<Book> getLendingHistory(Person person);
+   Map<Person, List<Book>> getAllHistory();
 }

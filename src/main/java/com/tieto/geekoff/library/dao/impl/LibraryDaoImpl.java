@@ -83,4 +83,30 @@ public class LibraryDaoImpl implements LibraryDao {
     public List<Book> getAllLendedBooks() {
         return null;
     }
+
+
+    public List<Person> getAllPersons() {
+        String personsSql = "SELECT personid, firstname, lastname, email, role FROM persondata";
+        List<Person> personList = new ArrayList<>();
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(personsSql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Person person = new Person();
+                person.setId(rs.getInt("personid"));
+                person.setFirstName(rs.getString("firstname"));
+                person.setSurname(rs.getString("lastname"));
+                person.setEmail(rs.getString("email"));
+                person.setRole(rs.getString("role"));
+                personList.add(person);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return personList;
+    }
 }

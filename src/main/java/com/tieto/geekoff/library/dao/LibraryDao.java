@@ -11,5 +11,5 @@ public interface LibraryDao {
     void bookIsNotAvailable(Person person, Book book);
     void bookIsAvailable(int id);
     List<Book> getAllLendedBooks();
-
+    List<Person> getAllPersons();
 }

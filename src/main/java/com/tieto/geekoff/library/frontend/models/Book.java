@@ -12,6 +12,7 @@ public class Book {
     private String code;
     private Date startdate;
     private Date enddate;
+    private String historyStatus;
 
 
     public String getName() {
@@ -90,5 +91,13 @@ public class Book {
 
     public void setEnddate(Date enddate) {
         this.enddate = enddate;
+    }
+
+    public String getHistoryStatus() {
+        return historyStatus;
+    }
+
+    public void setHistoryStatus(String historyStatus) {
+        this.historyStatus = historyStatus;
     }
 }
