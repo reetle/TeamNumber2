@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="col-sm-8 top margin-top margin">
+    <div class="col-sm-8 top padding-top">
         <div>
             <table class="padding">
                 <tr>
@@ -79,11 +79,13 @@
 
         <div>
             <c:if test="${person.role=='admin'}">
-                <td>
+                <table class="padding">
+                    <td>
                     <form action="/app/book/new" method="get">
                         <button class="button" type="submit">Add New</button>
                     </form>
-                </td>
+                    </td>
+                </table>
             </c:if>
         </div>
 

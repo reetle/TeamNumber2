@@ -54,10 +54,10 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
-        </div-->
+
     </div>
 
-    <div class="col-sm-8 top margin-top margin">
+    <div class="col-sm-8 top padding-top">
         <div>
             <table class="padding">
                 <tr>
@@ -81,6 +81,23 @@
                 </tr>
             </table>
         </div>
+        <div>
+            <c:if test="${person.role=='admin'}">
+                <table class="padding">
+                <td>
+                    <form action="/app/history" method="get">
+                        <button class="button-active" type="submit">Your History</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="..." method="get">
+                        <button class="button" type="submit">All History</button>
+                    </form>
+                </td>
+            </table>
+            </c:if>
+        </div>
+        <div>
 
 
         <table class="booksTable">
@@ -100,6 +117,7 @@
                 </tr>
             </c:forEach>
         </table>
+        </div>
 
 
     </div>
