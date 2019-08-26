@@ -64,7 +64,7 @@
 
 
 
-    <div class="col-sm-4 center margin">
+    <div class="col-sm-8 center margin">
         <div>
             <form:form method="POST" action="/app/book/return" modelAttribute="book">
                 <form:errors path="code" class="errors" />
