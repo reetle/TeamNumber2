@@ -2,6 +2,7 @@ package com.tieto.geekoff.library.service;
 
 import com.tieto.geekoff.library.dao.LibraryDao;
 import com.tieto.geekoff.library.frontend.models.Book;
+import com.tieto.geekoff.library.frontend.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,13 @@ public class LibraryServiceImpl implements LibraryService {
         return libraryDao.getBooks();
     }
 
-    public void bookIsNotAvailable(int id) {
-        libraryDao.bookIsNotAvailable(id);
+
+    public List<Book> getAllLendedBooks() {
+        return libraryDao.getAllLendedBooks();
+    }
+
+    public void bookIsNotAvailable(Person person, Book book) {
+        libraryDao.bookIsNotAvailable(person, book);
     }
 
 

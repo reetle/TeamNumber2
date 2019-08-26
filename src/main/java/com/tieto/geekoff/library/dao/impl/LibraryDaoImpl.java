@@ -3,6 +3,7 @@ package com.tieto.geekoff.library.dao.impl;
 import com.tieto.geekoff.library.dao.App;
 import com.tieto.geekoff.library.dao.LibraryDao;
 import com.tieto.geekoff.library.frontend.models.Book;
+import com.tieto.geekoff.library.frontend.models.Person;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -34,7 +35,7 @@ public class LibraryDaoImpl implements LibraryDao {
                 book.setAuthor(rs.getString("bookautor"));
                 book.setStatus(rs.getString("status"));
                 book.setReview(rs.getString("review"));
-                book.setCode(rs.getInt("code"));
+                book.setCode(rs.getString("code"));
                 listOfBooks.add(book);
             }
 
@@ -45,14 +46,15 @@ public class LibraryDaoImpl implements LibraryDao {
     }
 
 
-    public void bookIsNotAvailable(int id) {
+    public void bookIsNotAvailable(Person person, Book book) {
         String sql = "UPDATE bookdata SET status=? WHERE bookid = ?";
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, "booked");
-            pstmt.setInt(2, id);
+            String statusUpdated = "Booked by " + person.getFirstName() + " " + person.getSurname() + " until " + book.getEnddate() + ".";
+            pstmt.setString(1, statusUpdated);
+            pstmt.setInt(2, book.getBookid());
             pstmt.executeUpdate();
 
 
@@ -76,5 +78,9 @@ public class LibraryDaoImpl implements LibraryDao {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public List<Book> getAllLendedBooks() {
+        return null;
     }
 }

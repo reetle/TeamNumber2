@@ -12,17 +12,15 @@
     <!-- stylesheet-->
     <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
     <!-- google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
 
 </head>
 
-<body id="bodyGradient">
+<body>
 
 <div class="row">
-    <div class="col-sm-4" id="left">
-        <!--div class="container"-->
-        <!--div class="box"-->
+    <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
@@ -42,13 +40,13 @@
             </form>
         </div>
         <div>
-            <form action="/app/person/return" method="get">
+            <form action="/app/book/return" method="get">
                 <button class="button" type="submit">Returning</button>
             </form>
         </div>
         <div>
-            <form action="/app/library/books" method="get">
-                <button class="button" type="submit">Book Directory</button>
+            <form action="/app/profile" method="get">
+                <button class="button-active" type="submit">Books</button>
             </form>
         </div>
         <div>
@@ -57,43 +55,47 @@
             </form>
         </div>
 
-<%--        <div class="d-sm-none">
-            <p>Swipe Down for Your Profile</p>
-
-        </div>--%>
-
-
-        <!--/div>
-    </div-->
     </div>
-    <div class="col-sm-8" id="right">
-        <%--    <div class="container">--%>
-        <%--        <div class="box">--%>
-        <%--           <div>--%>
 
-
-        <table class="booksTable">
-            <tr>
-                <th colspan="2">Your books</th>
-
-            </tr>
-            <%--<th>No</th>--%>
-            <th>Name</th>
-            <th>Author</th>
-
-
-            <c:forEach var="book" items="${books}" varStatus="status">
+    <div class="col-sm-8 top padding-top">
+        <div>
+            <table class="padding">
                 <tr>
-                    <%--<td>${status.index + 1}</td>--%>
+                    <td>
+                        <form action="/app/profile" method="get">
+                            <button class="button-active" type="submit">Your Books</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/library/books" method="get">
+                            <button class="button" type="submit">All Books</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/history" method="get">
+                            <button class="button" type="submit">History</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <table class="booksTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Returning date</th>
+                </tr>
+                <tr>
+                    <c:forEach var="book" items="${person.borrowedBooks}" varStatus="status">
                     <td>${book.name}</td>
                     <td>${book.author}</td>
+                        <td>${book.enddate}</td>
                 </tr>
             </c:forEach>
-        </table>
-        <%--       </div>--%>
-        <%--        </div>--%>
-        <%--    </div>--%>
-    </div>
+            </table>
+        </div>
 </div>
 </body>
 </html>

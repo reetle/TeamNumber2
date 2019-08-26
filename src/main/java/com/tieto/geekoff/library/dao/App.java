@@ -36,6 +36,7 @@ public class App{
     }
 
 
+
     /*
     private boolean checkEmail(Person person) {
         String email = person.getEmail().substring(person.getEmail().indexOf("@") + 1);

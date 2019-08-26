@@ -1,6 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +12,8 @@
     <!-- stylesheet-->
     <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
     <!-- google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
+
 
 
 
@@ -25,78 +25,68 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 </head>
 
+
+
 <body>
-<script>
-Quagga.init({
-inputStream: {
-name: "Live",
-type: "LiveStream",
-target: document.querySelector('#camera')    // Or '#yourElement' (optional)
-},
-decoder: {
-readers: ["code_128_reader", "ean_reader",
-"ean_8_reader",
-"code_39_reader",
-"code_39_vin_reader"
-]
 
-},
-
-}, function (err) {
-if (err) {
-console.log(err);
-return
-}
-console.log("Initialization finished. Ready to start");
-Quagga.start();
-});
-
-
-Quagga.onDetected(function (data) {
-
-
-<!--console.log(data.codeResult.code);-->
-var x =document.getElementById("triip");
-x.value=data.codeResult.code;
-
-
-});
-
-
-</script>
-
-
-<div class="container">
-    <div class="box">
+<div class="row">
+    <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
-                    <td>
-
-                        <form:form method="POST" action="/app/library/book_confirmation" modelAttribute="book">
-                        <form:label path="bookid">Enter barcode </form:label>
-                        <form:input id="triip" path="bookid"/>
 
 
 
-                    </td>
+                    <td align="center">${person.firstName} ${person.surname}</td>
                 </tr>
                 <tr>
-                    <td>
-                        <input class="button" type="submit" value="Lend"/>
-                        </form:form>
 
-                    </td>
+                    <td align="center">${person.email}</td>
                 </tr>
+
             </table>
         </div>
-
-        <form action="${pageContext.request.contextPath}/app/person/profile" method="get">
-            <button class="button" type="submit">Back to Profile</button>
-        </form>
-
+        <div>
+            <form action="/app/person/lend" method="get">
+                <button class="button-active" type="submit">Lending</button>
+            </form>
+        </div>
+        <div>
+            <form action="/app/book/return" method="get">
+                <button class="button" type="submit">Returning</button>
+            </form>
+        </div>
+        <div>
+            <form action="/app/profile" method="get">
+                <button class="button" type="submit">Books</button>
+            </form>
+        </div>
+        <div>
+            <form action="/" method="get">
+                <button class="button" type="submit">Log Out</button>
+            </form>
+        </div>
     </div>
 
-</div>
+
+
+    <div class="col-sm-4 center margin">
+        <div>
+            <form:form method="POST" action="/app/person/lend" modelAttribute="book">
+                <form:errors path="code" class="errors"/>
+        </div>
+        <div>
+                <form:label path="code">Enter barcode</form:label>
+        </div>
+        <div>
+            <form:input path="code" autofocus="true"/>
+        </div>
+        <div>
+            <input class="button" type="submit" value="Lend"/>
+            </form:form>
+        </div>
+    </div>
+
+
 </body>
 </html>

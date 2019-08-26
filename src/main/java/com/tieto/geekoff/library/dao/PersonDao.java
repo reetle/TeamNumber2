@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface PersonDao {
 
-   boolean checkAccountAlreadyExist(Person person);
+   boolean checkAccountAlreadyExist(String email);
    boolean createUser(Person person) throws SQLException;
    Person loadUser(String email);
    void addBookToPerson(Person person, Book book);
@@ -19,4 +19,5 @@ public interface PersonDao {
    boolean checkEmail(Person person);
    void removeBookFromPerson(Person person, Book book);
    boolean isAdmin(Person person);
+   List<Book> getLendingHistory(Person person);
 }

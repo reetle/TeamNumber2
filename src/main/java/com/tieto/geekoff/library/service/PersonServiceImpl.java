@@ -18,8 +18,8 @@ public class PersonServiceImpl implements PersonService {
    @Autowired
    private PersonDao personDao;
 
-   public boolean checkAccountAlreadyExist(Person person) {
-      return personDao.checkAccountAlreadyExist(person);
+   public boolean checkAccountAlreadyExist(String email) {
+      return personDao.checkAccountAlreadyExist(email);
    }
 
    public boolean createUser(Person person) throws SQLException {
@@ -48,6 +48,10 @@ public class PersonServiceImpl implements PersonService {
 
    public boolean isAdmin(Person person) {
       return personDao.isAdmin(person);
+   }
+
+   public List<Book> getLendingHistory(Person person) {
+      return personDao.getLendingHistory(person);
    }
 
 

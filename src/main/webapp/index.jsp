@@ -11,26 +11,36 @@
     <!-- stylesheet-->
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <!-- google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+  <%--  <link href="https://fonts.googleapis.com/css?family=Montserrat:300&display=swap" rel="stylesheet">--%>
+    <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
 
 
 </head>
-<body id="bodyBackground">
+<body>
 
-<div class="container">
-    <div class="box">
+
+    <div class="center margin">
+        <div>
+            <h1>
+                <span>BOOK</span>
+                <span>SELF</span>
+            </h1>
+        </div>
         <div>
             <form action="/app/person/login" method="get">
                 <button class="button" type="submit">Login</button>
             </form>
         </div>
         <div>
-            <form action="/app/person/new" method="GET">
+            <form action="/app/addPerson" method="GET">
                 <button class="button" type="submit">Create Account</button>
             </form>
         </div>
+
+
     </div>
-</div>
+
+
 </body>
 </html>

@@ -36,7 +36,7 @@
         </div>
         <div>
             <form action="/app/person/lend" method="get">
-                <button class="button-active" type="submit">Lending</button>
+                <button class="button" type="submit">Lending</button>
             </form>
         </div>
         <div>
@@ -46,7 +46,7 @@
         </div>
         <div>
             <form action="/app/profile" method="get">
-                <button class="button" type="submit">Books</button>
+                <button class="button-active" type="submit">Books</button>
             </form>
         </div>
         <div>
@@ -54,42 +54,71 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
-        </div-->
+
     </div>
 
-    <div class="col-sm-8 center">
-    <div>
-        <table class=>
-            <tr>
-                <td>Do You want to borrow</td>
-            </tr>
-            <tr>
-                <th><h3>${book.name}</h3></th>
-            </tr>
-            <tr>
-                <td>${book.author}</td>
-            </tr>
-        </table>
-    </div>
-
-
-
+    <div class="col-sm-8 top padding-top">
         <div>
             <table class="padding">
                 <tr>
                     <td>
-                        <form action="/app/library/book_confirm_yes" method="get">
-                            <button class="button" type="submit">Yes</button>
+                        <form action="/app/profile" method="get">
+
+                            <button class="button" type="submit">Your Books</button>
+
                         </form>
                     </td>
                     <td>
-                        <form action="/app/library/book_confirm_no" method="get">
-                            <button class="button" type="submit">No</button>
+                        <form action="/app/library/books" method="get">
+                            <button class="button" type="submit">All Books</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/history" method="get">
+                            <button class="button-active" type="submit">History</button>
                         </form>
                     </td>
                 </tr>
             </table>
         </div>
+        <div>
+            <c:if test="${person.role=='admin'}">
+                <table class="padding">
+                <td>
+                    <form action="/app/history" method="get">
+                        <button class="button-active" type="submit">Your History</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="..." method="get">
+                        <button class="button" type="submit">All History</button>
+                    </form>
+                </td>
+            </table>
+            </c:if>
+        </div>
+        <div>
+
+
+        <table class="booksTable">
+            <%--<tr>
+                <th colspan="2">Your books</th>
+            </tr>--%>
+            <th>Name</th>
+            <th>Author</th>
+                <th>Date</th>
+
+
+            <c:forEach var="book" items="${books}" varStatus="status">
+                <tr>
+                    <td>${book.name}</td>
+                    <td>${book.author}</td>
+                    <td>${book.startdate}</td>
+                </tr>
+            </c:forEach>
+        </table>
+        </div>
+
 
     </div>
 </body>

@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +36,7 @@
         </div>
         <div>
             <form action="/app/person/lend" method="get">
-                <button class="button-active" type="submit">Lending</button>
+                <button class="button" type="submit">Lending</button>
             </form>
         </div>
         <div>
@@ -54,43 +54,32 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
-        </div-->
+
     </div>
 
-    <div class="col-sm-8 center">
-    <div>
-        <table class=>
-            <tr>
-                <td>Do You want to borrow</td>
-            </tr>
-            <tr>
-                <th><h3>${book.name}</h3></th>
-            </tr>
-            <tr>
-                <td>${book.author}</td>
-            </tr>
-        </table>
-    </div>
-
-
-
+    <div class="col-sm-8 center margin" >
         <div>
-            <table class="padding">
+            <table>
+                <form:form method="post" action="/app/saveNewBook" modelAttribute="book">
                 <tr>
-                    <td>
-                        <form action="/app/library/book_confirm_yes" method="get">
-                            <button class="button" type="submit">Yes</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/app/library/book_confirm_no" method="get">
-                            <button class="button" type="submit">No</button>
-                        </form>
-                    </td>
+                    <td>Name</td>
+                    <td><form:input path="name"  /></td>
+                </tr>
+                <tr>
+                    <td>Author</td>
+                    <td><form:input path="author" /></td>
+                </tr>
+                <tr>
+                    <td>Barcode</td>
+                    <td><form:input path="code"/></td>
                 </tr>
             </table>
-        </div>
+            <div>
+                <input class="button" type="submit" value="Save"/>
+            </div>
+                    </form:form>
 
+        </div>
     </div>
 </body>
 </html>

@@ -7,40 +7,44 @@ import com.tieto.geekoff.library.frontend.models.Person;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class PersonDaoImpl implements PersonDao {
 
-    private final String tietoDomain = "tieto.com";
+
+
+    private final String TIETO_DOMAIN = "tieto.com";
+    private final int LENDING_DURATION = 20;
 
     App app = new App();
 
     public boolean checkEmail(Person person) {
         String email = person.getEmail().substring(person.getEmail().indexOf("@") + 1);
-        return email.equals(tietoDomain);
+        return email.equals(TIETO_DOMAIN);
     }
 
 
-    public boolean checkAccountAlreadyExist(Person person) {
+    public boolean checkAccountAlreadyExist(String email) {
         String sql = "SELECT email FROM persondata WHERE email = ?";
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, person.getEmail());
+            pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 System.out.println("Konto juba olemas");
-                return false;
+                return true;
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
 
-        return true;
+        return false;
     }
 
 
@@ -51,15 +55,19 @@ public class PersonDaoImpl implements PersonDao {
                 + " email) VALUES ("
                 + "?, ?, ?)";
 
-        if (checkEmail(person) && checkAccountAlreadyExist(person)) {
+        String email = person.getEmail().toLowerCase();
+        String firstName = email.substring(0, email.indexOf("."));
+        String surname = email.substring(email.indexOf(".") + 1, email.indexOf("@"));
+
+        if (checkEmail(person) && !checkAccountAlreadyExist(person.getEmail())) {
             try (
                     Connection connection = app.connect();
                     PreparedStatement statement = connection.prepareStatement(sql,
                             Statement.RETURN_GENERATED_KEYS)
             ) {
 
-                statement.setString(1, person.getFirstName());
-                statement.setString(2, person.getSurname());
+                statement.setString(1, firstName.substring(0, 1).toUpperCase() + firstName.substring(1));
+                statement.setString(2, surname.substring(0, 1).toUpperCase() + surname.substring(1));
                 statement.setString(3, person.getEmail());
 
 
@@ -101,6 +109,7 @@ public class PersonDaoImpl implements PersonDao {
                 person.setSurname(rs.getString("lastname"));
                 person.setEmail(rs.getString("email"));
                 person.setRole(rs.getString("role"));
+                person.setBorrowedBooks(getBorrowedBooks(person));
             }
 
         } catch (SQLException ex) {
@@ -115,15 +124,63 @@ public class PersonDaoImpl implements PersonDao {
     }
 
 
-    public void addBookToPerson(Person person, Book book) {
-        String sql = "INSERT INTO orderedbooks (personid, bookid) VALUES (?,?)";
-
+    public List<Book> getLendingHistory(Person person) {
+        List<Book> books = new ArrayList<>();
+        String sql = "SELECT bookid, startdate FROM orderedbookshistory WHERE personid = ?";
+        String sql2 = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setLong(1, person.getId());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                PreparedStatement statement = conn.prepareStatement(sql2);
+                statement.setInt(1, rs.getInt("bookid"));
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    Book book = new Book();
+                    book.setBookid(resultSet.getInt("bookid"));
+                    book.setName(resultSet.getString("bookname"));
+                    book.setAuthor(resultSet.getString("bookautor"));
+                    book.setStatus(resultSet.getString("status"));
+                    book.setReview(resultSet.getString("review"));
+                    book.setCode(resultSet.getString("code"));
+                    book.setStartdate(rs.getDate("startdate"));
+                    books.add(book);
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return books;
+    }
+
+
+    public void addBookToPerson(Person person, Book book) {
+        String sql = "INSERT INTO orderedbooks (personid, bookid, startdate, enddate) VALUES (?,?, ?,?)";
+        String sqlHistory = "INSERT INTO orderedbookshistory (personid, bookid, startdate, status) VALUES (?,?,?,?)";
+
+        LocalDate now = LocalDate.now();
+        LocalDate end = now.plusDays(LENDING_DURATION);
+
+        try (Connection conn = app.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement statement = conn.prepareStatement(sqlHistory);
+            statement.setInt(1, person.getId());
+            statement.setInt(2, book.getBookid());
+            statement.setDate(3, Date.valueOf(now));
+            statement.setString(4, "holding");
+            statement.executeUpdate();
+
+            pstmt.setInt(1, person.getId());
             pstmt.setInt(2, book.getBookid());
+            pstmt.setDate(3, Date.valueOf(now));
+            pstmt.setDate(4, Date.valueOf(end));
             pstmt.executeUpdate();
+
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -132,9 +189,16 @@ public class PersonDaoImpl implements PersonDao {
 
     public void removeBookFromPerson(Person person, Book book) {
         String sql = "DELETE FROM orderedbooks WHERE bookid = ? AND personid = ?";
+        String returned = "UPDATE orderedbookshistory SET status = ? WHERE bookid = ? AND personid = ? AND status = ?";
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement statement = conn.prepareStatement(returned);
+            statement.setString(1, "returned");
+            statement.setInt(2, book.getBookid());
+            statement.setInt(3, person.getId());
+            statement.setString(4, "holding");
+            statement.executeUpdate();
 
             pstmt.setInt(1, book.getBookid());
             pstmt.setInt(2, person.getId());
@@ -149,7 +213,7 @@ public class PersonDaoImpl implements PersonDao {
     public List<Book> getBorrowedBooks(Person person) {
         List<Book> books = new ArrayList<>();
 
-        String sql = "SELECT bookid FROM orderedbooks WHERE personid = ?";
+        String sql = "SELECT bookid, startdate, enddate FROM orderedbooks WHERE personid = ?";
         String sql2 = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
 
         try (Connection conn = app.connect();
@@ -168,7 +232,9 @@ public class PersonDaoImpl implements PersonDao {
                     book.setAuthor(resultSet.getString("bookautor"));
                     book.setStatus(resultSet.getString("status"));
                     book.setReview(resultSet.getString("review"));
-                    book.setCode(resultSet.getInt("code"));
+                    book.setCode(resultSet.getString("code"));
+                    book.setStartdate(rs.getDate("startdate"));
+                    book.setEnddate(rs.getDate("enddate"));
                     books.add(book);
                 }
 

@@ -13,38 +13,28 @@
     <!-- stylesheet-->
     <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
     <!-- google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
 
 
 </head>
-<body id="bodyGradient">
+<body>
 
-<div class="container">
-    <div class="box">
+<div class="center margin">
         <div>
-            <form:form method="POST" action="/app/person/save" modelAttribute="person">
-            <table>
-                <tr>
-                    <td><form:label path="firstName">Firstname</form:label></td>
-                    <td><form:input path="firstName"/></td>
-                </tr>
-                <tr>
-                    <td><form:label path="surname">Lastname</form:label></td>
-                    <td><form:input path="surname"/></td>
-                </tr>
-                <tr>
-                    <td><form:label path="email">Email</form:label></td>
-                    <td><form:input path="email"/></td>
-                </tr>
-            </table>
-
+            <form:form method="POST" action="/app/addPerson" modelAttribute="person">
+                <form:errors path="email" class="errors"/>
+        </div>
+        <div>
+                <form:label path="email">Enter email</form:label>
+        </div>
+        <div>
+                    <form:input path="email"/>
         </div>
         <div>
             <input class="button" type="submit" value="Create Account"/>
+            </form:form>
         </div>
-        </form:form>
     </div>
-</div>
 </body>
 </html>
