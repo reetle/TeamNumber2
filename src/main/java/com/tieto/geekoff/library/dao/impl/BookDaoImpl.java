@@ -19,7 +19,7 @@ public class BookDaoImpl implements BookDao {
 
 
     public Book getBook(String code) {
-        String sql = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE code = ?";
+        String sql = "SELECT bookid, bookname, bookautor, status, review, code, genre FROM bookdata WHERE code = ?";
         Book book = new Book();
 
 
@@ -35,6 +35,7 @@ public class BookDaoImpl implements BookDao {
                 book.setStatus(rs.getString("status"));
                 book.setReview(rs.getString("review"));
                 book.setCode(rs.getString("code"));
+                book.setGenre(rs.getString("genre"));
 
             }
 
@@ -47,7 +48,7 @@ public class BookDaoImpl implements BookDao {
 
 
     public Book getBook(int id) {
-        String sql = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata WHERE bookid = ?";
+        String sql = "SELECT bookid, bookname, bookautor, status, review, code, genre FROM bookdata WHERE bookid = ?";
         Book book = new Book();
 
         try (Connection conn = app.connect();
@@ -62,7 +63,7 @@ public class BookDaoImpl implements BookDao {
                 book.setStatus(rs.getString("status"));
                 book.setReview(rs.getString("review"));
                 book.setCode(rs.getString("code"));
-
+                book.setGenre(rs.getString("genre"));
             }
 
         } catch (SQLException ex) {
@@ -75,7 +76,7 @@ public class BookDaoImpl implements BookDao {
 
     public void saveBook(Book book) {
 
-        String sql = "INSERT INTO bookdata(bookname,bookautor,status, code) values(?,?,?,?)";
+        String sql = "INSERT INTO bookdata(bookname,bookautor,status, code, genre) values(?,?,?,?,?)";
 
 
 
@@ -86,7 +87,7 @@ public class BookDaoImpl implements BookDao {
             pstmt.setString(3,"available");
 
             pstmt.setString(4, book.getCode());
-
+            pstmt.setString(5, book.getGenre());
 
             pstmt.executeUpdate();
 
@@ -99,13 +100,14 @@ public class BookDaoImpl implements BookDao {
 
 
     public void updateBook (Book book){
-        String sql = "UPDATE bookdata SET bookname = ?, bookautor = ? WHERE bookid=?";
+        String sql = "UPDATE bookdata SET bookname = ?, bookautor = ?, bookgenre = ? WHERE bookid=?";
 
         try (Connection conn = app.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, book.getName());
             pstmt.setString(2, book.getAuthor());
             pstmt.setInt(3, book.getBookid());
+            pstmt.setString(4, book.getGenre());
 
             pstmt.executeUpdate();
 

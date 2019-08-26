@@ -20,7 +20,7 @@ public class LibraryDaoImpl implements LibraryDao {
 
 
     public List<Book> getBooks() {
-        String sql = "SELECT bookid, bookname, bookautor, status, review, code FROM bookdata";
+        String sql = "SELECT bookid, bookname, bookautor, status, review, code, genre FROM bookdata";
         Book book;
         List<Book> listOfBooks =  new ArrayList<>();
 
@@ -36,6 +36,7 @@ public class LibraryDaoImpl implements LibraryDao {
                 book.setStatus(rs.getString("status"));
                 book.setReview(rs.getString("review"));
                 book.setCode(rs.getString("code"));
+                book.setGenre(rs.getString("genre"));
                 listOfBooks.add(book);
             }
 

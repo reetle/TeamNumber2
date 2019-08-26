@@ -73,6 +73,10 @@
                     <td>Barcode</td>
                     <td><form:input path="code"/></td>
                 </tr>
+                    <tr>
+                        <td>Genre</td>
+                        <td><form:input path="genre"/></td>
+                    </tr>
             </table>
             <div>
                 <input class="button" type="submit" value="Save"/>
