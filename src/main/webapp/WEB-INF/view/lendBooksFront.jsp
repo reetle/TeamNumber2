@@ -16,9 +16,6 @@
 
 
 
-    <!--<script src="quagga.min.js"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
-
 </head>
 
 <body>
@@ -60,13 +57,6 @@
         </div>
     </div>
 
-    <div class="col-sm-4 center">
-          <div id="interactive" class="viewport">
-              <video class="videoCamera" autoplay="true" preload="auto" src="" muted="true"
-                     playsinline="true"></video>
-              <canvas class="drawingBuffer"></canvas>
-          </div>
-    </div>
 
     <div class="col-sm-4 center margin">
         <div>
@@ -77,7 +67,7 @@
                 <form:label path="code">Enter barcode</form:label>
         </div>
         <div>
-            <form:input id="triip" path="code" autofocus="true"/>
+            <form:input path="code" autofocus="true"/>
         </div>
         <div>
             <input class="button" type="submit" value="Lend"/>
@@ -85,42 +75,6 @@
         </div>
     </div>
 
-<script>
-    Quagga.init({
-        inputStream: {
-            name: "Live",
-            type: "LiveStream",
-            target: document.querySelector('#camera')    // Or '#yourElement' (optional)
-        },
-        decoder: {
-            readers: ["code_128_reader", "ean_reader",
-                "ean_8_reader",
-                "code_39_reader",
-                "code_39_vin_reader"
-            ]
 
-        },
-
-    }, function (err) {
-        if (err) {
-            console.log(err);
-            return
-        }
-        console.log("Initialization finished. Ready to start");
-        Quagga.start();
-    });
-
-
-    Quagga.onDetected(function (data) {
-
-
-        <!--console.log(data.codeResult.code);-->
-        var x =document.getElementById("triip");
-        x.value=data.codeResult.code;
-
-
-    });
-
-</script>
 </body>
 </html>
