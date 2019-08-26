@@ -1,5 +1,7 @@
 package com.tieto.geekoff.library.frontend.models;
 
+import java.sql.Date;
+
 public class Book {
 
     private int bookid;
@@ -8,6 +10,8 @@ public class Book {
     private String status;
     private String review;
     private String code;
+    private Date startdate;
+    private Date enddate;
 
 
     public String getName() {
@@ -37,9 +41,14 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "name='" + name + '\'' +
+                "bookid=" + bookid +
+                ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", status='" + status + '\'' +
+                ", review='" + review + '\'' +
+                ", code='" + code + '\'' +
+                ", startdate=" + startdate +
+                ", enddate=" + enddate +
                 '}';
     }
 
@@ -67,4 +76,19 @@ public class Book {
         this.review = review;
     }
 
+    public Date getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
+    }
+
+    public Date getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
+    }
 }
