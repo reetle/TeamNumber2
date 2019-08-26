@@ -181,5 +181,6 @@ select:-webkit-autofill:focus {
     -webkit-transition-delay: 9999s;
 }
 
-.errors{
+.errors {
     color: #86C232;
+}
