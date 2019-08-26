@@ -28,7 +28,7 @@ public class App{
     /**
      * Connect to the PostgreSQL database
      *
-     * @return a Connection object
+     * @return a Connection objec
      */
 
     public Connection connect() throws SQLException {
