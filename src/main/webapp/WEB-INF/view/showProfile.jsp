@@ -57,7 +57,7 @@
 
     </div>
 
-    <div class="col-sm-8 top margin-top margin">
+    <div class="col-sm-8 top padding-top">
         <div>
             <table class="padding">
                 <tr>
