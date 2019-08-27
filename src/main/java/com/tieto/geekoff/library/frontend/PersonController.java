@@ -283,7 +283,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/savePersonEdit", method = RequestMethod.POST)
-    public String saveEdit(@ModelAttribute("person") Person person, Model model){
+    public String savePersonEdit(@ModelAttribute("person") Person person, Model model){
         model.addAttribute("person", person);
         personService.updatePerson(person);
         return "redirect:/app/allPersons";

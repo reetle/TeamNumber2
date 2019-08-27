@@ -66,32 +66,39 @@
     </div>
 
     <div class="col-sm-8 center margin">
-        <div>
-            <form:form method="POST" action="/app/saveBookEdit" modelAttribute="book">
-            <table>
-                <tr>
-                    <td><form:label path="author">Author</form:label></td>
-                    <td><form:input path="author"/></td>
-                </tr>
-                <tr>
-                <td><form:label path="name">Name</form:label></td>
-                <td><form:input path="name"/></td>
-                </tr>
-                <tr>
-                    <td><form:label path="genre">Genre</form:label></td>
-                    <td><form:input path="genre"/></td>
-                </tr>
-
-                <input type="hidden" name="bookid" value=${book.bookid}>
-
-            </table>
-
-        </div>
-        <div>
-            <input class="button" type="submit" value="Save"/>
-        </div>
-        </form:form>
+    <div>
+        <table class=>
+            <tr>
+                <td>Do you want to delete the following book?</td>
+            </tr>
+            <tr>
+                <th><h3>${book.name}</h3></th>
+            </tr>
+            <tr>
+                <td>${book.author}</td>
+            </tr>
+        </table>
     </div>
+
+
+
+        <div>
+            <table class="padding">
+                <tr>
+                    <td>
+                        <form action="/app/book/delete_confirm_yes/${book.bookid}" method="get">
+                            <button class="button" type="submit">Yes</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/book/delete_confirm_no" method="get">
+                            <button class="button" type="submit">No</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 </body>
 </html>
