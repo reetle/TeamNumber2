@@ -48,18 +48,27 @@ public class BookController {
 
     @RequestMapping(value = "saveBookEdit", method = RequestMethod.POST)
     public String saveEdit(@ModelAttribute("book") Book book, Model model){
-        model.addAttribute("book", book);
         bookService.updateBook(book);
         return "redirect:/app/library/books";
     }
 
     @RequestMapping(value = "/book/delete/{bookid}", method = RequestMethod.GET)
-    public String deleteBook (@PathVariable int bookid, Model model){
+    public String deleteBookAskConfirmation(@PathVariable int bookid, Model model){
+        Book book = bookService.getBook(bookid);
+        model.addAttribute("book", book);
+        return "deleteBookConfirmation";
+    }
+
+    @RequestMapping(value = "/book/delete_confirm_yes/{bookid}", method = RequestMethod.GET)
+    public String deleteBookFinally(@PathVariable int bookid){
         bookService.deleteBook(bookid);
-        // model.addAttribute("book");
         return "redirect:/app/library/books";
     }
 
+    @RequestMapping(value = "/book/delete_confirm_no", method = RequestMethod.GET)
+    public String deleteBookInterrupt(){
+        return "redirect:/app/library/books";
+    }
 
 
 }
