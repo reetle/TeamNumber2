@@ -1,13 +1,21 @@
+allcolors {
+    color: #ffffff; /*white*/
+    color: #cde6f5; /*pale blue*/
+    color: #67afe1; /*medium blue*/
+    color: #333333; /*darkest blue*/
+}
+
+
 html,body{
     height:100%;
     font-family: 'Montserrat', sans-serif;
-    color: #C5C6C7;
-    background-color: #222629;
+    color: #ffffff;
+    background-color: #333333;
 }
 
 /*BOOKSELF*/
 h1 {
-    color: #86C232;
+    color: #cde6f5;
     font-size: 100px;
 }
 
@@ -31,10 +39,10 @@ table.booksTable td, table.booksTable th {
     border-width: 1px;
 }
 table.booksTable tr:nth-child(even) {
-    background: #0b0c0d;
+    background: #333333;
 }
 table.booksTable thead {
-    background: #0b0c0d;
+    background: #333333;
 }
 table.booksTable thead th {
     font-weight: bold;
@@ -105,35 +113,35 @@ td, tr {
 /*NUPPUD*/
 .button {
     background-color: transparent;
-    border-color: #86C232;
+    border-color: #67afe1;
     border-style: solid;
     border-width: 1px;
     padding: 12px 20px;
     text-align: center;
     font-size: 20px;
     cursor: pointer;
-    color: #C5C6C7;
+    color: #ffffff;
     width: 200px;
 }
 
 .button:hover, .button:active, .button:focus {
-    background-color: #86C232;
-    border-color: #86C232;
-    color: #222629;
+    background-color: #cde6f5;
+    border-color: #cde6f5;
+    color: #333333;
     padding: 12px 20px;
     font-weight: bolder;
     outline:0;
 }
 
 .button-active {
-    background-color: #61892F;
-    border-color: #61892F;
+    background-color: #67afe1;
+    border-color: #67afe1;
     border-width: 1px;
     padding: 12px 20px;
     text-align: center;
     font-size: 20px;
     cursor: pointer;
-    color: #222629;
+    color: #333333;
     width: 200px;
     font-weight: bolder;
     outline:0;
@@ -160,18 +168,18 @@ input, select, textarea {
     outline: none;
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
-    border: 1px solid #C5C6C7;
+    border: 1px solid #ffffff;
     background-color: transparent;
-    color: #C5C6C7;
+    color: #ffffff;
 
 }
 
 textarea:focus, input:focus {
-    box-shadow: 0 0 5px #86C232;
+    box-shadow: 0 0 5px #cde6f5;
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
-    border: 1px solid #86C232;
-    color: #C5C6C7;
+    border: 1px solid #cde6f5;
+    color: #ffffff;
 }
 
 
@@ -190,5 +198,5 @@ select:-webkit-autofill:focus {
 }
 
 .errors {
-    color: #86C232;
+    color: #cde6f5;
 }
