@@ -82,6 +82,7 @@
                     <td><form:label path="role">Role</form:label></td>
                     <td><form:input path="role"/></td>
                 </tr>
+
                 <input type="hidden" name="id" value=${person.id}>
 
             </table>

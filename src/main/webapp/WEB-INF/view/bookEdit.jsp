@@ -70,12 +70,16 @@
             <form:form method="POST" action="/app/saveBookEdit" modelAttribute="book">
             <table>
                 <tr>
+                    <td><form:label path="name">Name</form:label></td>
+                    <td><form:input path="name"/></td>
+                </tr>
+                <tr>
                     <td><form:label path="author">Author</form:label></td>
                     <td><form:input path="author"/></td>
                 </tr>
                 <tr>
-                <td><form:label path="name">Name</form:label></td>
-                <td><form:input path="name"/></td>
+                    <td><form:label path="code">Barcode</form:label></td>
+                    <td><form:input path="code"/></td>
                 </tr>
                 <tr>
                     <td><form:label path="genre">Genre</form:label></td>
