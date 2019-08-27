@@ -1,7 +1,7 @@
 allcolors {
     color: #ffffff; /*white*/
-    color: #cde6f5; /*pale blue*/
-    color: #67afe1; /*medium blue*/
+    color: #9acaeb; /*pale blue*/
+    color: #62b3e5; /*medium blue*/
     color: #333333; /*darkest blue*/
 }
 
@@ -15,7 +15,7 @@ html,body{
 
 /*BOOKSELF*/
 h1 {
-    color: #cde6f5;
+    color: #62b3e5;
     font-size: 100px;
 }
 
@@ -113,7 +113,7 @@ td, tr {
 /*NUPPUD*/
 .button {
     background-color: transparent;
-    border-color: #67afe1;
+    border-color: #62b3e5;
     border-style: solid;
     border-width: 1px;
     padding: 12px 20px;
@@ -125,8 +125,8 @@ td, tr {
 }
 
 .button:hover, .button:active, .button:focus {
-    background-color: #cde6f5;
-    border-color: #cde6f5;
+    background-color: #9acaeb;
+    border-color: #9acaeb;
     color: #333333;
     padding: 12px 20px;
     font-weight: bolder;
@@ -134,8 +134,8 @@ td, tr {
 }
 
 .button-active {
-    background-color: #67afe1;
-    border-color: #67afe1;
+    background-color: #62b3e5;
+    border-color: #62b3e5;
     border-width: 1px;
     padding: 12px 20px;
     text-align: center;
@@ -175,10 +175,10 @@ input, select, textarea {
 }
 
 textarea:focus, input:focus {
-    box-shadow: 0 0 5px #cde6f5;
+    box-shadow: 0 0 5px #9acaeb;
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
-    border: 1px solid #cde6f5;
+    border: 1px solid #9acaeb;
     color: #ffffff;
 }
 
@@ -198,5 +198,5 @@ select:-webkit-autofill:focus {
 }
 
 .errors {
-    color: #cde6f5;
+    color: #9acaeb;
 }
