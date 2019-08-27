@@ -147,6 +147,10 @@ td, tr {
     width: auto;
 }
 
+.autoButton {
+    width: auto;
+}
+
 /*TEKSTILAHTRID*/
 input, select, textarea {
     -webkit-transition: all 0.30s ease-in-out;
