@@ -17,10 +17,10 @@
 
 </head>
 
-<body id="bodySolid">
+<body>
 
 <div class="row">
-    <div class="col-sm-4" id="left">
+    <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
@@ -44,9 +44,18 @@
         </div>
         <div>
             <form action="/app/library/books" method="get">
-                <button class="button-active" type="submit">Books</button>
+                <button class="button" type="submit">Books</button>
             </form>
         </div>
+        <c:if test="${person.role=='admin'}">
+            <div>
+                <td>
+                    <form action="/app/allPersons" method="get">
+                        <button class="button-active" type="submit">All persons</button>
+                    </form>
+                </td>
+            </div>
+        </c:if>
         <div>
             <form action="/" method="get">
                 <button class="button" type="submit">Log Out</button>
@@ -54,31 +63,8 @@
         </div>
     </div>
 
-    <div class="col-sm-8" id="profileRight">
-        <div>
-            <table id="topButtons">
-                <tr>
-                    <td>
-                        <form action="/app/profile" method="get">
-                            <button class="button" type="submit">Your Books</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/app/library/books" method="get">
-                            <button class="button-active" type="submit">All Books</button>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
+    <div class="col-sm-8 top padding-top">
 
-        <div>
-                <td>
-                    <form action="/app/book/new" method="get">
-                        <button class="button" type="submit">Add New</button>
-                    </form>
-                </td>
-        </div>
 
         <div>
             <table class="booksTable">
@@ -100,13 +86,13 @@
                     <td>${person.role}</td>
                     <td>
                             <form action="/app/person/edit/${person.id}" method="get">
-                                <button class="button" type="submit">Edit</button>
+                                <button class="button autoButton" type="submit">Edit</button>
                             </form>
 
                         </td>
                         <td>
                             <form action="/app/person/delete_ask_confirmation/${person.id}" method="get">
-                                <button class="button" type="submit">Remove</button>
+                                <button class="button autoButton" type="submit">Remove</button>
                             </form>
                     </td>
                 </tr>

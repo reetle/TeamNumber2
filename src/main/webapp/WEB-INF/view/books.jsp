@@ -47,6 +47,15 @@
                 <button class="button-active" type="submit">Books</button>
             </form>
         </div>
+        <c:if test="${person.role=='admin'}">
+            <div>
+                <td>
+                    <form action="/app/allPersons" method="get">
+                        <button class="button" type="submit">All persons</button>
+                    </form>
+                </td>
+            </div>
+        </c:if>
         <div>
             <form action="/" method="get">
                 <button class="button" type="submit">Log Out</button>

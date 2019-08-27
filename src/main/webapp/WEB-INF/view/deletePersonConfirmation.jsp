@@ -10,7 +10,7 @@
     <!--bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- stylesheet-->
-    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/../../stylesheet.css">
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
@@ -36,7 +36,7 @@
         </div>
         <div>
             <form action="/app/person/lend" method="get">
-                <button class="button-active" type="submit">Lending</button>
+                <button class="button" type="submit">Lending</button>
             </form>
         </div>
         <div>
@@ -49,6 +49,15 @@
                 <button class="button" type="submit">Books</button>
             </form>
         </div>
+        <c:if test="${person.role=='admin'}">
+            <div>
+                <td>
+                    <form action="/app/allPersons" method="get">
+                        <button class="button-active" type="submit">All persons</button>
+                    </form>
+                </td>
+            </div>
+        </c:if>
         <div>
             <form action="/" method="get">
                 <button class="button" type="submit">Log Out</button>
