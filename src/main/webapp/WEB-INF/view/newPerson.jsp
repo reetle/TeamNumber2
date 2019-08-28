@@ -19,30 +19,39 @@
 
 </head>
 <body>
-<video id="video" width="640" height="480" autoplay></video>
-
-<button id="snap">Snap Photo</button>
-
-<button id="save">Save Photo</button>
-<canvas id="canvas" width="640" height="480"></canvas>
 
 
+    <div class="row">
+        <div class="col-sm-6 center">
+            <div>
+                <video id="video" width="640" height="480" autoplay></video>
+            </div>
 
-<div class="center margin">
-   <div>
-        <form:form method="POST" action="/app/addPerson" modelAttribute="person">
-        <form:errors path="email" class="errors"/>
-    </div>
-    <div>
-        <form:label path="email">Enter email</form:label>
-    </div>
-    <div>
-        <form:input path="email"/>
-    </div>
-    <form:input  type="hidden" id= "web" path="image"/>
-    <div>
-        <input class="button" type="submit" value="Create Account"/>
-        </form:form>
+            <div>
+                <form:form method="POST" action="/app/addPerson" modelAttribute="person">
+                    <form:input type="hidden" id= "web" path="image"/>
+                    <button  type = "button" class="button" id="snap">Snap Photo</button>
+            </div>
+        </div>
+
+        <div class="col-sm-6 center margin">
+            <div>
+                <canvas id="canvas" width="320" height="240"></canvas>
+            </div>
+            <div>
+                <form:errors path="email" class="errors"/>
+            </div>
+            <div>
+                <form:label path="email">Enter email</form:label>
+            </div>
+            <div>
+                <form:input path="email"/>
+            </div>
+            <div>
+                <input class="button" type="submit" value="Create Account"/>
+                </form:form>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -73,7 +82,14 @@
 
     // Trigger photo take
     document.getElementById("snap").addEventListener("click", function() {
-        context.drawImage(video, 0, 0, 640, 480);
+
+        context.drawImage(video, 0, 0, 320, 240);
+        var dataURL = canvas.toDataURL();
+        console.log(dataURL);
+        var x  =document.getElementById("web");
+        x.value = dataURL;
+
+
     });
 
     document.getElementById("save").addEventListener("click", function() {

@@ -2,7 +2,6 @@ package com.tieto.geekoff.library.frontend.models;
 
 
 
-
 import java.util.List;
 
 public class Person {
