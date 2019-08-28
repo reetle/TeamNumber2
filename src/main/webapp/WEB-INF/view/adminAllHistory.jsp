@@ -119,7 +119,7 @@
 
                     <c:forEach items="${map}" var="mapElement">
                         <tr>
-                            <th colspan="4">${mapElement.key.firstName} ${mapElement.key.surname}</th>
+                            <th colspan="4"><h3>${mapElement.key.firstName} ${mapElement.key.surname}</h3></th>
                             </tr>
                         <tr>
                             <th>Book name</th>

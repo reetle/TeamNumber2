@@ -18,17 +18,12 @@
 
 
 
-<div id="resultado"></div>
-
-<div id="camera"></div>
-
-<!--<script src="quagga.min.js"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 </head>
 
 
 
 <body>
+<img src="https://seeklogo.com/images/T/tieto-logo-5D4F5D3319-seeklogo.com.png">
 
 <div class="row">
     <div class="col-sm-4 spaceAround">

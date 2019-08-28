@@ -13,6 +13,10 @@ html,body{
     background-color: #333333;
 }
 
+h3 {
+    color: #62b3e5;
+}
+
 /*BOOKSELF*/
 h1 {
     color: #62b3e5;
@@ -30,7 +34,7 @@ h1 span {
 table.booksTable {
     text-align: center;
     display: block;
-    max-height: 80vh;
+    max-height: 70vh;
     overflow: auto;
 }
 table.booksTable td, table.booksTable th {
@@ -200,4 +204,10 @@ select:-webkit-autofill:focus {
 
 .errors {
     color: #9acaeb;
+}
+
+img {
+    position: fixed;
+    width: 150px;
+    height: 104px;
 }
