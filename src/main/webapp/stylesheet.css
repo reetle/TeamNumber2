@@ -201,8 +201,3 @@ select:-webkit-autofill:focus {
 .errors {
     color: #9acaeb;
 }
-
-canvas {
-    position: absolute;
-    top: 0px;
-}

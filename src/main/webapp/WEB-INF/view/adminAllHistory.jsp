@@ -96,12 +96,12 @@
                 <table class="padding">
                     <td>
                         <form action="/app/history" method="get">
-                            <button class="button-active" type="submit">Your History</button>
+                            <button class="button" type="submit">Your History</button>
                         </form>
                     </td>
                     <td>
                         <form action="/app/allHistory" method="get">
-                            <button class="button" type="submit">All History</button>
+                            <button class="button-active" type="submit">All History</button>
                         </form>
                     </td>
                 </table>
