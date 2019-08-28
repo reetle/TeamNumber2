@@ -39,6 +39,7 @@
             </div>
             <div>
                 <form:errors path="email" class="errors"/>
+                <form:errors path="image" class="errors"/>
             </div>
             <div>
                 <form:label path="email">Enter email</form:label>
