@@ -77,7 +77,7 @@ public class PersonDaoImpl implements PersonDao {
                 statement.setString(1, firstName.substring(0, 1).toUpperCase() + firstName.substring(1));
                 statement.setString(2, surname.substring(0, 1).toUpperCase() + surname.substring(1));
                 statement.setString(3, person.getEmail());
-                statement.setString(4, person.getImage());
+                statement.setString(4, person.getImage().substring(22));
 
 
 
@@ -365,6 +365,8 @@ public class PersonDaoImpl implements PersonDao {
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
+
+                // System.out.println(rs.getString("image"));
                 return rs.getString("image");
             }
 
@@ -373,4 +375,6 @@ public class PersonDaoImpl implements PersonDao {
         }
         return null;
     }
+
+
 }

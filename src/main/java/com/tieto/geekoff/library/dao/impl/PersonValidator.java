@@ -38,9 +38,7 @@ public class PersonValidator implements Validator {
             errors.rejectValue("email", "email.invalid", "Invalid email! Please enter Tieto email.");
         }
 
-        if (personService.checkAccountAlreadyExist(person.getEmail())) {
-            errors.rejectValue("email", "email.exists", "The username already exists. Please use a different username");
-        }
+
 
 
 

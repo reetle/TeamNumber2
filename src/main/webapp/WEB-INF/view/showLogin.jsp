@@ -11,7 +11,7 @@
     <!--bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- stylesheet-->
-    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/../../stylesheet.css">
     <!-- google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
@@ -30,6 +30,7 @@
         <div>
             <form:form method="POST" action="/app/person/login/" modelAttribute="person">
             <form:input type="hidden" id= "web" path="image"/>
+
             <button  type = "button" class="button" id="snap">Snap Photo</button>
         </div>
     </div>
@@ -40,6 +41,7 @@
         </div>
         <div>
             <form:errors path="email" class="errors"/>
+            <form:errors path="image" class="errors"/>
         </div>
         <div>
             <form:label path="email">Enter email</form:label>

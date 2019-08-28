@@ -1,5 +1,6 @@
 package com.tieto.geekoff.library.dao;
 
+import com.tieto.geekoff.library.dao.impl.PersonDaoImpl;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -16,9 +17,11 @@ import java.util.List;
 public class HttpPostConnection {
 
     public boolean faceRecognise(String database, String login) throws IOException {
+        System.out.println(database);
+        System.out.println(login);
         try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
 
-            org.apache.http.client.methods.HttpPost request = new org.apache.http.client.methods.HttpPost("http://localhost:5000/face");
+            org.apache.http.client.methods.HttpPost request = new org.apache.http.client.methods.HttpPost("http://192.168.1.101:5000/face");
             request.setHeader("User-Agent", "Java client");
 
 
@@ -53,11 +56,25 @@ public class HttpPostConnection {
                 builder.append(line);
                 builder.append(System.lineSeparator());
             }
+            System.out.println("Builder value " + builder);
+            String value = builder.toString().trim();
+            System.out.println("Value is " + value);
+            boolean b = Boolean.parseBoolean(value);
+            System.out.println("Boolean value " + b);
 
-            System.out.println(builder);
-            return builder.equals("True");
+            System.out.println(builder.toString());
+            // System.out.println(builder.toString().equals("True"));
+            return b;
         }
 
+
+    }
+
+    public static void main(String[] args) {
+        HttpPostConnection post = new HttpPostConnection();
+        PersonDaoImpl imp = new PersonDaoImpl();
+        String data = imp.getPersonImageString("tibu.tibu@tieto.com");
+        System.out.println(data);
 
     }
 
