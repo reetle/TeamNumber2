@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -99,6 +100,12 @@ public class PersonController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView profile() {
         person2 = personService.loadUser(person2.getEmail());
+        try {
+            Process p = Runtime.getRuntime().exec("python /Users/raul/PycharmProjects/facerec/facetest2/test2.py");
+            System.out.println(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new ModelAndView("showProfile", "person", person2);
     }
 
