@@ -1,7 +1,6 @@
 package com.tieto.geekoff.library.frontend.models;
 
 
-import javafx.scene.text.Text;
 
 import java.util.List;
 
