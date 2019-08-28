@@ -76,7 +76,7 @@ public class PersonController {
         HttpPostConnection post = new HttpPostConnection();
 
         try {
-            if (!(post.faceRecognise(personService.getPersonImageString(person.getEmail()), person.getImage()))) {
+            if (!(post.faceRecognise(personService.getPersonImageString(person.getEmail().substring(22)), person.getImage()))) {
                 bindingResult.rejectValue("image", "faceRecognise.failed", "Face recognition failed!");
                 return "showLogin";
             }
@@ -112,12 +112,6 @@ public class PersonController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView profile() {
         person2 = personService.loadUser(person2.getEmail());
-        try {
-            Process p = Runtime.getRuntime().exec("python /Users/raul/PycharmProjects/facerec/facetest2/test2.py");
-            System.out.println(p);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return new ModelAndView("showProfile", "person", person2);
     }
 
@@ -153,6 +147,7 @@ public class PersonController {
                              BindingResult bindingResult, Model model, SessionStatus status) {
 
         personValidator.validate(person, bindingResult);
+        System.out.println(person.getImage());
 
         if (bindingResult.hasErrors()) {
             return "newPerson";
