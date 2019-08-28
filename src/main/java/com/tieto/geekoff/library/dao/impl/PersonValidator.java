@@ -27,7 +27,8 @@ public class PersonValidator implements Validator {
 
     @Override
     public void validate(Object obj, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email","email.required", "Name field is missing");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email","email.required", "Email field is missing");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "image","image.required", "Image is missing");
 
         Person person = (Person) obj;
 
