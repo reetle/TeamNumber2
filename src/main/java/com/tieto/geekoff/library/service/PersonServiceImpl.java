@@ -68,6 +68,10 @@ public class PersonServiceImpl implements PersonService {
       return personDao.getAllHistory();
    }
 
+   public String getPersonImageString(String email) {
+      return personDao.getPersonImageString(email);
+   }
+
 
 
    /*

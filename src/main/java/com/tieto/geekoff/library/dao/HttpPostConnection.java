@@ -13,29 +13,31 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-public class httpPost {
+public class HttpPostConnection {
 
-    public static void main(String[] args) throws IOException {
-
+    public boolean faceRecognise(String database, String login) throws IOException {
         try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
 
-            HttpPost request = new HttpPost("http://localhost:5000/face");
+            org.apache.http.client.methods.HttpPost request = new org.apache.http.client.methods.HttpPost("http://localhost:5000/face");
             request.setHeader("User-Agent", "Java client");
 
 
             List<NameValuePair> params = new ArrayList<>();
 
+            /*
             // Image from database
-            byte[] fileContent = FileUtils.readFileToByteArray(new File("/Users/raul/IdeaProjects/TeamNumber2/src/main/java/com/tieto/geekoff/library/dao/reet.jpg"));
+            byte[] fileContent = FileUtils.readFileToByteArray(new File("/Users/raul/IdeaProjects/TeamNumber2/src/main/java/com/tieto/geekoff/library/dao/raulold.jpg"));
             String encodedString = Base64.getEncoder().encodeToString(fileContent);
             System.out.println(encodedString);
             // Image from login
             byte[] fileContentLogin = FileUtils.readFileToByteArray(new File("/Users/raul/IdeaProjects/TeamNumber2/src/main/java/com/tieto/geekoff/library/dao/raul.jpg"));
             String encodedStringLogin = Base64.getEncoder().encodeToString(fileContentLogin);
-            
 
-            params.add(new BasicNameValuePair("database", encodedString));
-            params.add(new BasicNameValuePair("login", encodedStringLogin));
+             */
+
+
+            params.add(new BasicNameValuePair("database", database));
+            params.add(new BasicNameValuePair("login", login));
             request.setEntity(new UrlEncodedFormEntity(params));
 
             HttpResponse response = client.execute(request);
@@ -53,8 +55,13 @@ public class httpPost {
             }
 
             System.out.println(builder);
+            return builder.equals("True");
         }
+
+
     }
+
+
 }
 
 
