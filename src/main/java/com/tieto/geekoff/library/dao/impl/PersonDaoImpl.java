@@ -355,5 +355,22 @@ public class PersonDaoImpl implements PersonDao {
         }
     }
 
+    public String getPersonImageString(String email) {
+        String sql = "SELECT image FROM persondata WHERE email = ?";
 
+
+        try (Connection conn = app.connect();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getString("image");
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
 }

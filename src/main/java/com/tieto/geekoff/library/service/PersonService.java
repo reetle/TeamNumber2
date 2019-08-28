@@ -23,4 +23,5 @@ public interface PersonService {
    void updatePerson(Person person);
    void deletePerson(int id);
    Map<Person, List<Book>> getAllHistory();
+   String getPersonImageString(String email);
 }

@@ -1,5 +1,6 @@
 package com.tieto.geekoff.library.frontend;
 
+import com.tieto.geekoff.library.dao.HttpPostConnection;
 import com.tieto.geekoff.library.dao.impl.BookValidator;
 import com.tieto.geekoff.library.dao.impl.PersonValidator;
 import com.tieto.geekoff.library.frontend.models.Book;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -70,8 +72,19 @@ public class PersonController {
     public String userLoginF(@ModelAttribute("person")Person person, BindingResult bindingResult, Model model, SessionStatus status) {
 
         personValidator.validate(person, bindingResult);
-        Pattern pattern = Pattern.compile("[a-zA-Z]+[.][a-zA-Z]+@\\btieto\\b[.]\\bcom\\b",
-                Pattern.CASE_INSENSITIVE);
+
+        HttpPostConnection post = new HttpPostConnection();
+
+        try {
+            if (!(post.faceRecognise(personService.getPersonImageString(person.getEmail()), person.getImage()))) {
+                bindingResult.rejectValue("image", "faceRecognise.failed", "Face recognition failed!");
+                return "showLogin";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Pattern pattern = Pattern.compile("[a-zA-Z]+[.][a-zA-Z]+@\\btieto\\b[.]\\bcom\\b", Pattern.CASE_INSENSITIVE);
 
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
@@ -99,6 +112,12 @@ public class PersonController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView profile() {
         person2 = personService.loadUser(person2.getEmail());
+        try {
+            Process p = Runtime.getRuntime().exec("python /Users/raul/PycharmProjects/facerec/facetest2/test2.py");
+            System.out.println(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new ModelAndView("showProfile", "person", person2);
     }
 
