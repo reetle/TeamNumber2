@@ -166,7 +166,7 @@ public class PersonController {
 
 
         if (bindingResult.hasErrors()) {
-            
+
             return "returnBook";
         }
 

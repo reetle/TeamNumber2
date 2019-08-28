@@ -58,8 +58,10 @@ public class PersonDaoImpl implements PersonDao {
         String sql = "INSERT INTO persondata ("
                 + " firstname,"
                 + " lastname,"
-                + " email) VALUES ("
-                + "?, ?, ?)";
+                + " email,"
+                + " image"
+                + ") VALUES ("
+                + "?, ?, ?,?)";
 
         String email = person.getEmail().toLowerCase();
         String firstName = email.substring(0, email.indexOf("."));
@@ -75,6 +77,8 @@ public class PersonDaoImpl implements PersonDao {
                 statement.setString(1, firstName.substring(0, 1).toUpperCase() + firstName.substring(1));
                 statement.setString(2, surname.substring(0, 1).toUpperCase() + surname.substring(1));
                 statement.setString(3, person.getEmail());
+                statement.setString(4, person.getImage());
+
 
 
                 int affectedRows = statement.executeUpdate();
@@ -268,7 +272,7 @@ public class PersonDaoImpl implements PersonDao {
         return books;
     }
 
-//==========Maris ==========================
+    //==========Maris ==========================
     public List<Person> getPersons() {
         String sql = "SELECT personid, firstname, lastname, email, role FROM persondata";
         Person person;

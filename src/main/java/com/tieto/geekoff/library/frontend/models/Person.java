@@ -1,15 +1,20 @@
 package com.tieto.geekoff.library.frontend.models;
 
 
+import javafx.scene.text.Text;
+
 import java.util.List;
 
 public class Person {
+
 
    private int id;
    private String firstName;
    private String surname;
    private String email;
    private String role;
+   private String image;
+
    private List<Book> borrowedBooks;
 
 
@@ -45,6 +50,10 @@ public class Person {
       this.id = id;
    }
 
+   public void setImage (String image){ this.image = image;}
+
+   public String getImage() { return image; }
+
    @Override
    public String toString() {
       return "Person{" +
@@ -53,6 +62,9 @@ public class Person {
               ", surname='" + surname + '\'' +
               ", email='" + email + '\'' +
               ", role='" + role + '\'' +
+              ", image ='" + image + '\'' +
+
+
               '}';
    }
 
@@ -71,4 +83,10 @@ public class Person {
    public void setBorrowedBooks(List<Book> borrowedBooks) {
       this.borrowedBooks = borrowedBooks;
    }
+
+
 }
+
+
+
+
