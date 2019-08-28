@@ -30,9 +30,6 @@
         <div>
             <table>
                 <tr>
-
-
-
                     <td align="center">${person.firstName} ${person.surname}</td>
                 </tr>
                 <tr>
@@ -81,7 +78,7 @@
                 <form:errors path="code" class="errors"/>
         </div>
         <div>
-                <form:label path="code">Enter barcode</form:label>
+            <form:label path="code">Enter barcode</form:label>
         </div>
         <div>
             <form:input path="code" autofocus="true"/>
@@ -91,7 +88,10 @@
             </form:form>
         </div>
     </div>
+</div>
+<script>
 
+</script>
 
 </body>
 </html>

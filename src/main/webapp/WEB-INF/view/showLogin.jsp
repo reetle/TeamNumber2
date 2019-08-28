@@ -45,7 +45,7 @@
             <form:label path="email">Enter email</form:label>
         </div>
         <div>
-            <form:input path="email"/>
+            <form:input onfocus="this.value=''" path="email"/>
         </div>
         <div>
             <input class="button" type="submit" value="Login"/>

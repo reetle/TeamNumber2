@@ -69,7 +69,6 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
-
     </div>
 
 
