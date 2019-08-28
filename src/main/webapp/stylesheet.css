@@ -54,6 +54,7 @@ table.booksTable thead th {
 
 td, tr {
     text-align: center;
+    vertical-align: center;
 }
 
 /*JOONDUS*/
@@ -199,4 +200,9 @@ select:-webkit-autofill:focus {
 
 .errors {
     color: #9acaeb;
+}
+
+canvas {
+    position: absolute;
+    top: 0px;
 }
