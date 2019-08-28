@@ -49,6 +49,7 @@
                 <button class="button-active" type="submit">Books</button>
             </form>
         </div>
+
         <c:if test="${person.role=='admin'}">
             <div>
                 <td>
