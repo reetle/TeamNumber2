@@ -34,7 +34,7 @@
             <form:input id= "web" path="image"/>
         </div>
         <div>
-            <button  class="button" id="snap">Snap Photo</button>
+            <button  type="button" class="button" id="snap">Snap Photo</button>
             <input class="button" type="submit" value="Login"/>
                 </form:form>
         </div>
