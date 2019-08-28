@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -78,7 +79,28 @@ public class PersonController {
 
         Pattern pattern = Pattern.compile("[a-zA-Z]+[.][a-zA-Z]+@\\btieto\\b[.]\\bcom\\b", Pattern.CASE_INSENSITIVE);
 
+        // Siia lisasin errori kinnipüüdmise, et ilma emailita hakata kasutajat tuvastama.
         if (bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            for (ObjectError error : errors) {
+                System.out.println(error.getCode());
+                if (error.getCode().equals("email.required")) {
+                    if (person.getImage().length() == 0) {
+                        bindingResult.rejectValue("email", "email.empty", "Make a Snap Shot!");
+                        return "showLogin";
+                    }
+                    List<Person> personList = personService.getPersons();
+                    for (Person user : personList) {
+                        // user on andmebaasist, person on login tulev väärtus
+                        if (post.faceRecognise(personService.getPersonImageString(user.getEmail()), person.getImage().substring(22))) {
+                            person2 = personService.loadUser(user.getEmail());
+                            status.setComplete();
+                            return "redirect:/app/profile";
+                        }
+                    }
+
+                }
+            }
             return "showLogin";
 
         }

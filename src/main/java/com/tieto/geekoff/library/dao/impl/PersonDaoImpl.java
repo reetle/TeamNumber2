@@ -274,7 +274,7 @@ public class PersonDaoImpl implements PersonDao {
 
     //==========Maris ==========================
     public List<Person> getPersons() {
-        String sql = "SELECT personid, firstname, lastname, email, role FROM persondata";
+        String sql = "SELECT personid, firstname, lastname, email, role, image FROM persondata";
         Person person;
         List<Person> listOfPersons =  new ArrayList<>();
 
@@ -289,6 +289,7 @@ public class PersonDaoImpl implements PersonDao {
                 person.setSurname(rs.getString("lastname"));
                 person.setEmail(rs.getString("email"));
                 person.setRole(rs.getString("role"));
+                person.setImage(rs.getString("image"));
                 listOfPersons.add(person);
             }
 
@@ -318,7 +319,7 @@ public class PersonDaoImpl implements PersonDao {
 
 
     public Person getPerson(int id) {
-        String sql = "SELECT personid, firstname, lastname, email, role FROM persondata WHERE personid = ?";
+        String sql = "SELECT personid, firstname, lastname, email, role, image FROM persondata WHERE personid = ?";
         Person person = new Person();
 
         try (Connection conn = app.connect();
@@ -332,6 +333,7 @@ public class PersonDaoImpl implements PersonDao {
                 person.setSurname(rs.getString("lastname"));
                 person.setEmail(rs.getString("email"));
                 person.setRole(rs.getString("role"));
+                person.setImage(rs.getString("image"));
             }
 
         } catch (SQLException ex) {
