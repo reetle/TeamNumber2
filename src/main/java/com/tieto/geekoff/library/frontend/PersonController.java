@@ -69,33 +69,18 @@ public class PersonController {
     }
 
     @RequestMapping(value = "person/login", method = RequestMethod.POST)
-    public String userLoginF(@ModelAttribute("person")Person person, BindingResult bindingResult, Model model, SessionStatus status) {
+    public String userLoginF(@ModelAttribute("person")Person person, BindingResult bindingResult, Model model, SessionStatus status) throws IOException {
 
         personValidator.validate(person, bindingResult);
 
         HttpPostConnection post = new HttpPostConnection();
 
-        try {
-            if (!(post.faceRecognise(personService.getPersonImageString(person.getEmail().substring(22)), person.getImage()))) {
-                bindingResult.rejectValue("image", "faceRecognise.failed", "Face recognition failed!");
-                return "showLogin";
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         Pattern pattern = Pattern.compile("[a-zA-Z]+[.][a-zA-Z]+@\\btieto\\b[.]\\bcom\\b", Pattern.CASE_INSENSITIVE);
 
         if (bindingResult.hasErrors()) {
-            List<ObjectError> errors = bindingResult.getAllErrors();
-            for (ObjectError error : errors) {
-                System.out.println(error.getCode());
-                if (error.getCode().equals("email.exists")) {
-                    person2 = personService.loadUser(person.getEmail());
-                    status.setComplete();
-                    return "redirect:/app/profile";
-                }
-            }
+            return "showLogin";
 
         }
         if (pattern.matcher(person.getEmail()).matches() && !(personService.checkAccountAlreadyExist(person.getEmail()))) {
@@ -103,7 +88,14 @@ public class PersonController {
             return "showLogin";
         }
 
-        return "showLogin";
+        person2 = personService.loadUser(person.getEmail());
+        if (!(post.faceRecognise(personService.getPersonImageString(person.getEmail()), person.getImage().substring(22)))) {
+            bindingResult.rejectValue("image", "faceRecognise.failed", "Face recognition failed!");
+            System.out.println("face");
+            return "showLogin";
+        }
+        status.setComplete();
+        return "redirect:/app/profile";
 
 
     }
@@ -148,6 +140,11 @@ public class PersonController {
 
         personValidator.validate(person, bindingResult);
         System.out.println(person.getImage());
+
+        if (personService.checkAccountAlreadyExist(person.getEmail())) {
+            bindingResult.rejectValue("email", "email.exists", "The username already exists. Please use a different username.");
+            return "newPerson";
+        }
 
         if (bindingResult.hasErrors()) {
             return "newPerson";

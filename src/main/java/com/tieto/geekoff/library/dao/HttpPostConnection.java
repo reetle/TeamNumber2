@@ -56,9 +56,15 @@ public class HttpPostConnection {
                 builder.append(line);
                 builder.append(System.lineSeparator());
             }
+            System.out.println("Builder value " + builder);
+            String value = builder.toString().trim();
+            System.out.println("Value is " + value);
+            boolean b = Boolean.parseBoolean(value);
+            System.out.println("Boolean value " + b);
 
-            System.out.println(builder);
-            return builder.equals("True");
+            System.out.println(builder.toString());
+            // System.out.println(builder.toString().equals("True"));
+            return b;
         }
 
 
