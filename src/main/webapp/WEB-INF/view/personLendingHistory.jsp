@@ -47,7 +47,7 @@
         </div>
         <div>
             <form action="/app/profile" method="get">
-                <button class="button-active" type="submit">Books</button>
+                <button class="button" type="submit">Books</button>
             </form>
         </div>
         <c:if test="${person.role=='admin'}">
@@ -59,7 +59,7 @@
         </c:if>
         <div>
             <form action="/app/history" method="get">
-                <button class="button" type="submit">History</button>
+                <button class="button-active" type="submit">History</button>
             </form>
         </div>
         <div>

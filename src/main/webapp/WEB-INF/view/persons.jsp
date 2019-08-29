@@ -51,7 +51,7 @@
         <c:if test="${person.role=='admin'}">
             <div>
                 <form action="/app/allPersons" method="get">
-                    <button class="button" type="submit">Persons</button>
+                    <button class="button-active" type="submit">Persons</button>
                 </form>
             </div>
         </c:if>
