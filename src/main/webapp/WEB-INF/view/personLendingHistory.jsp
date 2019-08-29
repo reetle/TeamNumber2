@@ -47,18 +47,21 @@
         </div>
         <div>
             <form action="/app/profile" method="get">
-                <button class="button-active" type="submit">Books</button>
+                <button class="button" type="submit">Books</button>
             </form>
         </div>
         <c:if test="${person.role=='admin'}">
             <div>
-                <td>
-                    <form action="/app/allPersons" method="get">
-                        <button class="button" type="submit">All persons</button>
-                    </form>
-                </td>
+                <form action="/app/allPersons" method="get">
+                    <button class="button" type="submit">Persons</button>
+                </form>
             </div>
         </c:if>
+        <div>
+            <form action="/app/history" method="get">
+                <button class="button-active" type="submit">History</button>
+            </form>
+        </div>
         <div>
             <form action="/" method="get">
                 <button class="button" type="submit">Log Out</button>
@@ -69,42 +72,19 @@
 
     <div class="col-sm-8 top padding-top">
         <div>
-            <table class="padding">
-                <tr>
-                    <td>
-                        <form action="/app/profile" method="get">
-
-                            <button class="button" type="submit">Your Books</button>
-
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/app/library/books" method="get">
-                            <button class="button" type="submit">All Books</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/app/history" method="get">
-                            <button class="button-active" type="submit">History</button>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div>
             <c:if test="${person.role=='admin'}">
                 <table class="padding">
-                <td>
-                    <form action="/app/history" method="get">
-                        <button class="button-active" type="submit">Your History</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="/app/allHistory" method="get">
-                        <button class="button" type="submit">All History</button>
-                    </form>
-                </td>
-            </table>
+                    <td>
+                        <form action="/app/history" method="get">
+                            <button class="button-active" type="submit">Your History</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/allHistory" method="get">
+                            <button class="button" type="submit">All History</button>
+                        </form>
+                    </td>
+                </table>
             </c:if>
         </div>
         <div>
