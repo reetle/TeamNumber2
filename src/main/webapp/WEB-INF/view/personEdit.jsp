@@ -23,10 +23,10 @@
         <div>
             <table>
                 <tr>
-                    <td align="center">${person.firstName} ${person.surname}</td>
+                    <td align="center">${person2.firstName} ${person2.surname}</td>
                 </tr>
                 <tr>
-                    <td align="center">${person.email}</td>
+                    <td align="center">${person2.email}</td>
                 </tr>
             </table>
         </div>
