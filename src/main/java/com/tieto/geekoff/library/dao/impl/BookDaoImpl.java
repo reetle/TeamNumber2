@@ -48,7 +48,7 @@ public class BookDaoImpl implements BookDao {
 
 
     public Book getBook(int id) {
-        String sql = "SELECT bookid, bookname, bookautor, status, review, code, genre FROM bookdata WHERE bookid = ?";
+        String sql = "SELECT bookid, bookname, bookautor, status, review, code, genre FROM bookdata WHERE bookid = ? ORDER BY bookname";
         Book book = new Book();
 
         try (Connection conn = app.connect();
