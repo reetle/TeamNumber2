@@ -81,7 +81,7 @@ public class PersonController {
         // Siia lisasin errori kinnipüüdmise, et ilma emailita hakata kasutajat tuvastama.
         if (bindingResult.hasErrors()) {
             if (person.getImage().length() == 0) {
-                bindingResult.rejectValue("email", "email.empty", "Make a Snap Shot!");
+                bindingResult.rejectValue("image", "image.empty", "Make a Snap Shot!");
                 return "showLogin";
             }
             if (person.getEmail().length() == 0) {
@@ -94,6 +94,10 @@ public class PersonController {
                         return "redirect:/app/profile";
                     }
                 }
+                bindingResult.rejectValue("image", "faceRecognise.failed", "Face recognition failed!");
+                System.out.println("seda kasutajat pole meil");
+                return "showLogin";
+
             }
             return "showLogin";
 
@@ -103,12 +107,13 @@ public class PersonController {
             return "showLogin";
         }
 
-        person2 = personService.loadUser(person.getEmail());
+
         if (!(post.faceRecognise(personService.getPersonImageString(person.getEmail()), person.getImage().substring(22)))) {
             bindingResult.rejectValue("image", "faceRecognise.failed", "Face recognition failed!");
             System.out.println("face");
             return "showLogin";
         }
+        person2 = personService.loadUser(person.getEmail());
         status.setComplete();
         return "redirect:/app/profile";
 
