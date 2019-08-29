@@ -81,24 +81,19 @@ public class PersonController {
 
         // Siia lisasin errori kinnipüüdmise, et ilma emailita hakata kasutajat tuvastama.
         if (bindingResult.hasErrors()) {
-            List<ObjectError> errors = bindingResult.getAllErrors();
-            for (ObjectError error : errors) {
-                System.out.println(error.getCode());
-                if (error.getCode().equals("email.required")) {
-                    if (person.getImage().length() == 0) {
-                        bindingResult.rejectValue("email", "email.empty", "Make a Snap Shot!");
-                        return "showLogin";
+            if (person.getImage().length() == 0) {
+                bindingResult.rejectValue("email", "email.empty", "Make a Snap Shot!");
+                return "showLogin";
+            }
+            if (person.getEmail().length() == 0) {
+                List<Person> personList = personService.getPersons();
+                for (Person user : personList) {
+                    // user on andmebaasist, person on login tulev väärtus
+                    if (post.faceRecognise(personService.getPersonImageString(user.getEmail()), person.getImage().substring(22))) {
+                        person2 = personService.loadUser(user.getEmail());
+                        status.setComplete();
+                        return "redirect:/app/profile";
                     }
-                    List<Person> personList = personService.getPersons();
-                    for (Person user : personList) {
-                        // user on andmebaasist, person on login tulev väärtus
-                        if (post.faceRecognise(personService.getPersonImageString(user.getEmail()), person.getImage().substring(22))) {
-                            person2 = personService.loadUser(user.getEmail());
-                            status.setComplete();
-                            return "redirect:/app/profile";
-                        }
-                    }
-
                 }
             }
             return "showLogin";
