@@ -72,19 +72,19 @@
                 <form:form method="post" action="/app/saveNewBook" modelAttribute="book">
                 <tr>
                     <td>Name</td>
-                    <td><form:input path="name"  /></td>
+                    <td><form:input path="name"  autofocus="true" /></td>
                 </tr>
                 <tr>
                     <td>Author</td>
                     <td><form:input path="author" /></td>
                 </tr>
-                <tr>
-                    <td>Barcode</td>
-                    <td><form:input path="code"/></td>
-                </tr>
                     <tr>
                         <td>Genre</td>
                         <td><form:input path="genre"/></td>
+                    </tr>
+                    <tr>
+                        <td>Barcode</td>
+                        <td><form:input path="code"/></td>
                     </tr>
             </table>
             <div>
