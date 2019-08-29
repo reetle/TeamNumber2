@@ -29,7 +29,7 @@ public class HttpPostConnection {
 
             /*
             // Image from database
-            byte[] fileContent = FileUtils.readFileToByteArray(new File("/Users/raul/IdeaProjects/TeamNumber2/src/main/java/com/tieto/geekoff/library/dao/raulold.jpg"));
+            byte[] fileContent = FileUtils.readFileToByteArray(new File("/Users/raul/IdeaProjects/TeamNumber2/src/main/java/com/tieto/geekoff/library/dao/raul.jpg"));
             String encodedString = Base64.getEncoder().encodeToString(fileContent);
             System.out.println(encodedString);
             // Image from login
