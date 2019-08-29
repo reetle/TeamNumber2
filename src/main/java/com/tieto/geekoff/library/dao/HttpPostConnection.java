@@ -21,7 +21,7 @@ public class HttpPostConnection {
         System.out.println(login);
         try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
 
-            org.apache.http.client.methods.HttpPost request = new org.apache.http.client.methods.HttpPost("http://192.168.1.101:5000/face");
+            org.apache.http.client.methods.HttpPost request = new org.apache.http.client.methods.HttpPost("http://192.168.1.100:5000/face");
             request.setHeader("User-Agent", "Java client");
 
 

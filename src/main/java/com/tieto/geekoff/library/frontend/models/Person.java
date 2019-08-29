@@ -49,10 +49,6 @@ public class Person {
       this.id = id;
    }
 
-   public void setImage (String image){ this.image = image;}
-
-   public String getImage() { return image; }
-
    @Override
    public String toString() {
       return "Person{" +
@@ -61,9 +57,6 @@ public class Person {
               ", surname='" + surname + '\'' +
               ", email='" + email + '\'' +
               ", role='" + role + '\'' +
-              ", image ='" + image + '\'' +
-
-
               '}';
    }
 
@@ -84,6 +77,13 @@ public class Person {
    }
 
 
+   public String getImage() {
+      return image;
+   }
+
+   public void setImage(String image) {
+      this.image = image;
+   }
 }
 
 
