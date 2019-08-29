@@ -81,11 +81,6 @@
                             <button class="button-active" type="submit">All Books</button>
                         </form>
                     </td>
-                    <td>
-                        <form action="/app/history" method="get">
-                            <button class="button" type="submit">History</button>
-                        </form>
-                    </td>
                 </tr>
             </table>
         </div>
