@@ -50,13 +50,16 @@
         </div>
         <c:if test="${person.role=='admin'}">
             <div>
-                <td>
-                    <form action="/app/allPersons" method="get">
-                        <button class="button" type="submit">All persons</button>
-                    </form>
-                </td>
+                <form action="/app/allPersons" method="get">
+                    <button class="button" type="submit">Persons</button>
+                </form>
             </div>
         </c:if>
+        <div>
+            <form action="/app/history" method="get">
+                <button class="button" type="submit">History</button>
+            </form>
+        </div>
         <div>
             <form action="/" method="get">
                 <button class="button" type="submit">Log Out</button>
@@ -76,11 +79,6 @@
                     <td>
                         <form action="/app/library/books" method="get">
                             <button class="button-active" type="submit">All Books</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/app/history" method="get">
-                            <button class="button" type="submit">History</button>
                         </form>
                     </td>
                 </tr>

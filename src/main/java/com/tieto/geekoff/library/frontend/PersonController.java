@@ -304,6 +304,7 @@ public class PersonController {
     @RequestMapping(value = "/person/edit/{id}", method = RequestMethod.GET)
     public String editPerson(@PathVariable int id, Model model){
         Person person = personService.getPerson(id);
+        model.addAttribute("person2", person2);
         model.addAttribute("person", person);
         return "personEdit";
     }

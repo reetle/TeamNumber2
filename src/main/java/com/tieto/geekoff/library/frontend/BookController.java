@@ -33,7 +33,7 @@ public class BookController {
     public String save(@ModelAttribute("book") Book book){
 
         bookService.saveBook(book);
-        return "redirect:/app/library/books";
+        return "redirect:/app/book/new";
     }
 
     @RequestMapping(value = "/book/edit/{bookid}", method = RequestMethod.GET)

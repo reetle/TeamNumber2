@@ -51,13 +51,16 @@
         </div>
         <c:if test="${person.role=='admin'}">
             <div>
-                <td>
                     <form action="/app/allPersons" method="get">
-                        <button class="button" type="submit">All persons</button>
+                        <button class="button" type="submit">Persons</button>
                     </form>
-                </td>
             </div>
         </c:if>
+        <div>
+            <form action="/app/history" method="get">
+                <button class="button" type="submit">History</button>
+            </form>
+        </div>
         <div>
             <form action="/" method="get">
                 <button class="button" type="submit">Log Out</button>
@@ -72,19 +75,19 @@
                 <form:form method="post" action="/app/saveNewBook" modelAttribute="book">
                 <tr>
                     <td>Name</td>
-                    <td><form:input path="name"  /></td>
+                    <td><form:input path="name"  autofocus="true" /></td>
                 </tr>
                 <tr>
                     <td>Author</td>
                     <td><form:input path="author" /></td>
                 </tr>
-                <tr>
-                    <td>Barcode</td>
-                    <td><form:input path="code"/></td>
-                </tr>
                     <tr>
                         <td>Genre</td>
                         <td><form:input path="genre"/></td>
+                    </tr>
+                    <tr>
+                        <td>Barcode</td>
+                        <td><form:input path="code"/></td>
                     </tr>
             </table>
             <div>
