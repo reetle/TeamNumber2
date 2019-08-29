@@ -37,6 +37,17 @@ table.booksTable {
     max-height: 70vh;
     overflow: auto;
 }
+
+table.tableButtonsOnTopNone {
+    max-height: 90vh;
+    overflow: auto;
+}
+
+table.tableButtonsOnTopOne {
+    max-height: 80vh;
+    overflow: auto;
+}
+
 table.booksTable td, table.booksTable th {
     padding: 10px 20px;
     border-style: dotted;

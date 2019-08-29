@@ -46,7 +46,7 @@
         </div>
         <div>
             <form action="/app/profile" method="get">
-                <button class="button-active" type="submit">Books</button>
+                <button class="button" type="submit">Books</button>
             </form>
         </div>
         <c:if test="${person.role=='admin'}">

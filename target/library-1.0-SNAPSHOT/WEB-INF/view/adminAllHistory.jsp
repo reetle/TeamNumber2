@@ -91,12 +91,7 @@
         <div>
 
 
-            <table class="booksTable">
-                <%--<tr>
-                    <th colspan="2">Your books</th>
-                </tr>--%>
-
-
+            <table class="booksTable tableButtonsOnTopOne">
 
                     <c:forEach items="${map}" var="mapElement">
                         <tr>

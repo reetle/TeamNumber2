@@ -71,7 +71,7 @@
 
 
         <div>
-            <table class="booksTable">
+            <table class="booksTable tableButtonsOnTopNone">
                 <tr>
                     <th>Person Id</th>
                     <th>First name</th>
