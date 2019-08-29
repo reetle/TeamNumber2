@@ -66,18 +66,7 @@ public class HttpPostConnection {
             // System.out.println(builder.toString().equals("True"));
             return b;
         }
-
-
     }
-
-    public static void main(String[] args) {
-        HttpPostConnection post = new HttpPostConnection();
-        PersonDaoImpl imp = new PersonDaoImpl();
-        String data = imp.getPersonImageString("tibu.tibu@tieto.com");
-        System.out.println(data);
-
-    }
-
 
 }
 
