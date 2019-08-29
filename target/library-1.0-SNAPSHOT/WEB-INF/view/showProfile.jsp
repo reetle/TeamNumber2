@@ -1,4 +1,3 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -16,20 +15,17 @@
     <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
 
-
-
 </head>
-
-
 
 <body>
 <img src="https://seeklogo.com/images/T/tieto-logo-5D4F5D3319-seeklogo.com.png">
-
 <div class="row">
+
     <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
+
                     <td align="center">${person.firstName} ${person.surname}</td>
                 </tr>
                 <tr>
@@ -41,7 +37,7 @@
         </div>
         <div>
             <form action="/app/person/lend" method="get">
-                <button class="button-active" type="submit">Lending</button>
+                <button class="button" type="submit">Lending</button>
             </form>
         </div>
         <div>
@@ -51,7 +47,7 @@
         </div>
         <div>
             <form action="/app/profile" method="get">
-                <button class="button" type="submit">Books</button>
+                <button class="button-active" type="submit">Books</button>
             </form>
         </div>
         <c:if test="${person.role=='admin'}">
@@ -68,35 +64,48 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
+
     </div>
 
+    <div class="col-sm-8 top padding-top">
+        <div>
+            <table class="padding">
+                <tr>
+                    <td>
+                        <form action="/app/profile" method="get">
+                            <button class="button-active" type="submit">Your Books</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/library/books" method="get">
+                            <button class="button" type="submit">All Books</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/history" method="get">
+                            <button class="button" type="submit">History</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-
-    <div class="col-sm-8 center margin">
         <div>
-            <form:form method="POST" action="/app/person/lend" modelAttribute="book">
-                <form:errors path="code" class="errors"/>
+            <table class="booksTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Returning date</th>
+                </tr>
+                <tr>
+                    <c:forEach var="book" items="${person.borrowedBooks}" varStatus="status">
+                    <td>${book.name}</td>
+                    <td>${book.author}</td>
+                        <td>${book.enddate}</td>
+                </tr>
+            </c:forEach>
+            </table>
         </div>
-        <div>
-            <form:label path="code">Enter barcode</form:label>
-        </div>
-        <div>
-            <form:input path="code" autofocus="true"/>
-        </div>
-        <div>
-            <input class="button" type="submit" value="Lend"/>
-            </form:form>
-        </div>
-    </div>
 </div>
-<script>
-    var elements = document.getElementsByTagName("input");
-    for (var ii=0; ii < elements.length; ii++) {
-        if (elements[ii].type == "text") {
-            elements[ii].value = "";
-        }
-    }
-</script>
-
 </body>
 </html>

@@ -1,5 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -16,20 +15,16 @@
     <link href="https://fonts.googleapis.com/css?family=Exo:800|Montserrat:300&display=swap" rel="stylesheet">
 
 
-
-
 </head>
-
-
 
 <body>
 <img src="https://seeklogo.com/images/T/tieto-logo-5D4F5D3319-seeklogo.com.png">
-
 <div class="row">
     <div class="col-sm-4 spaceAround">
         <div>
             <table>
                 <tr>
+
                     <td align="center">${person.firstName} ${person.surname}</td>
                 </tr>
                 <tr>
@@ -68,35 +63,43 @@
                 <button class="button" type="submit">Log Out</button>
             </form>
         </div>
+        </div-->
+    </div>
+
+    <div class="col-sm-8 center">
+    <div>
+        <table class=>
+            <tr>
+                <td>Do You want to borrow</td>
+            </tr>
+            <tr>
+                <th><h3>${book.name}</h3></th>
+            </tr>
+            <tr>
+                <td>${book.author}</td>
+            </tr>
+        </table>
     </div>
 
 
 
-    <div class="col-sm-8 center margin">
         <div>
-            <form:form method="POST" action="/app/person/lend" modelAttribute="book">
-                <form:errors path="code" class="errors"/>
+            <table class="padding">
+                <tr>
+                    <td>
+                        <form action="/app/library/book_confirm_yes" method="get">
+                            <button class="button" type="submit">Yes</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/app/library/book_confirm_no" method="get">
+                            <button class="button" type="submit">No</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div>
-            <form:label path="code">Enter barcode</form:label>
-        </div>
-        <div>
-            <form:input path="code" autofocus="true"/>
-        </div>
-        <div>
-            <input class="button" type="submit" value="Lend"/>
-            </form:form>
-        </div>
-    </div>
-</div>
-<script>
-    var elements = document.getElementsByTagName("input");
-    for (var ii=0; ii < elements.length; ii++) {
-        if (elements[ii].type == "text") {
-            elements[ii].value = "";
-        }
-    }
-</script>
 
+    </div>
 </body>
 </html>
