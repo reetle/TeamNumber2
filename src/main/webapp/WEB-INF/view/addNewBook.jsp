@@ -20,7 +20,7 @@
 <body>
 <img src="https://seeklogo.com/images/T/tieto-logo-5D4F5D3319-seeklogo.com.png">
 <div class="row">
-    <div class="col-sm-4 spaceAround">
+    <div class="col-md-4 spaceAround">
         <div>
             <table>
                 <tr>
@@ -69,7 +69,7 @@
 
     </div>
 
-    <div class="col-sm-8 center margin" >
+    <div class="col-md-8 center margin" >
         <div>
             <table>
                 <form:form method="post" action="/app/saveNewBook" modelAttribute="book">

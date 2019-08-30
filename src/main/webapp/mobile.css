@@ -1,0 +1,225 @@
+allcolors {
+    color: #ffffff; /*white*/
+    color: #9acaeb; /*pale blue*/
+    color: #62b3e5; /*medium blue*/
+    color: #333333; /*darkest blue*/
+}
+
+
+html,body{
+    height:100%;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    background-color: #333333;
+}
+
+h3 {
+    color: #62b3e5;
+}
+
+/*BOOKSELF*/
+h1 {
+    color: #62b3e5;
+    font-size: 100px;
+}
+
+h1 span {
+    display: block;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 900;
+    text-align: center;
+}
+
+/*TABELID*/
+table.booksTable {
+    text-align: center;
+    display: block;
+    max-height: 70vh;
+    overflow: auto;
+}
+
+table.tableButtonsOnTopNone {
+    max-height: 90vh;
+    overflow: auto;
+}
+
+table.tableButtonsOnTopOne {
+    max-height: 80vh;
+    overflow: auto;
+}
+
+table.booksTable td, table.booksTable th {
+    padding: 10px 20px;
+    border-style: dotted;
+    border-width: 1px;
+}
+table.booksTable tr:nth-child(even) {
+    background: #333333;
+}
+table.booksTable thead {
+    background: #333333;
+}
+table.booksTable thead th {
+    font-weight: bold;
+    text-align: center;
+}
+.tableHeading {
+    border-style: none;
+}
+
+td, tr {
+    text-align: center;
+    vertical-align: center;
+}
+
+/*JOONDUS*/
+
+.row {
+    height: 100%;
+    width: 100%;
+}
+
+.center {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.spaceAround {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.top {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.margin div {
+    margin: 10px auto;
+}
+
+.padding-top {
+
+    padding-top: 30px;
+}
+
+.padding td{
+    padding: 10px;
+}
+
+.drawingBuffer {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+/*NUPPUD*/
+.button {
+    background-color: transparent;
+    border-color: #62b3e5;
+    border-style: solid;
+    border-width: 1px;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    color: #ffffff;
+    width: 200px;
+}
+
+.button:hover, .button:active, .button:focus {
+    background-color: #9acaeb;
+    border-color: #9acaeb;
+    color: #333333;
+    padding: 12px 20px;
+    font-weight: bolder;
+    outline:0;
+}
+
+.button-active {
+    background-color: #62b3e5;
+    border-color: #62b3e5;
+    border-width: 1px;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333333;
+    width: 200px;
+    font-weight: bolder;
+    outline:0;
+}
+
+.button-active:focus{
+    outline: 0;
+}
+
+#autoButton {
+    width: auto;
+}
+
+.autoButton {
+    width: auto;
+}
+
+/*TEKSTILAHTRID*/
+input, select, textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+
+}
+
+textarea:focus, input:focus {
+    box-shadow: 0 0 5px #9acaeb;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid #9acaeb;
+    color: #ffffff;
+}
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+
+    -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
+    -webkit-transition-delay: 9999s;
+}
+
+.errors {
+    color: #9acaeb;
+}
+
+img {
+    position: fixed;
+    width: 150px;
+    height: 104px;
+}
