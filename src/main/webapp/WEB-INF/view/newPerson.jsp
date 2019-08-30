@@ -21,7 +21,7 @@
 <body>
 <img src="https://seeklogo.com/images/T/tieto-logo-5D4F5D3319-seeklogo.com.png">
     <div class="row">
-        <div class="col-sm-6 center">
+        <div class="col-md-6 center">
             <div>
                 <video id="video" width="640" height="480" autoplay></video>
             </div>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="col-sm-6 center margin">
+        <div class="col-md-6 center margin">
             <div>
                 <canvas id="canvas" width="320" height="240"></canvas>
             </div>
