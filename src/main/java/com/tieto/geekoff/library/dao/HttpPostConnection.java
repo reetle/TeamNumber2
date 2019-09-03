@@ -37,8 +37,6 @@ public class HttpPostConnection {
             String encodedStringLogin = Base64.getEncoder().encodeToString(fileContentLogin);
 
              */
-
-
             params.add(new BasicNameValuePair("database", database));
             params.add(new BasicNameValuePair("login", login));
             request.setEntity(new UrlEncodedFormEntity(params));
