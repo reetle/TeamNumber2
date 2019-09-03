@@ -58,10 +58,12 @@
 </div>
 </div>
 
-<script>
+<script type="text/javascript">
     var video = document.getElementById('video');
 
+    console.log(video);
     // Get access to the camera!
+    console.log(navigator.getUserMedia);
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         // Not adding `{ audio: true }` since we only want video now
         navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
